@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{64417e48-cd17-4088-b7d5-3e3370f79ae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Common">
+      <UniqueIdentifier>{08f3ef0d-2546-4e9a-bd2f-8692f0f84b6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component">
+      <UniqueIdentifier>{af8c5fbf-ba26-4db4-a090-17ad79b8715d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject">
+      <UniqueIdentifier>{dde4354e-bfaf-40b0-b0ff-200be3cdf1a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\High Level Interface">
+      <UniqueIdentifier>{d65167ce-782e-4291-8af6-e8ad5b9fddfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{6334d4a8-f95a-4617-9bc7-9afa45be7a93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Layer">
+      <UniqueIdentifier>{aaeb403a-6fbc-4d24-a35e-1dfc6193cd36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource">
+      <UniqueIdentifier>{41812731-09b3-4bbf-9b59-9957fc90b37b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene">
+      <UniqueIdentifier>{2f37bcb8-e9c8-4a1a-8ed0-49d13ed8f6e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Time">
+      <UniqueIdentifier>{191de71b-7bc0-40f4-8ad4-d97845712b59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{a3c28c91-c897-4317-adb6-7bf1cf6e0b7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene">
+      <UniqueIdentifier>{9dfaad77-e736-47ae-8473-597c51ff6289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Player">
+      <UniqueIdentifier>{49c5fb10-ca0e-4ea9-9995-d1fd9d9608fe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="Peglin.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="bEngine.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="bEntity.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="bEnums.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="bMath.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonInclude.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="bComponent.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="bGameObject.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="bApplication.h">
+      <Filter>Engine\High Level Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="bInput.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="bLayer.h">
+      <Filter>Engine\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="bImage.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="bResource.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="bResources.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="bScene.h">
+      <Filter>Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="bSceneManager.h">
+      <Filter>Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="bTime.h">
+      <Filter>Engine\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="bPeglin.h">
+      <Filter>Contents\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="bPlayScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="bTitleScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="bEntity.cpp">
+      <Filter>Engine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="bMath.cpp">
+      <Filter>Engine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="bComponent.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="bGameObject.cpp">
+      <Filter>Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="bApplication.cpp">
+      <Filter>Engine\High Level Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="bInput.cpp">
+      <Filter>Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="bLayer.cpp">
+      <Filter>Engine\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="bImage.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="bResource.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="bResources.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="bScene.cpp">
+      <Filter>Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="bSceneManager.cpp">
+      <Filter>Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="bTime.cpp">
+      <Filter>Engine\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="bPeglin.cpp">
+      <Filter>Contents\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="bPlayScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="bTitleScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Peglin.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Peglin.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
