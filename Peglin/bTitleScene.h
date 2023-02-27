@@ -19,6 +19,7 @@ namespace b
 		virtual void OnExit() override;
 	private:
 		Image* titleBackground;
+		Image* logo;
 	};
 }
 
