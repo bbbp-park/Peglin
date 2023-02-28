@@ -1,6 +1,7 @@
 #include "bSceneManager.h"
 #include "bPlayScene.h"
 #include "bTitleScene.h"
+#include "bFightScene.h"
 
 namespace b
 {
@@ -13,6 +14,7 @@ namespace b
 
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
+		mScenes[(UINT)eSceneType::Fight] = new FightScene();
 
 		mActiveScene = mScenes[(UINT)eSceneType::Title];
 

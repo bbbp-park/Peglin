@@ -3,6 +3,8 @@
 #include "bSceneManager.h";
 #include "bInput.h";
 #include "bResources.h"
+#include "bTransform.h"
+#include "bAnimator.h"
 
 
 namespace b
@@ -17,8 +19,14 @@ namespace b
 
 	void Peglin::Initialize()
 	{
-		iPeglin = Resources::Load<Image>(L"Peglin", L"..\\Resources\\sprite.bmp\\Peglin.bmp");
+		Image* mImage = Resources::Load<Image>(L"Peglin", L"..\\Resources\\sprite.bmp\\peglin.bmp");
 
+		Animator* animator = AddComponent<Animator>();
+
+		/*animator->CreateAnimation(L"Idle", mImage, Vector2::Zero, 9, 8, 9, Vector2::Zero, 0.15);*/
+		animator->CreateAnimation(L"Idle", mImage, Vector2(0.0f, 32.0f * 0), 9, 8, 4, Vector2::Zero, 0.15);
+
+		animator->Play(L"Idle", true);
 		GameObject::Initialize();
 	}
 
@@ -26,14 +34,13 @@ namespace b
 	{
 		GameObject::Update();
 
-
+		/*Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();*/
 	}
 
 	void Peglin::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
-
-		BitBlt(hdc, 0, 0, iPeglin->getWidth(), iPeglin->getHeight(), iPeglin->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void Peglin::Release()

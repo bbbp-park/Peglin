@@ -13,8 +13,8 @@ namespace b
 
 		HDC GetHdc() { return mHdc; }
 		HBITMAP GetBitmap() { return mBitmap; }
-		UINT getWidth() { return mWidth; }
-		UINT getHeight() { return mHeight; }
+		UINT GetWidth() { return mWidth; }
+		UINT GetHeight() { return mHeight; }
 
 	private:
 		HDC mHdc;

@@ -24,11 +24,11 @@ namespace b
 	{
 		QueryPerformanceCounter(&mCurFrequency);
 
-		double differenceFrequency = mCurFrequency.QuadPart - mPrevFrequency.QuadPart;
+		double differnceFrequency = mCurFrequency.QuadPart - mPrevFrequency.QuadPart;
 
-		mDeltaTime = differenceFrequency / mCpuFrequency.QuadPart;
+		mDeltaTime = differnceFrequency / mCpuFrequency.QuadPart;
 
-		mPrevFrequency.QuadPart = mCpuFrequency.QuadPart;
+		mPrevFrequency.QuadPart = mCurFrequency.QuadPart;
 	}
 
 	void Time::Render(HDC hdc)
@@ -42,7 +42,7 @@ namespace b
 			wchar_t szFloat[50] = {};
 			float FPS = 1.0f / (float)mDeltaTime;
 			swprintf_s(szFloat, 50, L"FPS : %d", (UINT)FPS);
-
+			//int iLen = wcsnlen_s(szFloat, 50);
 			SetWindowText(hWnd, szFloat);
 
 			mSecond = 0.0f;

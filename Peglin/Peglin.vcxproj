@@ -127,11 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="bAnimator.h" />
+    <ClInclude Include="bAnimation.h" />
     <ClInclude Include="bApplication.h" />
     <ClInclude Include="bComponent.h" />
     <ClInclude Include="bEngine.h" />
     <ClInclude Include="bEntity.h" />
     <ClInclude Include="bEnums.h" />
+    <ClInclude Include="bFightScene.h" />
     <ClInclude Include="bGameObject.h" />
     <ClInclude Include="bImage.h" />
     <ClInclude Include="bInput.h" />
@@ -145,6 +148,7 @@
     <ClInclude Include="bSceneManager.h" />
     <ClInclude Include="bTime.h" />
     <ClInclude Include="bTitleScene.h" />
+    <ClInclude Include="bTransform.h" />
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Peglin.h" />
@@ -152,9 +156,12 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bAnimator.cpp" />
+    <ClCompile Include="bAnimation.cpp" />
     <ClCompile Include="bApplication.cpp" />
     <ClCompile Include="bComponent.cpp" />
     <ClCompile Include="bEntity.cpp" />
+    <ClCompile Include="bFightScene.cpp" />
     <ClCompile Include="bGameObject.cpp" />
     <ClCompile Include="bImage.cpp" />
     <ClCompile Include="bInput.cpp" />
@@ -168,6 +175,7 @@
     <ClCompile Include="bSceneManager.cpp" />
     <ClCompile Include="bTime.cpp" />
     <ClCompile Include="bTitleScene.cpp" />
+    <ClCompile Include="bTransform.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

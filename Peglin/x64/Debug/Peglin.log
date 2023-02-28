@@ -1,4 +1,7 @@
-﻿  main.cpp
-D:\Assortrock\Peglin\Peglin\Peglin\bMath.h(23,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Assortrock\Peglin\Peglin\Peglin\bMath.h(24,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  bFightScene.cpp
+D:\Assortrock\Peglin\Peglin\Peglin\CommonInclude.h(18,36): warning C4081: 'newline'이(가) 있어야 하는데 ';'이(가) 있습니다.
+D:\Assortrock\Peglin\Peglin\Peglin\bMath.h(29,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Assortrock\Peglin\Peglin\Peglin\bMath.h(30,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Assortrock\Peglin\Peglin\Peglin\bFightScene.cpp(30,30): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Assortrock\Peglin\Peglin\Peglin\bFightScene.cpp(29,29): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Peglin.vcxproj -> D:\Assortrock\Peglin\Peglin\x64\Debug\Peglin.exe

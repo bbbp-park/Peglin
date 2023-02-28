@@ -119,6 +119,18 @@
     <ClInclude Include="bTitleScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="bAnimation.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="bAnimator.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="bTransform.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="bFightScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -170,6 +182,18 @@
       <Filter>Contents\Scene</Filter>
     </ClCompile>
     <ClCompile Include="bTitleScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="bAnimation.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="bAnimator.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="bTransform.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="bFightScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
   </ItemGroup>

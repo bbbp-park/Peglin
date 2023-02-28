@@ -33,6 +33,9 @@ namespace b
 
 	void PlayScene::Render(HDC hdc)
 	{
+		/*HBRUSH brush = CreateSolidBrush(RGB(48, 130, 48));
+		SelectObject(hdc, brush);*/
+
 		Scene::Render(hdc);
 	}
 

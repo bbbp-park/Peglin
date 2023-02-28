@@ -16,7 +16,6 @@ namespace b
 		virtual void Release() override;
 
 	private:
-		Image* iPeglin;
 	};
 }
 
