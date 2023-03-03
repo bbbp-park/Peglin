@@ -4,6 +4,7 @@
 
 namespace b
 {
+	class Animator;
 	class Peglin : public GameObject
 	{
 	public:
@@ -16,6 +17,7 @@ namespace b
 		virtual void Release() override;
 
 	private:
+		Animator* mAnimator;
 	};
 }
 

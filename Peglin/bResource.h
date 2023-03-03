@@ -3,7 +3,7 @@
 
 namespace b
 {
-	class Resource : public Entity
+	class Resource
 	{
 	public:
 		Resource();

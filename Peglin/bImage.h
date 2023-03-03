@@ -6,6 +6,8 @@ namespace b
 	class Image : public Resource
 	{
 	public:
+		static Image* Create(const std::wstring& name, UINT widht, UINT height);
+
 		Image();
 		~Image();
 

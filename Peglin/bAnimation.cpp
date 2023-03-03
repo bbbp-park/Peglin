@@ -56,7 +56,10 @@ namespace b
 
 	}
 
-	void Animation::Create(Image* sheet, Vector2 leftTop, UINT coulmn, UINT row, UINT spriteLenght, Vector2 offset, float duration)
+	void Animation::Create(Image* sheet
+		, Vector2 leftTop
+		, UINT coulmn, UINT row
+		, UINT spriteLenght, Vector2 offset, float duration)
 	{
 		mSheetImage = sheet;
 
@@ -71,7 +74,7 @@ namespace b
 			spriteInfo.leftTop.x = leftTop.x + (size.x * i);
 			spriteInfo.leftTop.y = leftTop.y;
 			spriteInfo.size = size;
-			spriteInfo.offSet = offset;
+			spriteInfo.offset = offset;
 			spriteInfo.duration = duration;
 
 			mSpriteSheet.push_back(spriteInfo);

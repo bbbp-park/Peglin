@@ -11,7 +11,7 @@ namespace b
 		{
 			// 리소스맵에서 데이터를 탐색한다.
 			// 데이터가 있다면 해당 데이터를 반환하고 데이터가 없다면 end를 반환해준다.
-			auto iter = mResources.find(key);
+			std::map<std::wstring, Resource*>::iterator iter = mResources.find(key);
 
 			// 찾고자 하는 데이터가 존재한다면 해당 타입으로 형변환하여 반환
 			if (iter != mResources.end())
@@ -44,6 +44,12 @@ namespace b
 			mResources.insert(std::make_pair(key, resource));
 
 			return dynamic_cast<T*>(resource);
+		}
+
+		template <typename T>
+		static void Insert(const std::wstring& key, T* resource)
+		{
+			mResources.insert(std::make_pair(key, resource));
 		}
 
 		static void Release()

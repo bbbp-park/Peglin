@@ -40,15 +40,20 @@ namespace b
 		virtual void Release() override;
 
 		// 완성된 스프라이트 시트를 지정해서 애니메이션을 제작
-		void CreateAnimation(const std::wstring& name, Image* sheet, Vector2 leftTop, UINT coulmn, UINT row, UINT spriteLenght, Vector2 offset, float duration);
+		void CreateAnimation(const std::wstring& name
+			, Image* sheet, Vector2 leftTop
+			, UINT coulmn, UINT row
+			, UINT spriteLenght
+			, Vector2 offset, float duration);
 
 		// 스프라이트를 이용해서 애니메이션 제작
-		void CreateAnimations();
+		void CreateAnimations(const std::wstring& path, Vector2 offset, float duration);
 
-		Animation* FindAnimation(const std::wstring& name);
 		void Play(const std::wstring& name, bool loop);
 
-		Event* FindEvents(const std::wstring* name);
+		Animation* FindAnimation(const std::wstring& name);
+
+		Events* FindEvents(const std::wstring& name);
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;

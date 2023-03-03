@@ -28,7 +28,7 @@ namespace b
 		template <typename T>
 		T* GetComponent()
 		{
-			for (Component comp : mComponents)
+			for (Component* comp : mComponents)
 			{
 				if (dynamic_cast<T*>(comp))
 					return dynamic_cast<T*>(comp);

@@ -21,12 +21,10 @@ namespace b
 	{
 		Image* mImage = Resources::Load<Image>(L"Peglin", L"..\\Resources\\sprite.bmp\\peglin.bmp");
 
-		Animator* animator = AddComponent<Animator>();
+		mAnimator = AddComponent<Animator>();
+		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Idle", Vector2::Zero, 0.15f);
 
-		/*animator->CreateAnimation(L"Idle", mImage, Vector2::Zero, 9, 8, 9, Vector2::Zero, 0.15);*/
-		animator->CreateAnimation(L"Idle", mImage, Vector2(0.0f, 32.0f * 0), 9, 8, 4, Vector2::Zero, 0.15);
-
-		animator->Play(L"Idle", true);
+		mAnimator->Play(L"PeglinIdle", true);
 		GameObject::Initialize();
 	}
 

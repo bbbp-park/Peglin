@@ -1,4 +1,5 @@
 #include "bAnimator.h"
+#include "bResources.h"
 
 namespace b
 {
@@ -61,8 +62,60 @@ namespace b
 		mAnimations.insert(std::make_pair(name, animation));
 	}
 
-	void Animator::CreateAnimations()
+	void Animator::CreateAnimations(const std::wstring& path, Vector2 offset, float duration)
 	{
+		UINT width = 0;
+		UINT height = 0;
+		UINT fileCount = 0;
+
+
+		std::filesystem::path fs(path);
+		std::vector<Image*> images = {};
+		for (const auto& p : std::filesystem::recursive_directory_iterator(path))
+		{
+			std::wstring fileName = p.path().filename();
+			std::wstring fullName = path + L"\\" + fileName;
+
+			const std::wstring ext = p.path().extension();
+			if (ext == L".png")
+				continue;
+
+			Image* image = Resources::Load<Image>(fileName, fullName);
+
+			images.push_back(image);
+
+			if (width < image->GetWidth())
+			{
+				width = image->GetWidth();
+			}
+			if (height < image->GetHeight())
+			{
+				height = image->GetHeight();
+			}
+			fileCount++;
+		}
+
+		std::wstring key = fs.parent_path().filename();
+		key += fs.filename();
+		mSpriteSheet = Image::Create(key, width * fileCount, height);
+
+		//
+		int index = 0;
+		for (Image* image : images)
+		{
+			int centerX = (width - image->GetWidth()) / 2;
+			int centerY = (height - image->GetHeight());
+
+			BitBlt(mSpriteSheet->GetHdc()
+				, width * index + centerX
+				, 0 + centerY
+				, image->GetWidth(), image->GetHeight()
+				, image->GetHdc(), 0, 0, SRCCOPY);
+
+			index++;
+		}
+
+		CreateAnimation(key, mSpriteSheet, Vector2::Zero, index, 1, index, offset, duration);
 	}
 
 	Animation* Animator::FindAnimation(const std::wstring& name)
@@ -81,7 +134,7 @@ namespace b
 		mbLoop = loop;
 	}
 
-	Animator::Event* Animator::FindEvents(const std::wstring* name)
+	Animator::Events* Animator::FindEvents(const std::wstring& name)
 	{
 		return nullptr;
 	}

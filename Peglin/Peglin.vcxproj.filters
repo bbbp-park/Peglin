@@ -48,6 +48,9 @@
     <Filter Include="Contents\Player">
       <UniqueIdentifier>{49c5fb10-ca0e-4ea9-9995-d1fd9d9608fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component\Animation">
+      <UniqueIdentifier>{36f3046d-6bee-45a5-b10a-1f20fb59d9a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -119,17 +122,17 @@
     <ClInclude Include="bTitleScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="bAnimation.h">
-      <Filter>Engine\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="bAnimator.h">
-      <Filter>Engine\Component</Filter>
-    </ClInclude>
     <ClInclude Include="bTransform.h">
       <Filter>Engine\Component</Filter>
     </ClInclude>
     <ClInclude Include="bFightScene.h">
       <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="bAnimation.h">
+      <Filter>Engine\Component\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="bAnimator.h">
+      <Filter>Engine\Component\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -184,17 +187,17 @@
     <ClCompile Include="bTitleScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="bAnimation.cpp">
-      <Filter>Engine\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="bAnimator.cpp">
-      <Filter>Engine\Component</Filter>
-    </ClCompile>
     <ClCompile Include="bTransform.cpp">
       <Filter>Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="bFightScene.cpp">
       <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="bAnimation.cpp">
+      <Filter>Engine\Component\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="bAnimator.cpp">
+      <Filter>Engine\Component\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
