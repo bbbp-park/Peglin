@@ -54,6 +54,7 @@ namespace b
 		Animation* FindAnimation(const std::wstring& name);
 
 		Events* FindEvents(const std::wstring& name);
+		Vector2 GetCenterPos() { return centerPos; }
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
@@ -61,6 +62,7 @@ namespace b
 		Animation* mActiveAnimation;
 		Image* mSpriteSheet;
 		bool mbLoop;
+		Vector2 centerPos;
 	};
 }
 

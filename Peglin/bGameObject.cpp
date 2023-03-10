@@ -1,10 +1,12 @@
 #include "bGameObject.h"
+#include "bTransform.h"
 
 namespace b
 {
 	GameObject::GameObject()
 	{
 		mComponents.resize((UINT)eComponentType::End);
+		AddComponent<Transform>();
 
 	}
 

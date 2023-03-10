@@ -8,6 +8,15 @@ namespace b
 	class Peglin : public GameObject
 	{
 	public:
+		enum class ePeglinState
+		{
+			Move,
+			ShootBall,
+			ShootBomb,
+			Death,
+			Idle,
+		};
+
 		Peglin();
 		~Peglin();
 
@@ -17,7 +26,15 @@ namespace b
 		virtual void Release() override;
 
 	private:
+		void move();
+		void shoot_ball();
+		void shoot_bomb();
+		void death();
+		void idle();
+
+	private:
 		Animator* mAnimator;
+		ePeglinState mState;
 	};
 }
 

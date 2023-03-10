@@ -2,6 +2,7 @@
 #include "bPlayScene.h"
 #include "bTitleScene.h"
 #include "bFightScene.h"
+#include "bEndingScene.h"
 
 namespace b
 {
@@ -15,6 +16,7 @@ namespace b
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 		mScenes[(UINT)eSceneType::Fight] = new FightScene();
+		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
 
 		mActiveScene = mScenes[(UINT)eSceneType::Title];
 
@@ -34,7 +36,12 @@ namespace b
 
 	void SceneManager::Render(HDC hdc)
 	{
+		HBRUSH brush = CreateSolidBrush(RGB(48, 130, 48));
+		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
+
 		mActiveScene->Render(hdc);
+
+		DeleteObject(oldBrush);
 	}
 
 	void SceneManager::Release()

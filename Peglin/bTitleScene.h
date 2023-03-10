@@ -4,6 +4,7 @@
 
 namespace b
 {
+	class Logo;
 	class TitleScene : public Scene
 	{
 	public:
@@ -20,7 +21,7 @@ namespace b
 
 	private:
 		Image* titleBackground;
-		Image* logo;
+		Logo* logo;
 	};
 }
 

@@ -51,6 +51,18 @@
     <Filter Include="Engine\Component\Animation">
       <UniqueIdentifier>{36f3046d-6bee-45a5-b10a-1f20fb59d9a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Logo">
+      <UniqueIdentifier>{7efc4a1a-60f8-4b52-9500-58833d4b659a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Monster">
+      <UniqueIdentifier>{84d0a424-7b6d-41a8-98a2-4e79ec36bf20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Ball">
+      <UniqueIdentifier>{54a874bf-8fb9-478c-a0ff-122a2d5cb2a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Collider">
+      <UniqueIdentifier>{893273f9-34ad-46aa-aaf2-7fbf82734c39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -134,6 +146,18 @@
     <ClInclude Include="bAnimator.h">
       <Filter>Engine\Component\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="bLogo.h">
+      <Filter>Contents\Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="bBall.h">
+      <Filter>Contents\Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="bCollider.h">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="bEndingScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -198,6 +222,18 @@
     </ClCompile>
     <ClCompile Include="bAnimator.cpp">
       <Filter>Engine\Component\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="bLogo.cpp">
+      <Filter>Contents\Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="bBall.cpp">
+      <Filter>Contents\Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="bCollider.cpp">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="bEndingScene.cpp">
+      <Filter>Contents\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

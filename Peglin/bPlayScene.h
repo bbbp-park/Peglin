@@ -1,5 +1,6 @@
 #pragma once
 #include "bScene.h"
+#include "bImage.h"
 
 namespace b
 {
@@ -20,6 +21,7 @@ namespace b
 
 	private:
 		Peglin* mPeglin;
+		Image* treeTop;
 	};
 }
 

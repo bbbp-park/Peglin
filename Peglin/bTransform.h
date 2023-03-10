@@ -17,7 +17,7 @@ namespace b
 		void SetPos(Vector2 pos) { mPos = pos; }
 		void SetScale(Vector2 size) { mScale = size; }
 		Vector2 GetPos() { return mPos; }
-		Vector2 GetSize() { return mScale; }
+		Vector2 GetScale() { return mScale; }
 
 	private:
 		Vector2 mPos;

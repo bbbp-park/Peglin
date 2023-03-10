@@ -8,6 +8,7 @@ namespace b
 		, mActiveAnimation(nullptr)
 		, mSpriteSheet(nullptr)
 		, mbLoop(false)
+		, centerPos(Vector2::Zero)
 	{
 	}
 
@@ -77,7 +78,7 @@ namespace b
 			std::wstring fullName = path + L"\\" + fileName;
 
 			const std::wstring ext = p.path().extension();
-			if (ext == L".png")
+			if (ext != L".bmp")
 				continue;
 
 			Image* image = Resources::Load<Image>(fileName, fullName);
@@ -98,7 +99,7 @@ namespace b
 		std::wstring key = fs.parent_path().filename();
 		key += fs.filename();
 		mSpriteSheet = Image::Create(key, width * fileCount, height);
-
+		centerPos = Vector2(width / 2.0f, height / 2.0f + 10.0f);
 		//
 		int index = 0;
 		for (Image* image : images)
