@@ -22,6 +22,11 @@ namespace b
 	private:
 		Image* titleBackground;
 		Logo* logo;
+
+		HDC mHdc;
+
+		HFONT font;
+		HFONT oldFont;
 	};
 }
 

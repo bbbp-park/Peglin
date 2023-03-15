@@ -4,12 +4,13 @@
 
 namespace b
 {
-	class Peglin;
-	class PlayScene : public Scene
+	class SpeedUp;
+	class MapPeglin;
+	class MapScene : public Scene
 	{
 	public:
-		PlayScene();
-		~PlayScene();
+		MapScene();
+		~MapScene();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -20,8 +21,11 @@ namespace b
 		virtual void OnExit() override;
 
 	private:
-		Peglin* mPeglin;
+		MapPeglin* mMapPeglin;
+
 		Image* treeTop;
+
+		SpeedUp* mSpeedUp;
 	};
 }
 

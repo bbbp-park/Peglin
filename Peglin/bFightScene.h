@@ -4,6 +4,8 @@
 
 namespace b
 {
+	class HPbar;
+	class Peglin;
 	class FightScene : public Scene
 	{
 	public:
@@ -17,7 +19,11 @@ namespace b
 
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
+
 	private:
+		Peglin* mPeglin;
+		HPbar* mHPbar;
+
 		Image* forest1_bg;
 		Image* forest1_tile;
 		Image* forest2_bg;

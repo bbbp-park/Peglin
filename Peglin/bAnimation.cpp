@@ -4,6 +4,7 @@
 #include "bAnimator.h"
 #include "bGameObject.h"
 #include "bTransform.h"
+#include "bResources.h"
 
 namespace b
 {
@@ -96,4 +97,5 @@ namespace b
 		mTime = 0;
 		mbComplete = false;
 	}
+
 }

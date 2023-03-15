@@ -3,10 +3,12 @@
 #include "bSceneManager.h"
 #include "bResources.h"
 #include "bLogo.h"
+#include "bAnimation.h"
 
 namespace b
 {
 	TitleScene::TitleScene()
+		: mHdc(nullptr)
 	{
 	}
 
@@ -26,9 +28,9 @@ namespace b
 
 	void TitleScene::Update()
 	{
-		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
+		if (Input::GetKeyState(eKeyCode::M) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(eSceneType::Play);
+			SceneManager::LoadScene(eSceneType::Map);
 		}
 
 		Scene::Update();
@@ -36,11 +38,10 @@ namespace b
 
 	void TitleScene::Render(HDC hdc)
 	{
-
 		StretchBlt(hdc, -1, -1, 1902, 1082, titleBackground->GetHdc(), 0, 0, titleBackground->GetWidth(), titleBackground->GetHeight(), SRCCOPY);
 
+		mHdc = hdc;
 		Scene::Render(hdc);
-
 	}
 
 	void TitleScene::Release()

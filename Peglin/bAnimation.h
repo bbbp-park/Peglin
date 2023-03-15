@@ -37,11 +37,11 @@ namespace b
 		bool IsComplete() { return mbComplete; }
 		void SetAnimator(Animator* animator) { mAnimator = animator; }
 
-
 	private:
 		Animator* mAnimator;
 		Image* mSheetImage;
 		std::vector<Sprite> mSpriteSheet;
+
 		float mTime;
 		bool mbComplete;
 		int mSpriteIndex;

@@ -10,7 +10,6 @@ namespace b
 	public:
 		enum class ePeglinState
 		{
-			Move,
 			ShootBall,
 			ShootBomb,
 			Death,
@@ -26,7 +25,6 @@ namespace b
 		virtual void Release() override;
 
 	private:
-		void move();
 		void shoot_ball();
 		void shoot_bomb();
 		void death();

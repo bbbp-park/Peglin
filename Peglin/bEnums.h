@@ -3,8 +3,9 @@
 enum class eSceneType
 {
 	Title,
-	Play,
+	Map,
 	Fight,
+	MiniMap,
 	Ending,
 	End,
 };

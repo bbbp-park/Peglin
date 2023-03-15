@@ -63,6 +63,12 @@
     <Filter Include="Engine\Component\Collider">
       <UniqueIdentifier>{893273f9-34ad-46aa-aaf2-7fbf82734c39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\UI">
+      <UniqueIdentifier>{c86d0656-4cb1-412e-adbe-400842fd89ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\BackGround">
+      <UniqueIdentifier>{086f2831-82e5-4f18-8e2c-cdc0c84a6cd1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -128,7 +134,7 @@
     <ClInclude Include="bPeglin.h">
       <Filter>Contents\Player</Filter>
     </ClInclude>
-    <ClInclude Include="bPlayScene.h">
+    <ClInclude Include="bMapScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
     <ClInclude Include="bTitleScene.h">
@@ -157,6 +163,15 @@
     </ClInclude>
     <ClInclude Include="bEndingScene.h">
       <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="bSpeedUp.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="bMapPeglin.h">
+      <Filter>Contents\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="bHPbar.h">
+      <Filter>Contents\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -205,7 +220,7 @@
     <ClCompile Include="bPeglin.cpp">
       <Filter>Contents\Player</Filter>
     </ClCompile>
-    <ClCompile Include="bPlayScene.cpp">
+    <ClCompile Include="bMapScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
     <ClCompile Include="bTitleScene.cpp">
@@ -234,6 +249,15 @@
     </ClCompile>
     <ClCompile Include="bEndingScene.cpp">
       <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="bSpeedUp.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="bMapPeglin.cpp">
+      <Filter>Contents\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="bHPbar.cpp">
+      <Filter>Contents\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

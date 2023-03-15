@@ -1,5 +1,5 @@
 #include "bSceneManager.h"
-#include "bPlayScene.h"
+#include "bMapScene.h"
 #include "bTitleScene.h"
 #include "bFightScene.h"
 #include "bEndingScene.h"
@@ -14,11 +14,11 @@ namespace b
 		mScenes.resize((UINT)eSceneType::End);
 
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
-		mScenes[(UINT)eSceneType::Play] = new PlayScene();
+		mScenes[(UINT)eSceneType::Map] = new MapScene();
 		mScenes[(UINT)eSceneType::Fight] = new FightScene();
 		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
 
-		mActiveScene = mScenes[(UINT)eSceneType::Title];
+		mActiveScene = mScenes[(UINT)eSceneType::Fight];
 
 		for (Scene* scene : mScenes)
 		{
