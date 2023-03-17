@@ -1,4 +1,16 @@
-﻿  bLogo.cpp
+﻿  bEndingScene.cpp
 D:\Assortrock\Peglin\Peglin\Peglin\bMath.h(29,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\Assortrock\Peglin\Peglin\Peglin\bMath.h(30,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  bFightScene.cpp
+D:\Assortrock\Peglin\Peglin\Peglin\bMath.h(29,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Assortrock\Peglin\Peglin\Peglin\bMath.h(30,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  bMapScene.cpp
+D:\Assortrock\Peglin\Peglin\Peglin\bMath.h(29,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Assortrock\Peglin\Peglin\Peglin\bMath.h(30,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Assortrock\Peglin\Peglin\Peglin\bMapScene.cpp(63,27): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Assortrock\Peglin\Peglin\Peglin\bMapScene.cpp(62,26): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  bTitleScene.cpp
+D:\Assortrock\Peglin\Peglin\Peglin\bMath.h(29,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Assortrock\Peglin\Peglin\Peglin\bMath.h(30,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
   Peglin.vcxproj -> D:\Assortrock\Peglin\Peglin\x64\Debug\Peglin.exe

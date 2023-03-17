@@ -23,7 +23,7 @@ namespace b
 	{
 		Transform* tr = GetComponent<Transform>();
 		tr->SetScale(Vector2(3.0f, 3.0f));
-		tr->SetPos(Vector2(430.0f, 150.0f));
+		tr->SetPos(Vector2(430.0f, 240.0f));
 		tr->SetName(L"peglin's transform");
 
 		mAnimator = AddComponent<Animator>();
@@ -34,7 +34,7 @@ namespace b
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Shoot Bomb", Vector2::Zero, 0.15f);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2::Zero);
+		collider->SetCenter(Vector2(-40.0f, -80.0f));
 		collider->SetSize(Vector2(80.0f, 80.0f));
 
 		mAnimator->GetCompleteEvent(L"PeglinDeath") = std::bind(&Peglin::deathCompleteEvent, this);
@@ -107,7 +107,7 @@ namespace b
 
 		if (Input::GetKeyDown(eKeyCode::W))
 		{
-			mAnimator->Play(L"PeglinShoot Bamb", true);
+			mAnimator->Play(L"PeglinShoot Bomb", true);
 			mState = ePeglinState::ShootBomb;
 		}
 
@@ -124,6 +124,20 @@ namespace b
 	}
 	void Peglin::shoot_ballCompleteEvent()
 	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		pos.x += 40.0f;
+		pos.y -= 40.0f;
+
+		Scene* curScene = SceneManager::GetActiveScene();
+
+		Ball* ball = new Ball();
+		
+		ball->GetComponent<Transform>()->SetPos(pos);
+		ball->GetComponent<Transform>()->SetScale(Vector2(4.0f, 4.0f));
+		curScene->AddGameObject(ball, eLayerType::Ball);
+
+
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;
 	}

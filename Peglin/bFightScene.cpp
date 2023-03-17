@@ -31,12 +31,12 @@ namespace b
 
 	void FightScene::Update()
 	{
-		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
+		if (Input::GetKeyState(eKeyCode::O) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(eSceneType::Fight);
+			SceneManager::LoadScene(eSceneType::Map);
 		}
 
-		if (Input::GetKeyState(eKeyCode::M) == eKeyState::Down)
+		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Ending);
 		}

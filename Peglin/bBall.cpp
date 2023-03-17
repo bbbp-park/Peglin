@@ -15,12 +15,8 @@ namespace b
 	}
 
 	void Ball::Initialize()
-	{/*
-		Transform* tr = GetComponent<Transform>();
-		tr->SetScale(Vector2(2.0f, 2.0f));
-
-		mImage = Resources::Load<Image>(L"Rock", L"..\\Resources\\sprite\\Ball\\rock.bmp");*/
-
+	{
+		/*mImage = Resources::Load<Image>(L"Rock", L"..\\Resources\\sprite\\Ball\\rock.bmp");*/
 	}
 
 	void Ball::Update()
@@ -33,13 +29,15 @@ namespace b
 
 	void Ball::Render(HDC hdc)
 	{
-		Transform* tr = GetComponent<Transform>();
-		tr->SetScale(Vector2(2.0f, 2.0f));
-		Vector2 pos = tr->GetPos();
-
 		mImage = Resources::Load<Image>(L"Rock", L"..\\Resources\\sprite\\Ball\\rock.bmp");
 
-		TransparentBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, mImage->GetWidth(), mImage->GetHeight(), RGB(255, 0, 255));
+		Transform* tr = GetComponent<Transform>();
+		Vector2 scale = tr->GetScale();
+		Vector2 pos = tr->GetPos();
+		pos.x -= mImage->GetWidth();
+		pos.y -= mImage->GetHeight();
+
+		TransparentBlt(hdc, pos.x, pos.y, mImage->GetWidth() * scale.x, mImage->GetHeight() * scale.y, mImage->GetHdc(), 0, 0, mImage->GetWidth(), mImage->GetHeight(), RGB(255, 0, 255));
 	}
 
 	void Ball::Release()
