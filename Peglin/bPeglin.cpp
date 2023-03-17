@@ -25,19 +25,21 @@ namespace b
 		tr->SetScale(Vector2(3.0f, 3.0f));
 		tr->SetPos(Vector2(430.0f, 150.0f));
 		tr->SetName(L"peglin's transform");
-		//Image* mImage = Resources::Load<Image>(L"Peglin", L"..\\Resources\\sprite.bmp\\peglin.bmp");
 
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Idle", Vector2::Zero, 0.15f);
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Angel", Vector2::Zero, 0.15f);
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Death", Vector2::Zero, 0.15f);
-		/*mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Move", Vector2::Zero, 0.15f);*/
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Shoot Ball", Vector2::Zero, 0.15f);
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Shoot Bomb", Vector2::Zero, 0.15f);
 
-		/*Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(mAnimator->GetCenterPos());
-		collider->SetSize(Vector2(65.0f, 70.0f));*/
+		Collider* collider = AddComponent<Collider>();
+		collider->SetCenter(Vector2::Zero);
+		collider->SetSize(Vector2(80.0f, 80.0f));
+
+		mAnimator->GetCompleteEvent(L"PeglinDeath") = std::bind(&Peglin::deathCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"PeglinShoot Ball") = std::bind(&Peglin::shoot_ballCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"PeglinShoot Bomb") = std::bind(&Peglin::shoot_bombCompleteEvent, this);
 		
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;
@@ -97,6 +99,37 @@ namespace b
 
 	void Peglin::idle()
 	{
-		
+		if (Input::GetKeyDown(eKeyCode::Q))
+		{
+			mAnimator->Play(L"PeglinShoot Ball", true);
+			mState = ePeglinState::ShootBall;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::W))
+		{
+			mAnimator->Play(L"PeglinShoot Bamb", true);
+			mState = ePeglinState::ShootBomb;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::E))
+		{
+			mAnimator->Play(L"PeglinDeath", true);
+			mState = ePeglinState::Death;
+		}
+	}
+	void Peglin::deathCompleteEvent()
+	{
+		mAnimator->Play(L"PeglinAngel", true);
+		mState = ePeglinState::Death;
+	}
+	void Peglin::shoot_ballCompleteEvent()
+	{
+		mAnimator->Play(L"PeglinIdle", true);
+		mState = ePeglinState::Idle;
+	}
+	void Peglin::shoot_bombCompleteEvent()
+	{
+		mAnimator->Play(L"PeglinIdle", true);
+		mState = ePeglinState::Idle;
 	}
 }

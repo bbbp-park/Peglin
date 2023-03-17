@@ -8,7 +8,6 @@ namespace b
 		: Component(eComponentType::Collider)
 		, mCenter(Vector2::Zero)
 		, mSize(Vector2(100.0f, 100.0f))
-		, mScale(Vector2::Zero)
 		, mPos(Vector2::Zero)
 	{
 	}
@@ -24,6 +23,7 @@ namespace b
 	void Collider::Update()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
+
 		mPos = tr->GetPos() + mCenter;
 	}
 

@@ -19,6 +19,8 @@ namespace b
 		virtual void OnExit();
 
 		void AddGameObject(GameObject* obj, eLayerType layer);
+		const std::vector<GameObject*>& GetGameObjects(eLayerType layer);
+
 	private:
 		std::vector<Layer> mLayers;
 	};

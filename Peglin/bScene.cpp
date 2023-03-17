@@ -52,4 +52,8 @@ namespace b
 	{
 		mLayers[(UINT)layer].AddaGameObject(obj);
 	}
+	const std::vector<GameObject*>& Scene::GetGameObjects(eLayerType layer)
+	{
+		return mLayers[(UINT)layer].GetGameObjects();
+	}
 }

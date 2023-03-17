@@ -173,6 +173,9 @@
     <ClInclude Include="bHPbar.h">
       <Filter>Contents\UI</Filter>
     </ClInclude>
+    <ClInclude Include="bCollisionManager.h">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -258,6 +261,9 @@
     </ClCompile>
     <ClCompile Include="bHPbar.cpp">
       <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="bCollisionManager.cpp">
+      <Filter>Engine\Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

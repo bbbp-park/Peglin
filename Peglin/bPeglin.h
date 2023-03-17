@@ -30,6 +30,10 @@ namespace b
 		void death();
 		void idle();
 
+		void deathCompleteEvent();
+		void shoot_ballCompleteEvent();
+		void shoot_bombCompleteEvent();
+
 	private:
 		Animator* mAnimator;
 		ePeglinState mState;

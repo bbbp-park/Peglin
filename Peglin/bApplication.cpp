@@ -2,6 +2,7 @@
 #include "bTime.h"
 #include "bInput.h"
 #include "bSceneManager.h"
+#include "bCollisionManager.h"
 
 namespace b
 {
@@ -35,10 +36,10 @@ namespace b
 		ShowWindow(hWnd, true);
 
 		mBackBuffer = CreateCompatibleBitmap(mHdc, mWidth, mHeight);
-		mBackHdc = CreateCompatibleDC(mHdc);
+		mBackHDC = CreateCompatibleDC(mHdc);
 
 		HBITMAP defaultBitmap
-			= (HBITMAP)SelectObject(mBackHdc, mBackBuffer);
+			= (HBITMAP)SelectObject(mBackHDC, mBackBuffer);
 		DeleteObject(defaultBitmap);
 
 		Time::Initiailize();
@@ -57,20 +58,25 @@ namespace b
 		Time::Update();
 		Input::Update();
 		SceneManager::Update();
+		CollisionManager::Update();
 	}
 
 	void Application::Render()
 	{
 		// clear
+		clear();
 
-		Rectangle(mBackHdc, -1, -1, 1602, 902);
-
-		Time::Render(mBackHdc);
-		Input::Render(mBackHdc);
-		SceneManager::Render(mBackHdc);
+		Time::Render(mBackHDC);
+		Input::Render(mBackHDC);
+		SceneManager::Render(mBackHDC);
 
 
 		// backBuffer에 있는 그림을 원본 버퍼에 그려줘야한다.
-		BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHdc, 0, 0, SRCCOPY);
+		BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHDC, 0, 0, SRCCOPY);
+	}
+
+	void Application::clear()
+	{
+		Rectangle(mBackHDC, -1, -1, 1602, 902);
 	}
 }

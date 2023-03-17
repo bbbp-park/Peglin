@@ -133,6 +133,7 @@
     <ClInclude Include="bApplication.h" />
     <ClInclude Include="bBall.h" />
     <ClInclude Include="bCollider.h" />
+    <ClInclude Include="bCollisionManager.h" />
     <ClInclude Include="bComponent.h" />
     <ClInclude Include="bEndingScene.h" />
     <ClInclude Include="bEngine.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="bApplication.cpp" />
     <ClCompile Include="bBall.cpp" />
     <ClCompile Include="bCollider.cpp" />
+    <ClCompile Include="bCollisionManager.cpp" />
     <ClCompile Include="bComponent.cpp" />
     <ClCompile Include="bEndingScene.cpp" />
     <ClCompile Include="bEntity.cpp" />

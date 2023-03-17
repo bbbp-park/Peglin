@@ -21,6 +21,7 @@ namespace b
 		logo = new Logo();
 		
 		titleBackground = Resources::Load<Image>(L"titleBackground", L"..\\Resources\\sprite\\Background\\TitleSceneBackground.bmp");
+
 		AddGameObject(logo, eLayerType::BG);
 
 		Scene::Initialize();

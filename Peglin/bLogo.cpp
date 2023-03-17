@@ -15,7 +15,7 @@ namespace b
 	void Logo::Initialize()
 	{
 		Transform* tr = GetComponent<Transform>();
-		tr->SetPos(Vector2(10.0f, 140.0f));
+		tr->SetPos(Vector2(500.0f, 340.0f));
 		tr->SetScale(Vector2(7.0f, 7.0f));
 
 		mAnimator = AddComponent<Animator>();

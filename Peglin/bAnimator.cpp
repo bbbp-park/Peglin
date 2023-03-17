@@ -19,6 +19,12 @@ namespace b
 			delete animation.second;
 			animation.second = nullptr;
 		}
+
+		for (auto events : mEvents)
+		{
+			delete events.second;
+			events.second = nullptr;
+		}
 	}
 
 	void Animator::Initialize()
@@ -33,7 +39,13 @@ namespace b
 
 			if (mbLoop && mActiveAnimation->IsComplete())
 			{
+				Animator::Events* events = FindEvents(mActiveAnimation->GetName());
+
+				if (events != nullptr)
+					events->mCompleteEvent();
+
 				mActiveAnimation->Reset();
+
 			}
 		}
 	}
@@ -48,19 +60,22 @@ namespace b
 	{
 	}
 
-	void Animator::CreateAnimation(const std::wstring& name, Image* sheet, Vector2 leftTop, UINT coulmn, UINT row, UINT spriteLenght, Vector2 offset, float duration)
+	void Animator::CreateAnimation(const std::wstring& name, Image* sheet, Vector2 leftTop, UINT coulmn, UINT row, UINT spriteLength, Vector2 offset, float duration)
 	{
 		Animation* animation = FindAnimation(name);
 
 		if (animation != nullptr)
 			return;
 
-		animation = new Animation;
-		animation->Create(sheet, leftTop, coulmn, row, spriteLenght, offset, duration);
+		animation = new Animation();
+		animation->Create(sheet, leftTop, coulmn, row, spriteLength, offset, duration);
 		animation->SetName(name);
 		animation->SetAnimator(this);
 
 		mAnimations.insert(std::make_pair(name, animation));
+
+		Events* event = new Events();
+		mEvents.insert(std::make_pair(name, event));
 	}
 
 	void Animator::CreateAnimations(const std::wstring& path, Vector2 offset, float duration)
@@ -69,9 +84,9 @@ namespace b
 		UINT height = 0;
 		UINT fileCount = 0;
 
-
 		std::filesystem::path fs(path);
 		std::vector<Image*> images = {};
+
 		for (const auto& p : std::filesystem::recursive_directory_iterator(path))
 		{
 			std::wstring fileName = p.path().filename();
@@ -82,26 +97,21 @@ namespace b
 				continue;
 
 			Image* image = Resources::Load<Image>(fileName, fullName);
-
 			images.push_back(image);
 
 			if (width < image->GetWidth())
-			{
 				width = image->GetWidth();
-			}
 			if (height < image->GetHeight())
-			{
 				height = image->GetHeight();
-			}
 			fileCount++;
 		}
 
 		std::wstring key = fs.parent_path().filename();
 		key += fs.filename();
 		mSpriteSheet = Image::Create(key, width * fileCount, height);
-		centerPos = Vector2(width / 2.0f, height / 2.0f + 10.0f);
-		//
+
 		int index = 0;
+
 		for (Image* image : images)
 		{
 			int centerX = (width - image->GetWidth()) / 2;
@@ -110,8 +120,10 @@ namespace b
 			BitBlt(mSpriteSheet->GetHdc()
 				, width * index + centerX
 				, 0 + centerY
-				, image->GetWidth(), image->GetHeight()
-				, image->GetHdc(), 0, 0, SRCCOPY);
+				, image->GetWidth()
+				, image->GetHeight()
+				, image->GetHdc()
+				, 0, 0, SRCCOPY);
 
 			index++;
 		}
@@ -131,12 +143,58 @@ namespace b
 
 	void Animator::Play(const std::wstring& name, bool loop)
 	{
+		if (mActiveAnimation != nullptr)
+		{
+			Animator::Events* prevEvents = FindEvents(mActiveAnimation->GetName());
+
+			if (prevEvents != nullptr)
+				prevEvents->mEndEvent();
+		}
+
 		mActiveAnimation = FindAnimation(name);
+		mActiveAnimation->Reset();
 		mbLoop = loop;
+
+		Animator::Events* events = FindEvents(mActiveAnimation->GetName());
+
+		if (events != nullptr)
+			events->mStartEvent();
 	}
 
 	Animator::Events* Animator::FindEvents(const std::wstring& name)
 	{
-		return nullptr;
+		std::map<std::wstring, Events*>::iterator iter = mEvents.find(name);
+
+		if (iter == mEvents.end())
+			return nullptr;
+
+		return iter->second;
+	}
+
+	std::function<void()>& Animator::GetStartEvent(const std::wstring& name)
+	{
+		Animation* animation = FindAnimation(name);
+
+		Animator::Events* events = FindEvents(animation->GetName());
+
+		return events->mStartEvent.mEvent;
+	}
+
+	std::function<void()>& Animator::GetCompleteEvent(const std::wstring& name)
+	{
+		Animation* animation = FindAnimation(name);
+
+		Animator::Events* events = FindEvents(animation->GetName());
+
+		return events->mCompleteEvent.mEvent;
+	}
+
+	std::function<void()>& Animator::GetEndEvent(const std::wstring& name)
+	{
+		Animation* animation = FindAnimation(name);
+
+		Animator::Events* events = FindEvents(animation->GetName());
+
+		return events->mEndEvent.mEvent;
 	}
 }

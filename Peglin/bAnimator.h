@@ -43,7 +43,7 @@ namespace b
 		void CreateAnimation(const std::wstring& name
 			, Image* sheet, Vector2 leftTop
 			, UINT coulmn, UINT row
-			, UINT spriteLenght
+			, UINT spriteLength
 			, Vector2 offset, float duration);
 
 		// 스프라이트를 이용해서 애니메이션 제작
@@ -54,7 +54,9 @@ namespace b
 		Animation* FindAnimation(const std::wstring& name);
 
 		Events* FindEvents(const std::wstring& name);
-		Vector2 GetCenterPos() { return centerPos; }
+		std::function<void()>& GetStartEvent(const std::wstring& name);
+		std::function<void()>& GetCompleteEvent(const std::wstring& name);
+		std::function<void()>& GetEndEvent(const std::wstring& name);
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;

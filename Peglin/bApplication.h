@@ -17,13 +17,15 @@ namespace b
 		HWND GetHwnd() { return mHwnd; }
 		HDC GetHdc() { return mHdc; }
 
+		void clear();
+
 	private:
 		HWND mHwnd;
 		HDC mHdc;
 
 		// back buffer
 		HBITMAP mBackBuffer;
-		HDC mBackHdc;
+		HDC mBackHDC;
 
 		UINT mWidth;
 		UINT mHeight;
