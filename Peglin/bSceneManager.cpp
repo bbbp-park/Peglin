@@ -3,6 +3,7 @@
 #include "bTitleScene.h"
 #include "bFightScene.h"
 #include "bEndingScene.h"
+#include "bCollisionManager.h"
 
 namespace b
 {
@@ -61,6 +62,7 @@ namespace b
 		// ÇöÀç ¾À
 		mActiveScene->OnExit();
 
+		CollisionManager::Clear();
 		// ´ÙÀ½ ¾À
 		mActiveScene = mScenes[(UINT)type];
 		mActiveScene->OnEnter();

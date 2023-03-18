@@ -7,6 +7,7 @@
 namespace b
 {
 	Ball::Ball()
+		: mImage(nullptr)
 	{
 	}
 
@@ -22,6 +23,12 @@ namespace b
 	void Ball::Update()
 	{
 		Transform* tr = GetComponent<Transform>();
+		//Vector2 dir = Vector2(500.0f, 500.f) - tr->GetPos();
+		//dir.Normalize();
+
+		//Vector2 pos = tr->GetPos();
+		//pos.x += 100.0f * dir.x * Time::DeltaTime();
+		//pos.y += 100.0f * dir.y * Time::DeltaTime();
 		Vector2 pos = tr->GetPos();
 		pos.x += 100.0f * Time::DeltaTime();
 		tr->SetPos(pos);
@@ -29,7 +36,7 @@ namespace b
 
 	void Ball::Render(HDC hdc)
 	{
-		mImage = Resources::Load<Image>(L"Rock", L"..\\Resources\\sprite\\Ball\\rock.bmp");
+		mImage = Resources::Load<Image>(L"Rock", L"..\\Resources\\sprite\\Ball\\Rock\\rock.bmp");
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 scale = tr->GetScale();

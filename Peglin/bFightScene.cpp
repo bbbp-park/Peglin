@@ -3,7 +3,9 @@
 #include "bInput.h"
 #include "bSceneManager.h"
 #include "bPeglin.h"
+#include "bMonster.h"
 #include "bHPbar.h"
+#include "bCollisionManager.h"
 
 namespace b
 {
@@ -19,6 +21,12 @@ namespace b
 	{
 		mPeglin = new Peglin();
 		AddGameObject(mPeglin, eLayerType::Player);
+
+		Monster* monster = new Monster();
+		AddGameObject(monster, eLayerType::Monster);
+
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+
 
 		mHPbar = new HPbar();
 		AddGameObject(mHPbar, eLayerType::UI);

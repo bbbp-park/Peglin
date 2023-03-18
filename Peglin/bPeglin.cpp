@@ -12,6 +12,7 @@
 namespace b
 {
 	Peglin::Peglin()
+		: mAnimator(nullptr)
 	{
 	}
 
@@ -82,6 +83,20 @@ namespace b
 		GameObject::Release();
 	}
 
+	void Peglin::OnCollisionEnter(Collider* other)
+	{
+		int a = 0;
+	}
+
+	void Peglin::OnCollisionStay(Collider* other)
+	{
+	}
+
+	void Peglin::OnCollisionExit(Collider* other)
+	{
+	}
+
+
 	void Peglin::shoot_ball()
 	{
 		
@@ -116,12 +131,35 @@ namespace b
 			mAnimator->Play(L"PeglinDeath", true);
 			mState = ePeglinState::Death;
 		}
+
+
+
+
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		if (Input::GetKey(eKeyCode::LEFT))
+			pos.x -= 100.0f * Time::DeltaTime();
+
+		if (Input::GetKey(eKeyCode::RIGHT))
+			pos.x += 100.0f * Time::DeltaTime();
+
+		if (Input::GetKey(eKeyCode::UP))
+			pos.y -= 100.0f * Time::DeltaTime();
+
+		if (Input::GetKey(eKeyCode::DOWN))
+			pos.y += 100.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
 	}
+
 	void Peglin::deathCompleteEvent()
 	{
 		mAnimator->Play(L"PeglinAngel", true);
 		mState = ePeglinState::Death;
 	}
+
 	void Peglin::shoot_ballCompleteEvent()
 	{
 		Transform* tr = GetComponent<Transform>();
@@ -141,6 +179,7 @@ namespace b
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;
 	}
+
 	void Peglin::shoot_bombCompleteEvent()
 	{
 		mAnimator->Play(L"PeglinIdle", true);

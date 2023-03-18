@@ -19,8 +19,7 @@ namespace b
 	{
 		Transform* tr = GetComponent<Transform>();
 		tr->SetScale(Vector2(2.2f, 2.2f));
-		tr->SetPos(Vector2(770.0f, 210.0f));
-		tr->SetName(L"mapPeglin's transform");
+		tr->SetPos(Vector2(820.0f, 240.0f));;
 
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Idle", Vector2::Zero, 0.15f);
@@ -62,10 +61,10 @@ namespace b
 
 	void MapPeglin::move()
 	{
-		if (Input::GetKeyUp(eKeyCode::A)
-			|| Input::GetKeyUp(eKeyCode::D)
-			|| Input::GetKeyUp(eKeyCode::S)
-			|| Input::GetKeyUp(eKeyCode::W))
+		if (Input::GetKeyUp(eKeyCode::UP)
+			|| Input::GetKeyUp(eKeyCode::DOWN)
+			|| Input::GetKeyUp(eKeyCode::LEFT)
+			|| Input::GetKeyUp(eKeyCode::RIGHT))
 		{
 			mState = eMapPeglinState::Idle;
 			mAnimator->Play(L"PeglinIdle", true);
@@ -74,16 +73,16 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		if (Input::GetKey(eKeyCode::A))
+		if (Input::GetKey(eKeyCode::LEFT))
 			pos.x -= 100.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::D))
+		if (Input::GetKey(eKeyCode::RIGHT))
 			pos.x += 100.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::W))
+		if (Input::GetKey(eKeyCode::UP))
 			pos.y -= 100.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::S))
+		if (Input::GetKey(eKeyCode::DOWN))
 			pos.y += 100.0f * Time::DeltaTime();
 
 		tr->SetPos(pos);
@@ -91,10 +90,10 @@ namespace b
 
 	void MapPeglin::idle()
 	{
-		if (Input::GetKeyDown(eKeyCode::A)
-			|| Input::GetKeyDown(eKeyCode::D)
-			|| Input::GetKeyDown(eKeyCode::S)
-			|| Input::GetKeyDown(eKeyCode::W))
+		if (Input::GetKeyDown(eKeyCode::UP)
+			|| Input::GetKeyDown(eKeyCode::DOWN)
+			|| Input::GetKeyDown(eKeyCode::LEFT)
+			|| Input::GetKeyDown(eKeyCode::RIGHT))
 		{
 			mState = eMapPeglinState::Move;
 			mAnimator->Play(L"PeglinMove", true);

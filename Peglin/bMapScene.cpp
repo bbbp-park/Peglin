@@ -23,6 +23,7 @@ namespace b
 		AddGameObject(mMapPeglin, eLayerType::Player);
 
 		treeTop = Resources::Load<Image>(L"treeTop", L"..\\Resources\\sprite\\Background\\treetop_.bmp");
+		
 
 		mSpeedUp = new SpeedUp();
 		AddGameObject(mSpeedUp, eLayerType::UI);
@@ -58,7 +59,7 @@ namespace b
 		HBRUSH brush = CreateSolidBrush(RGB(48, 130, 48));
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
 
-		TransparentBlt(hdc, -990, -405
+		TransparentBlt(hdc, -990, -600
 			, treeTop->GetWidth() * 2.4
 			, treeTop->GetHeight() * 2.4
 			, treeTop->GetHdc(), 0, 0

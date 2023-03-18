@@ -16,9 +16,9 @@ namespace b
 
 	void SpeedUp::Initialize()
 	{
-		indicator_up = Resources::Load<Image>(L"indicator_up", L"..\\Resources\\sprite\\UI\\speedup_indicator_up.bmp");
+		indicator_up = Resources::Load<Image>(L"indicator_up", L"..\\Resources\\sprite\\UI\\SpeedUp\\speedup_indicator_up.bmp");
 
-		indicator_down = Resources::Load<Image>(L"indicator_down", L"..\\Resources\\sprite\\UI\\speedup_indicator_down.bmp");
+		indicator_down = Resources::Load<Image>(L"indicator_down", L"..\\Resources\\sprite\\UI\\SpeedUp\\speedup_indicator_down.bmp");
 
 		indicator = indicator_up;
 

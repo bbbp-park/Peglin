@@ -13,7 +13,7 @@ namespace b
 
 	void HPbar::Initialize()
 	{
-		image = Resources::Load<Image>(L"HPbar", L"..\\Resources\\sprite\\UI\\health_ui_v3.bmp");
+		image = Resources::Load<Image>(L"HPbar", L"..\\Resources\\sprite\\UI\\HealthUI\\health_ui_v3.bmp");
 		GameObject::Initialize();
 	}
 

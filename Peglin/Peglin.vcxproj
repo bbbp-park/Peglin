@@ -148,6 +148,7 @@
     <ClInclude Include="bLogo.h" />
     <ClInclude Include="bMapPeglin.h" />
     <ClInclude Include="bMath.h" />
+    <ClInclude Include="bMonster.h" />
     <ClInclude Include="bPeglin.h" />
     <ClInclude Include="bMapScene.h" />
     <ClInclude Include="bResource.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="bLogo.cpp" />
     <ClCompile Include="bMapPeglin.cpp" />
     <ClCompile Include="bMath.cpp" />
+    <ClCompile Include="bMonster.cpp" />
     <ClCompile Include="bPeglin.cpp" />
     <ClCompile Include="bMapScene.cpp" />
     <ClCompile Include="bResource.cpp" />

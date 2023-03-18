@@ -6,6 +6,7 @@
 namespace b
 {
 	EndingScene::EndingScene()
+		: endScreen(nullptr)
 	{
 	}
 

@@ -4,11 +4,14 @@
 
 namespace b
 {
+	UINT Collider::ColliderNumber = 0;
+
 	Collider::Collider()
 		: Component(eComponentType::Collider)
 		, mCenter(Vector2::Zero)
-		, mSize(Vector2(100.0f, 100.0f))
+		, mSize(100.0f, 100.0f)
 		, mPos(Vector2::Zero)
+		, mID(ColliderNumber++)
 	{
 	}
 
@@ -43,5 +46,20 @@ namespace b
 
 	void Collider::Release()
 	{
+	}
+
+	void Collider::OnCollisionEnter(Collider* other)
+	{
+		GetOwner()->OnCollisionEnter(other);
+	}
+
+	void Collider::OnCollisionStay(Collider* other)
+	{
+		GetOwner()->OnCollisionStay(other);
+	}
+
+	void Collider::OnCollisionExit(Collider* other)
+	{
+		GetOwner()->OnCollisionExit(other);
 	}
 }
