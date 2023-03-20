@@ -6,6 +6,8 @@
 #include "bSpeedUp.h"
 #include "bAnimation.h"
 #include "bTime.h"
+#include "bCamera.h"
+#include "bTransform.h"
 
 namespace b
 {
@@ -27,6 +29,8 @@ namespace b
 
 		mSpeedUp = new SpeedUp();
 		AddGameObject(mSpeedUp, eLayerType::UI);
+
+		Camera::SetTarget(mMapPeglin);
 
 		Scene::Initialize();
 	}
@@ -59,6 +63,7 @@ namespace b
 		HBRUSH brush = CreateSolidBrush(RGB(48, 130, 48));
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
 
+		
 		TransparentBlt(hdc, -990, -600
 			, treeTop->GetWidth() * 2.4
 			, treeTop->GetHeight() * 2.4

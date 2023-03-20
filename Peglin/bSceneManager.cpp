@@ -19,7 +19,7 @@ namespace b
 		mScenes[(UINT)eSceneType::Fight] = new FightScene();
 		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
 
-		mActiveScene = mScenes[(UINT)eSceneType::Fight];
+		mActiveScene = mScenes[(UINT)eSceneType::Title];
 
 		for (Scene* scene : mScenes)
 		{

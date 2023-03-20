@@ -1,6 +1,7 @@
 #include "bCollider.h"
 #include "bTransform.h"
 #include "bGameObject.h"
+#include "bCamera.h"
 
 namespace b
 {
@@ -37,7 +38,8 @@ namespace b
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
 
-		Rectangle(hdc, mPos.x, mPos.y, mPos.x + mSize.x, mPos.y + mSize.y);
+		Vector2 pos = Camera::CalculatePos(mPos);
+		Rectangle(hdc, pos.x, pos.y, pos.x + mSize.x, pos.y + mSize.y);
 
 		(HPEN)SelectObject(hdc, oldPen);
 		(HBRUSH)SelectObject(hdc, oldBrush);

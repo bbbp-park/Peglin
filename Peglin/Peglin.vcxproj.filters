@@ -69,6 +69,9 @@
     <Filter Include="Contents\BackGround">
       <UniqueIdentifier>{086f2831-82e5-4f18-8e2c-cdc0c84a6cd1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Camera">
+      <UniqueIdentifier>{d9d9e279-bac5-4e38-bdd1-a554ca9a727e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -179,6 +182,9 @@
     <ClInclude Include="bMonster.h">
       <Filter>Contents\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="bCamera.h">
+      <Filter>Engine\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -270,6 +276,9 @@
     </ClCompile>
     <ClCompile Include="bMonster.cpp">
       <Filter>Contents\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="bCamera.cpp">
+      <Filter>Engine\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@
 #include "bAnimator.h"
 #include "bTransform.h"
 #include "bGameObject.h"
+#include "bCamera.h"
 
 namespace b
 {
@@ -53,6 +54,7 @@ namespace b
           Vector2 scale = tr->GetScale();
 
           Vector2 pos = tr->GetPos();
+          pos = Camera::CalculatePos(pos);
           pos += mSpriteSheet[mSpriteIndex].offset;
           pos.x -= (mSpriteSheet[mSpriteIndex].size.x * scale.x) / 2.0f;
           pos.y -= mSpriteSheet[mSpriteIndex].size.y * scale.y;
