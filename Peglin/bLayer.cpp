@@ -22,6 +22,10 @@ namespace b
 			if (gameObj == nullptr)
 				continue;
 
+			if (gameObj->GetState()
+				!= GameObject::eState::Active)
+				continue;
+
 			gameObj->Initialize();
 		}
 	}
@@ -33,6 +37,10 @@ namespace b
 			if (gameObj == nullptr)
 				continue;
 
+			if (gameObj->GetState()
+				!= GameObject::eState::Active)
+				continue;
+
 			gameObj->Update();
 		}
 	}
@@ -42,6 +50,10 @@ namespace b
 		for (GameObject* gameObj : mGameObjects)
 		{
 			if (gameObj == nullptr)
+				continue;
+
+			if (gameObj->GetState()
+				!= GameObject::eState::Active)
 				continue;
 
 			gameObj->Render(hdc);

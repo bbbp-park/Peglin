@@ -5,6 +5,7 @@ namespace b
 	Resource::Resource()
 	{
 	}
+
 	Resource::~Resource()
 	{
 	}

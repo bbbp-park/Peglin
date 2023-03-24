@@ -3,6 +3,7 @@
 #include "bInput.h"
 #include "bSceneManager.h"
 #include "bCollisionManager.h"
+#include "bCamera.h"
 
 namespace b
 {
@@ -45,18 +46,22 @@ namespace b
 		Time::Initiailize();
 		Input::Initialize();
 		SceneManager::Initailize();
+		Camera::Initiailize();
 	}
 
 	void Application::Run()
 	{
 		Update();
 		Render();
+		SceneManager::Destroy();
 	}
 
 	void Application::Update()
 	{
 		Time::Update();
 		Input::Update();
+		Camera::Update();
+
 		SceneManager::Update();
 		CollisionManager::Update();
 	}

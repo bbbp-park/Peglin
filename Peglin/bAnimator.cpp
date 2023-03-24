@@ -8,7 +8,6 @@ namespace b
 		, mActiveAnimation(nullptr)
 		, mSpriteSheet(nullptr)
 		, mbLoop(false)
-		, centerPos(Vector2::Zero)
 	{
 	}
 
@@ -37,9 +36,9 @@ namespace b
 		{
 			mActiveAnimation->Update();
 
-			if (mbLoop && mActiveAnimation->IsComplete())
+			if (mActiveAnimation->IsComplete())
 			{
-				Animator::Events* events = FindEvents(mActiveAnimation->GetName());
+				Animator::Events* events = FindEvents(mActiveAnimation->GetAnimationName());
 
 				if (events != nullptr)
 					events->mCompleteEvent();
@@ -47,6 +46,8 @@ namespace b
 				mActiveAnimation->Reset();
 
 			}
+			if (mbLoop && mActiveAnimation->IsComplete())
+				mActiveAnimation->Reset();
 		}
 	}
 
@@ -69,7 +70,7 @@ namespace b
 
 		animation = new Animation();
 		animation->Create(sheet, leftTop, coulmn, row, spriteLength, offset, duration);
-		animation->SetName(name);
+		animation->SetAnimationName(name);
 		animation->SetAnimator(this);
 
 		mAnimations.insert(std::make_pair(name, animation));
@@ -120,10 +121,8 @@ namespace b
 			BitBlt(mSpriteSheet->GetHdc()
 				, width * index + centerX
 				, 0 + centerY
-				, image->GetWidth()
-				, image->GetHeight()
-				, image->GetHdc()
-				, 0, 0, SRCCOPY);
+				, image->GetWidth(), image->GetHeight()
+				, image->GetHdc(), 0, 0, SRCCOPY);
 
 			index++;
 		}
@@ -145,7 +144,7 @@ namespace b
 	{
 		if (mActiveAnimation != nullptr)
 		{
-			Animator::Events* prevEvents = FindEvents(mActiveAnimation->GetName());
+			Animator::Events* prevEvents = FindEvents(mActiveAnimation->GetAnimationName());
 
 			if (prevEvents != nullptr)
 				prevEvents->mEndEvent();
@@ -155,7 +154,7 @@ namespace b
 		mActiveAnimation->Reset();
 		mbLoop = loop;
 
-		Animator::Events* events = FindEvents(mActiveAnimation->GetName());
+		Animator::Events* events = FindEvents(mActiveAnimation->GetAnimationName());
 
 		if (events != nullptr)
 			events->mStartEvent();
@@ -175,7 +174,7 @@ namespace b
 	{
 		Animation* animation = FindAnimation(name);
 
-		Animator::Events* events = FindEvents(animation->GetName());
+		Animator::Events* events = FindEvents(animation->GetAnimationName());
 
 		return events->mStartEvent.mEvent;
 	}
@@ -184,7 +183,7 @@ namespace b
 	{
 		Animation* animation = FindAnimation(name);
 
-		Animator::Events* events = FindEvents(animation->GetName());
+		Animator::Events* events = FindEvents(animation->GetAnimationName());
 
 		return events->mCompleteEvent.mEvent;
 	}
@@ -193,7 +192,7 @@ namespace b
 	{
 		Animation* animation = FindAnimation(name);
 
-		Animator::Events* events = FindEvents(animation->GetName());
+		Animator::Events* events = FindEvents(animation->GetAnimationName());
 
 		return events->mEndEvent.mEvent;
 	}

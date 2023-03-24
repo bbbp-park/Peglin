@@ -16,9 +16,10 @@ namespace b
 
 	void EndingScene::Initialize()
 	{
+		Scene::Initialize();
+		
 		endScreen = Resources::Load<Image>(L"endScreen", L"..\\Resources\\sprite\\Background\\endscreen2.bmp");
 
-		Scene::Initialize();
 	}
 
 	void EndingScene::Update()

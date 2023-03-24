@@ -25,9 +25,9 @@ enum class eLayerType
 enum class eComponentType
 {
 	Transform,
-	Collider,
 	SpriteRenderer,
 	Animator,
+	Collider,
 	Audio,
 	End,
 };

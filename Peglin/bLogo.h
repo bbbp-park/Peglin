@@ -1,6 +1,5 @@
 #pragma once
 #include "bGameObject.h"
-#include "bImage.h"
 
 namespace b
 {

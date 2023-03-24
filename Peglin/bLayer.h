@@ -16,7 +16,7 @@ namespace b
 		virtual void Release();
 
 		void AddaGameObject(GameObject* gameObj);
-		const std::vector<GameObject*>& GetGameObjects() { return mGameObjects; }
+		std::vector<GameObject*>& GetGameObjects() { return mGameObjects; }
 
 	private:
 		std::vector<GameObject*> mGameObjects;

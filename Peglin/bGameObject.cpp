@@ -4,10 +4,10 @@
 namespace b
 {
 	GameObject::GameObject()
+		: mState(eState::Active)
 	{
 		mComponents.resize((UINT)eComponentType::End);
 		AddComponent<Transform>();
-
 	}
 
 	GameObject::~GameObject()

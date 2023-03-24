@@ -14,6 +14,7 @@ namespace b
           , mTime(0.0f)
           , mbComplete(false)
           , mSpriteIndex(0)
+          , mAnimationName(L"")
      {
 
      }
@@ -56,14 +57,15 @@ namespace b
           Vector2 pos = tr->GetPos();
           pos = Camera::CalculatePos(pos);
           pos += mSpriteSheet[mSpriteIndex].offset;
-          pos.x -= (mSpriteSheet[mSpriteIndex].size.x * scale.x) / 2.0f;
-          pos.y -= mSpriteSheet[mSpriteIndex].size.y * scale.y;
+          pos.x -= mSpriteSheet[mSpriteIndex].size.x / 2.0f;
+          pos.y -= mSpriteSheet[mSpriteIndex].size.y;
 
           TransparentBlt(hdc, pos.x, pos.y
                , mSpriteSheet[mSpriteIndex].size.x * scale.x
                , mSpriteSheet[mSpriteIndex].size.y * scale.y
                , mSheetImage->GetHdc()
-               , mSpriteSheet[mSpriteIndex].leftTop.x, mSpriteSheet[mSpriteIndex].leftTop.y
+               , mSpriteSheet[mSpriteIndex].leftTop.x
+               , mSpriteSheet[mSpriteIndex].leftTop.y
                , mSpriteSheet[mSpriteIndex].size.x
                , mSpriteSheet[mSpriteIndex].size.y,
                RGB(255, 0, 255));

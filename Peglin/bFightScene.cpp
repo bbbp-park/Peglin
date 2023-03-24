@@ -19,6 +19,9 @@ namespace b
 
 	void FightScene::Initialize()
 	{
+
+		Scene::Initialize();
+
 		mPeglin = new Peglin();
 		AddGameObject(mPeglin, eLayerType::Player);
 
@@ -34,7 +37,6 @@ namespace b
 		forest1_bg = Resources::Load<Image>(L"forest1_bg", L"..\\Resources\\sprite\\Background\\forest_1_background.bmp");
 		forest1_tile = Resources::Load<Image>(L"forest1_tile", L"..\\Resources\\sprite\\Background\\forest_1_tile.bmp");
 
-		Scene::Initialize();
 	}
 
 	void FightScene::Update()

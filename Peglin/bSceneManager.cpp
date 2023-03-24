@@ -4,6 +4,7 @@
 #include "bFightScene.h"
 #include "bEndingScene.h"
 #include "bCollisionManager.h"
+#include "bCamera.h"
 
 namespace b
 {
@@ -19,8 +20,6 @@ namespace b
 		mScenes[(UINT)eSceneType::Fight] = new FightScene();
 		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
 
-		mActiveScene = mScenes[(UINT)eSceneType::Title];
-
 		for (Scene* scene : mScenes)
 		{
 			if (scene == nullptr)
@@ -28,6 +27,8 @@ namespace b
 
 			scene->Initialize();
 		}
+
+		mActiveScene = mScenes[(UINT)eSceneType::Title];
 	}
 
 	void SceneManager::Update()
@@ -45,6 +46,11 @@ namespace b
 		DeleteObject(oldBrush);
 	}
 
+	void SceneManager::Destroy()
+	{
+		mActiveScene->Destroy();
+	}
+
 	void SceneManager::Release()
 	{
 		for (Scene* scene : mScenes)
@@ -59,6 +65,8 @@ namespace b
 
 	void SceneManager::LoadScene(eSceneType type)
 	{
+		Camera::Clear();
+
 		// ÇöÀç ¾À
 		mActiveScene->OnExit();
 

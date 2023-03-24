@@ -19,6 +19,7 @@ namespace b
 		UINT GetWidth() { return mWidth; }
 		UINT GetHeight() { return mHeight; }
 
+	private:
 		void clear();
 
 	private:

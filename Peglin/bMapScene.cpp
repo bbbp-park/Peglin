@@ -8,10 +8,14 @@
 #include "bTime.h"
 #include "bCamera.h"
 #include "bTransform.h"
+#include "bObject.h"
 
 namespace b
 {
 	MapScene::MapScene()
+		: mMapPeglin(nullptr)
+		, treeTop(nullptr)
+		, mSpeedUp(nullptr)
 	{
 	}
 
@@ -21,18 +25,20 @@ namespace b
 
 	void MapScene::Initialize()
 	{
-		mMapPeglin = new MapPeglin();
-		AddGameObject(mMapPeglin, eLayerType::Player);
+		Scene::Initialize();
+
+		object::Instantiate<MapPeglin>(Vector2(800.0f, 240.0f), Vector2(2.2f, 2.2f), eLayerType::Player);
+		/*mMapPeglin = new MapPeglin();
+		AddGameObject(mMapPeglin, eLayerType::Player);*/
 
 		treeTop = Resources::Load<Image>(L"treeTop", L"..\\Resources\\sprite\\Background\\treetop_.bmp");
 		
 
-		mSpeedUp = new SpeedUp();
-		AddGameObject(mSpeedUp, eLayerType::UI);
+		/*mSpeedUp = new SpeedUp();
+		AddGameObject(mSpeedUp, eLayerType::UI);*/
 
 		Camera::SetTarget(mMapPeglin);
 
-		Scene::Initialize();
 	}
 
 	void MapScene::Update()

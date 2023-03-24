@@ -22,9 +22,7 @@ namespace b
 
 	private:
 		MapPeglin* mMapPeglin;
-
 		Image* treeTop;
-
 		SpeedUp* mSpeedUp;
 	};
 }

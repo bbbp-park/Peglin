@@ -4,11 +4,11 @@
 #include "bResources.h"
 #include "bLogo.h"
 #include "bAnimation.h"
+#include "bObject.h"
 
 namespace b
 {
 	TitleScene::TitleScene()
-		: mHdc(nullptr)
 	{
 	}
 
@@ -18,13 +18,14 @@ namespace b
 
 	void TitleScene::Initialize()
 	{
-		logo = new Logo();
+		Scene::Initialize();
+		//Transform* tr = GetComponent<Transform>();
+		//tr->SetPos(Vector2(400.0f, 340.0f));
+		//tr->SetScale(Vector2(7.0f, 7.0f));
+
+		object::Instantiate<Logo>(Vector2(100.0f, 200.0f), Vector2(7.0f, 7.0f),eLayerType::BG);
 		
 		titleBackground = Resources::Load<Image>(L"titleBackground", L"..\\Resources\\sprite\\Background\\TitleSceneBackground.bmp");
-
-		AddGameObject(logo, eLayerType::BG);
-
-		Scene::Initialize();
 	}
 
 	void TitleScene::Update()
@@ -46,7 +47,6 @@ namespace b
 	{
 		StretchBlt(hdc, -1, -1, 1902, 1082, titleBackground->GetHdc(), 0, 0, titleBackground->GetWidth(), titleBackground->GetHeight(), SRCCOPY);
 
-		mHdc = hdc;
 		Scene::Render(hdc);
 	}
 

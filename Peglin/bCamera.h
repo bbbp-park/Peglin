@@ -9,6 +9,7 @@ namespace b
 	public:
 		static void Initiailize();
 		static void Update();
+		static void Clear();
 
 		static void SetTarget(GameObject* target) { mTarget = target; }
 		static Vector2 CalculatePos(Vector2 pos) { return pos - mDistance; }
