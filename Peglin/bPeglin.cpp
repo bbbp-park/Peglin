@@ -8,6 +8,7 @@
 #include "bBall.h"
 #include "bCollider.h"
 #include "bScene.h"
+#include "bObject.h"
 
 namespace b
 {
@@ -22,10 +23,10 @@ namespace b
 
 	void Peglin::Initialize()
 	{
-		Transform* tr = GetComponent<Transform>();
+		/*Transform* tr = GetComponent<Transform>();
 		tr->SetScale(Vector2(3.0f, 3.0f));
 		tr->SetPos(Vector2(430.0f, 240.0f));
-		tr->SetName(L"peglin's transform");
+		tr->SetName(L"peglin's transform");*/
 
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Idle", Vector2::Zero, 0.15f);
@@ -139,16 +140,16 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		if (Input::GetKey(eKeyCode::LEFT))
+		if (Input::GetKey(eKeyCode::A))
 			pos.x -= 100.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::RIGHT))
+		if (Input::GetKey(eKeyCode::D))
 			pos.x += 100.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::UP))
+		if (Input::GetKey(eKeyCode::W))
 			pos.y -= 100.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::DOWN))
+		if (Input::GetKey(eKeyCode::S))
 			pos.y += 100.0f * Time::DeltaTime();
 
 		tr->SetPos(pos);
@@ -169,11 +170,12 @@ namespace b
 
 		Scene* curScene = SceneManager::GetActiveScene();
 
-		Ball* ball = new Ball();
+		/*Ball* ball = new Ball();
 		
 		ball->GetComponent<Transform>()->SetPos(pos);
 		ball->GetComponent<Transform>()->SetScale(Vector2(4.0f, 4.0f));
-		curScene->AddGameObject(ball, eLayerType::Ball);
+		curScene->AddGameObject(ball, eLayerType::Ball);*/
+		object::Instantiate<Ball>(pos, eLayerType::Ball);
 
 
 		mAnimator->Play(L"PeglinIdle", true);

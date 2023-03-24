@@ -6,6 +6,7 @@
 #include "bMonster.h"
 #include "bHPbar.h"
 #include "bCollisionManager.h"
+#include "bObject.h"
 
 namespace b
 {
@@ -22,17 +23,19 @@ namespace b
 
 		Scene::Initialize();
 
-		mPeglin = new Peglin();
+		object::Instantiate<Peglin>(Vector2(430.0f, 240.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
+
+		object::Instantiate<Monster>(Vector2(800.0f, 240.0f), Vector2(3.0f, 3.0f), eLayerType::Monster);
+
+		object::Instantiate<HPbar>(eLayerType::UI);
+		/*mPeglin = new Peglin();
 		AddGameObject(mPeglin, eLayerType::Player);
 
 		Monster* monster = new Monster();
-		AddGameObject(monster, eLayerType::Monster);
+		AddGameObject(monster, eLayerType::Monster);*/
 
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
-
-
-		mHPbar = new HPbar();
-		AddGameObject(mHPbar, eLayerType::UI);
+		/*mHPbar = new HPbar();
+		AddGameObject(mHPbar, eLayerType::UI);*/
 
 		forest1_bg = Resources::Load<Image>(L"forest1_bg", L"..\\Resources\\sprite\\Background\\forest_1_background.bmp");
 		forest1_tile = Resources::Load<Image>(L"forest1_tile", L"..\\Resources\\sprite\\Background\\forest_1_tile.bmp");
@@ -79,6 +82,7 @@ namespace b
 
 	void FightScene::OnEnter()
 	{
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 	}
 
 	void FightScene::OnExit()

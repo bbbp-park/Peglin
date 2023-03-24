@@ -156,6 +156,7 @@
     <ClInclude Include="bMapScene.h" />
     <ClInclude Include="bResource.h" />
     <ClInclude Include="bResources.h" />
+    <ClInclude Include="bRigidBody.h" />
     <ClInclude Include="bScene.h" />
     <ClInclude Include="bSceneManager.h" />
     <ClInclude Include="bSpeedUp.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="bMapScene.cpp" />
     <ClCompile Include="bResource.cpp" />
     <ClCompile Include="bResources.cpp" />
+    <ClCompile Include="bRigidBody.cpp" />
     <ClCompile Include="bScene.cpp" />
     <ClCompile Include="bSceneManager.cpp" />
     <ClCompile Include="bSpeedUp.cpp" />

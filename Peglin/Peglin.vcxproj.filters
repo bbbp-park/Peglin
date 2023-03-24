@@ -72,6 +72,12 @@
     <Filter Include="Engine\Camera">
       <UniqueIdentifier>{d9d9e279-bac5-4e38-bdd1-a554ca9a727e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component\Transform">
+      <UniqueIdentifier>{c543ad82-b278-44e9-8701-06b34c421d74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\RigidBody">
+      <UniqueIdentifier>{f80d881c-3e03-4665-8a5d-201597095a77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -143,9 +149,6 @@
     <ClInclude Include="bTitleScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="bTransform.h">
-      <Filter>Engine\Component</Filter>
-    </ClInclude>
     <ClInclude Include="bFightScene.h">
       <Filter>Contents\Scene</Filter>
     </ClInclude>
@@ -187,6 +190,12 @@
     </ClInclude>
     <ClInclude Include="bObject.h">
       <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="bTransform.h">
+      <Filter>Engine\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="bRigidBody.h">
+      <Filter>Engine\Component\RigidBody</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -241,9 +250,6 @@
     <ClCompile Include="bTitleScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="bTransform.cpp">
-      <Filter>Engine\Component</Filter>
-    </ClCompile>
     <ClCompile Include="bFightScene.cpp">
       <Filter>Contents\Scene</Filter>
     </ClCompile>
@@ -282,6 +288,12 @@
     </ClCompile>
     <ClCompile Include="bCamera.cpp">
       <Filter>Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="bTransform.cpp">
+      <Filter>Engine\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="bRigidBody.cpp">
+      <Filter>Engine\Component\RigidBody</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

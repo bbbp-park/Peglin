@@ -7,6 +7,9 @@ namespace b
 {
 	SpeedUp::SpeedUp()
 		: isDown(false)
+		, indicator(nullptr)
+		, indicator_up(nullptr)
+		, indicator_down(nullptr)
 	{
 	}
 
@@ -27,6 +30,14 @@ namespace b
 
 	void SpeedUp::Update()
 	{
+		if (Input::GetKeyState(eKeyCode::F) == eKeyState::Down)
+		{
+			if (isDown)
+				isDown = false;
+			else
+				isDown = true;
+		}
+
 		if (isDown)
 		{
 			indicator = indicator_down;

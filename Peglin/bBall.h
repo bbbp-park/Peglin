@@ -17,6 +17,7 @@ namespace b
 
 	private:
 		Image* mImage;
+		float mTime;
 	};
 
 }

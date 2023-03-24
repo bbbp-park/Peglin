@@ -27,6 +27,7 @@ namespace b
 
 	private:
 		static UINT ColliderNumber;
+		UINT mCollisionCount;
 		UINT mID;
 
 		Vector2 mCenter;

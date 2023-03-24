@@ -33,11 +33,11 @@ namespace b
 
 		treeTop = Resources::Load<Image>(L"treeTop", L"..\\Resources\\sprite\\Background\\treetop_.bmp");
 		
-
+		object::Instantiate<SpeedUp>(eLayerType::UI);
 		/*mSpeedUp = new SpeedUp();
 		AddGameObject(mSpeedUp, eLayerType::UI);*/
 
-		Camera::SetTarget(mMapPeglin);
+		//Camera::SetTarget(mMapPeglin);
 
 	}
 
@@ -51,14 +51,6 @@ namespace b
 		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Fight);
-		}
-
-		if (Input::GetKeyState(eKeyCode::F) == eKeyState::Down)
-		{
-			if (mSpeedUp->GetIndicator())
-				mSpeedUp->SetIndicator(false);
-			else
-				mSpeedUp->SetIndicator(true);
 		}
 
 		Scene::Update();

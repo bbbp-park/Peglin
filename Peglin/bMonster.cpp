@@ -16,9 +16,9 @@ namespace b
 
 	void Monster::Initialize()
 	{
-		Transform* tr = GetComponent<Transform>();
+		/*Transform* tr = GetComponent<Transform>();
 		tr->SetPos(Vector2(800.0f, 240.0f));
-		tr->SetScale(Vector2(3.0f, 3.0f));
+		tr->SetScale(Vector2(3.0f, 3.0f));*/
 
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Monster\\Slime\\GreenSlime\\Idle", Vector2::Zero, 0.15f);
@@ -26,7 +26,7 @@ namespace b
 		mAnimator->Play(L"GreenSlimeIdle", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-30.0f, -60.0f));
+		collider->SetCenter(Vector2::Zero);
 		collider->SetSize(Vector2(60.0f, 60.0f));
 
 		GameObject::Initialize();

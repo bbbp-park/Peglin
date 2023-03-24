@@ -68,6 +68,15 @@ struct Vector2
 		return temp;
 	}
 
+	Vector2 operator*(const float ratio)
+	{
+		Vector2 temp;
+		temp.x = x * ratio;
+		temp.y = y * ratio;
+
+		return temp;
+	}
+
 	Vector2 operator/(const float ratio)
 	{
 		Vector2 temp;
@@ -87,6 +96,12 @@ struct Vector2
 	{
 		x -= other.x;
 		y -= other.y;
+	}
+
+	void Clear()
+	{
+		x = 0.0f;
+		y = 0.0f;
 	}
 
 	float Length()

@@ -6,7 +6,7 @@ namespace b
 	class Image : public Resource
 	{
 	public:
-		static Image* Create(const std::wstring& name, UINT widht, UINT height);
+		static Image* Create(const std::wstring& name, UINT widht, UINT height, COLORREF rgb = RGB(255, 255, 255));
 
 		Image();
 		~Image();

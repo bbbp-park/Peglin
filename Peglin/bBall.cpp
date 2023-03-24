@@ -3,11 +3,13 @@
 #include "bTime.h"
 #include "bResources.h"
 #include "bImage.h"
+#include "bObject.h"
 
 namespace b
 {
 	Ball::Ball()
 		: mImage(nullptr)
+		, mTime(0.0f)
 	{
 	}
 
@@ -32,6 +34,13 @@ namespace b
 		Vector2 pos = tr->GetPos();
 		pos.x += 100.0f * Time::DeltaTime();
 		tr->SetPos(pos);
+
+		mTime += Time::DeltaTime();
+
+		if (mTime > 2.0f)
+		{
+			object::Destory(this);
+		}
 	}
 
 	void Ball::Render(HDC hdc)

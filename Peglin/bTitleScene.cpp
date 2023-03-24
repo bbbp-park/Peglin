@@ -5,6 +5,7 @@
 #include "bLogo.h"
 #include "bAnimation.h"
 #include "bObject.h"
+#include "bCamera.h"
 
 namespace b
 {
@@ -23,7 +24,7 @@ namespace b
 		//tr->SetPos(Vector2(400.0f, 340.0f));
 		//tr->SetScale(Vector2(7.0f, 7.0f));
 
-		object::Instantiate<Logo>(Vector2(100.0f, 200.0f), Vector2(7.0f, 7.0f),eLayerType::BG);
+		object::Instantiate<Logo>(Vector2(100.0f, 200.0f), Vector2(7.0f, 7.0f), eLayerType::BG);
 		
 		titleBackground = Resources::Load<Image>(L"titleBackground", L"..\\Resources\\sprite\\Background\\TitleSceneBackground.bmp");
 	}
@@ -61,5 +62,6 @@ namespace b
 
 	void TitleScene::OnExit()
 	{
+		Camera::StartFadeIn();
 	}
 }

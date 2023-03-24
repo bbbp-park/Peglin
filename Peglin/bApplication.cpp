@@ -74,7 +74,7 @@ namespace b
 		Time::Render(mBackHDC);
 		Input::Render(mBackHDC);
 		SceneManager::Render(mBackHDC);
-
+		Camera::Render(mBackHDC);
 
 		// backBuffer에 있는 그림을 원본 버퍼에 그려줘야한다.
 		BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHDC, 0, 0, SRCCOPY);
