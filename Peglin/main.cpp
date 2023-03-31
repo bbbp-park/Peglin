@@ -17,66 +17,75 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름�
 b::Application application;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
-ATOM                MyRegisterClass(HINSTANCE hInstance);
+ATOM                MyRegisterClass(HINSTANCE hInstance, LPCWSTR name, WNDPROC proc);
+
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK    AtlasWndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
+
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
+     _In_opt_ HINSTANCE hPrevInstance,
+     _In_ LPWSTR    lpCmdLine,
+     _In_ int       nCmdShow)
 {
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-    // 1. 윈도우의 정보를 담고있는 클래스를 정의(메모리에 등록)해주어야한다.
+     UNREFERENCED_PARAMETER(hPrevInstance);
+     UNREFERENCED_PARAMETER(lpCmdLine);
+     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+     //_CrtSetBreakAlloc(217); // 추가
+     // 1. 윈도우의 정보를 담고있는 클래스를 정의(메모리에 등록)해주어야한다.
      // 2. CreateWindow함수를 통해서 메모리상에 윈도우를 할당해준다.
      // 3. ShowWindow함수를 통해서 화면에 보여준다.
      // 4. 윈도우 클래스를 정의할떄 등록된 메서지 처리함수를
      //    순회하면서 들어오는 메세지를 처리해준다.
 
-    // 전역 문자열을 초기화합니다.
-    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_PEGLIN, szWindowClass, MAX_LOADSTRING);
-    MyRegisterClass(hInstance);
 
-    // 애플리케이션 초기화를 수행합니다:
-    if (!InitInstance (hInstance, nCmdShow))
-    {
-        return FALSE;
-    }
+     // 전역 문자열을 초기화합니다.
+     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
+     LoadStringW(hInstance, IDC_PEGLIN, szWindowClass, MAX_LOADSTRING);
+     // main window
+     MyRegisterClass(hInstance, szWindowClass, WndProc);
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PEGLIN));
+     // tile window
+     MyRegisterClass(hInstance, L"AtlasWindow", AtlasWndProc);
 
-    MSG msg;
+     // 애플리케이션 초기화를 수행합니다:
+     if (!InitInstance(hInstance, nCmdShow))
+     {
+          return FALSE;
+     }
 
-    // 기본 메시지 루프입니다:
-    while (true)
-    {
-         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
-         {
-              if (WM_QUIT == msg.message)
-                   break;
+     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PEGLIN));
 
-              if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-              {
-                   TranslateMessage(&msg);
-                   DispatchMessageW(&msg);
-              }
-        }
-         else
-         {
-              // 여기서 게임 로직이 돌아가야 한다.
-              application.Run();
-         }
-    }
+     MSG msg;
 
-    b::SceneManager::Release();
-    b::Resources::Release();
-    return (int) msg.wParam;
+
+     while (true)
+     {
+          if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+          {
+               if (WM_QUIT == msg.message)
+                    break;
+
+               if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+               {
+                    TranslateMessage(&msg);
+                    DispatchMessage(&msg);
+               }
+          }
+          else
+          {
+               // 여기서 게임 로직이 돌아가야한다.
+               application.Run();
+          }
+     }
+
+     b::SceneManager::Release();
+     b::Resources::Release();
+
+     return (int)msg.wParam;
 }
-
 
 
 //
@@ -84,14 +93,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 //
 //  용도: 창 클래스를 등록합니다.
 //
-ATOM MyRegisterClass(HINSTANCE hInstance)
+ATOM MyRegisterClass(HINSTANCE hInstance, LPCWSTR name, WNDPROC proc)
 {
     WNDCLASSEXW wcex;
 
     wcex.cbSize = sizeof(WNDCLASSEX);
 
     wcex.style          = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc    = WndProc;
+    wcex.lpfnWndProc    = proc;
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
@@ -99,7 +108,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
     wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_PEGLIN);
-    wcex.lpszClassName  = szWindowClass;
+    wcex.lpszClassName  = name;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
     return RegisterClassExW(&wcex);
@@ -119,12 +128,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-
-
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+      0, 0, 1600, 900, nullptr, nullptr, hInstance, nullptr);
 
-   SetMenu(hWnd, NULL);
+   HWND hWnd2 = CreateWindowW(L"AtlasWindow", szTitle, WS_OVERLAPPEDWINDOW,
+        1600, 0, 500, 500, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
@@ -134,7 +142,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
+   ShowWindow(hWnd2, nCmdShow);
+   UpdateWindow(hWnd2);
+
    application.Initialize(hWnd);
+   application.SetToolHwnd(hWnd2);
 
    return TRUE;
 }

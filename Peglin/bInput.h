@@ -9,6 +9,7 @@ namespace b
 		A, S, D, F, G, H, J, K, L,
 		Z, X, C, V, B, N, M,
 		UP, DOWN, LEFT, RIGHT,
+		LBUTTON, RBUTTON,
 		END,
 	};
 
@@ -59,8 +60,12 @@ namespace b
 		{
 			return mKeys[static_cast<UINT>(keyCode)].state == eKeyState::Up;
 		}
+
+		static __forceinline Vector2 GetMousePos() { return mMousePos; }
+
 	private:
 		static std::vector<Key> mKeys;
+		static Vector2 mMousePos;
 	};
 }
 

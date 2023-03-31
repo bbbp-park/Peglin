@@ -57,6 +57,8 @@ namespace b
 			}
 		}
 
+		// 죽은 위치에서 충돌중인 다른 충돌체가 있었다면 exit를 호출 해준 후에 삭제해야 한다.
+
 		for (GameObject* deathObj : deleteGameObjects)
 		{
 			delete deathObj;
@@ -80,6 +82,7 @@ namespace b
 	{
 		mLayers[(UINT)layer].AddaGameObject(obj);
 	}
+
 	std::vector<GameObject*>& Scene::GetGameObjects(eLayerType layer)
 	{
 		return mLayers[(UINT)layer].GetGameObjects();

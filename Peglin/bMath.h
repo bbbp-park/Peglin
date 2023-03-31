@@ -35,11 +35,23 @@ struct Vector2
 
 	}
 
+	Vector2(UINT32 x, UINT32 y)
+		: x(x)
+		, y(y)
+	{
+
+	}
+
 	Vector2(const Vector2&) = default;
 	Vector2& operator=(const Vector2&) = default;
 
 	Vector2(Vector2&&) = default;
 	Vector2& operator=(Vector2&&) = default;
+
+	Vector2 operator-()
+	{
+		return Vector2(-x, -y);
+	}
 
 	Vector2 operator+(const Vector2& other)
 	{
@@ -98,6 +110,23 @@ struct Vector2
 		y -= other.y;
 	}
 
+	void operator*=(const Vector2& other)
+	{
+		x *= other.x;
+		y *= other.y;
+	}
+
+	void operator*=(const float& value)
+	{
+		x *= value;
+		y *= value;
+	}
+
+	bool operator==(const Vector2& other)
+	{
+		return (x == other.x && y == other.y);
+	}
+
 	void Clear()
 	{
 		x = 0.0f;
@@ -119,7 +148,7 @@ struct Vector2
 	}
 };
 
-namespace ya::math
+namespace b::math
 {
 	// 벡터를 degree만큼 회전(반시계)
 	inline static Vector2 Rotate(Vector2 vector, float degree)
@@ -131,5 +160,15 @@ namespace ya::math
 		float y = vector.x * sinf(radian) + vector.y * cosf(radian);
 
 		return Vector2(x, y);
+	}
+
+	inline static float Dot(Vector2& v1, Vector2& v2)
+	{
+		return v1.x * v2.x + v1.y * v2.y;
+	}
+
+	inline static float Cross(Vector2& v1, Vector2& v2)
+	{
+		return v1.x * v2.y - v1.y * v2.x;
 	}
 }

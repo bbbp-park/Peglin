@@ -78,6 +78,12 @@
     <Filter Include="Engine\Component\RigidBody">
       <UniqueIdentifier>{f80d881c-3e03-4665-8a5d-201597095a77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="main\Sound">
+      <UniqueIdentifier>{a5292d40-26e8-41ad-84e9-75daaed2e44f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Tile">
+      <UniqueIdentifier>{8b146db8-9cb5-45ef-847f-aaaed51d7f23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -197,6 +203,21 @@
     <ClInclude Include="bRigidBody.h">
       <Filter>Engine\Component\RigidBody</Filter>
     </ClInclude>
+    <ClInclude Include="bSound.h">
+      <Filter>main\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="bSoundManager.h">
+      <Filter>main\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="bToolScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="bTile.h">
+      <Filter>Contents\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="bTilePalatte.h">
+      <Filter>Contents\Tile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -294,6 +315,21 @@
     </ClCompile>
     <ClCompile Include="bRigidBody.cpp">
       <Filter>Engine\Component\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="bSound.cpp">
+      <Filter>main\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="bSoundManager.cpp">
+      <Filter>main\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="bToolScene.cpp">
+      <Filter>Contents\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="bTile.cpp">
+      <Filter>Contents\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="bTilePalatte.cpp">
+      <Filter>Contents\Tile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

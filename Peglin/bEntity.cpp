@@ -7,6 +7,7 @@ namespace b
 		, mID((UINT64)this)
 	{
 	}
+
 	Entity::~Entity()
 	{
 	}

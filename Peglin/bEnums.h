@@ -7,15 +7,18 @@ enum class eSceneType
 	Fight,
 	MiniMap,
 	Ending,
+	Tool,
 	End,
 };
 
 enum class eLayerType
 {
 	BG,
+	Tile,
 	Monster,
 	Player,
 	Ball,
+	Ground,
 	Test,
 	Effect,
 	UI,
