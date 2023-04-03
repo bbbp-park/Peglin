@@ -15,10 +15,6 @@ namespace b
 
 	void Logo::Initialize()
 	{
-		//Transform* tr = GetComponent<Transform>();
-		//tr->SetPos(Vector2(400.0f, 340.0f));
-		//tr->SetScale(Vector2(7.0f, 7.0f));
-
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Logo", Vector2::Zero, 0.15f);
 

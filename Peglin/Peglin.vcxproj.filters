@@ -218,6 +218,12 @@
     <ClInclude Include="bTilePalatte.h">
       <Filter>Contents\Tile</Filter>
     </ClInclude>
+    <ClInclude Include="bTrees.h">
+      <Filter>Contents\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="bBag.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -330,6 +336,12 @@
     </ClCompile>
     <ClCompile Include="bTilePalatte.cpp">
       <Filter>Contents\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="bTrees.cpp">
+      <Filter>Contents\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="bBag.cpp">
+      <Filter>Contents\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

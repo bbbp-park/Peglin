@@ -17,10 +17,6 @@ namespace b
 
 	void MapPeglin::Initialize()
 	{
-		/*Transform* tr = GetComponent<Transform>();
-		tr->SetScale(Vector2(2.2f, 2.2f));
-		tr->SetPos(Vector2(820.0f, 240.0f));;*/
-
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Idle", Vector2::Zero, 0.15f);
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Move", Vector2::Zero, 0.15f);

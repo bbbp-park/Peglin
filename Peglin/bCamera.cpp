@@ -21,6 +21,8 @@ namespace b
 	float Camera::mAlphaTime = 0.0f;
 	float Camera::mEndTime = 3.0f;
 
+	bool Camera::mbMove = false;
+
 	void Camera::Initiailize()
 	{
 		mResolution.x = application.GetWidth();
@@ -32,18 +34,20 @@ namespace b
 
 	void Camera::Update()
 	{
+		if (mbMove)
+		{
+			if (Input::GetKey(eKeyCode::LEFT))
+				mLookPosition.x -= 100.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::LEFT))
-			mLookPosition.x -= 100.0f * Time::DeltaTime();
+			if (Input::GetKey(eKeyCode::RIGHT))
+				mLookPosition.x += 100.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::RIGHT))
-			mLookPosition.x += 100.0f * Time::DeltaTime();
+			if (Input::GetKey(eKeyCode::UP))
+				mLookPosition.y -= 100.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::UP))
-			mLookPosition.y -= 100.0f * Time::DeltaTime();
-
-		if (Input::GetKey(eKeyCode::DOWN))
-			mLookPosition.y += 100.0f * Time::DeltaTime();
+			if (Input::GetKey(eKeyCode::DOWN))
+				mLookPosition.y += 100.0f * Time::DeltaTime();
+		}
 
 
 		if (mTarget != nullptr)

@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="bBag.h" />
     <ClInclude Include="bAnimator.h" />
     <ClInclude Include="bAnimation.h" />
     <ClInclude Include="bApplication.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="bTitleScene.h" />
     <ClInclude Include="bToolScene.h" />
     <ClInclude Include="bTransform.h" />
+    <ClInclude Include="bTrees.h" />
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Peglin.h" />
@@ -175,6 +177,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bBag.cpp" />
     <ClCompile Include="bAnimator.cpp" />
     <ClCompile Include="bAnimation.cpp" />
     <ClCompile Include="bApplication.cpp" />
@@ -211,6 +214,7 @@
     <ClCompile Include="bTitleScene.cpp" />
     <ClCompile Include="bToolScene.cpp" />
     <ClCompile Include="bTransform.cpp" />
+    <ClCompile Include="bTrees.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

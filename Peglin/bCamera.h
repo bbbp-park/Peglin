@@ -48,6 +48,8 @@ namespace b
 		static float mCuttonAlpha;
 		static float mAlphaTime;
 		static float mEndTime;
+
+		static bool mbMove;
 	};
 }
 

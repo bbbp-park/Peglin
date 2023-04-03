@@ -7,10 +7,17 @@
 #include "bHPbar.h"
 #include "bCollisionManager.h"
 #include "bObject.h"
+#include "bCamera.h"
+#include "bSpeedUp.h"
+#include "bBag.h"
 
 namespace b
 {
 	FightScene::FightScene()
+		: mPeglin(nullptr)
+		, mHPbar(nullptr)
+		, forest1_bg(nullptr)
+		, forest1_tile(nullptr)
 	{
 	}
 
@@ -23,23 +30,16 @@ namespace b
 
 		Scene::Initialize();
 
-		object::Instantiate<Peglin>(Vector2(430.0f, 240.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
+		object::Instantiate<Peglin>(Vector2(430.0f, -280.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
 
-		object::Instantiate<Monster>(Vector2(800.0f, 240.0f), Vector2(3.0f, 3.0f), eLayerType::Monster);
+		object::Instantiate<Monster>(Vector2(800.0f, -250.0f), Vector2(3.0f, 3.0f), eLayerType::Monster);
 
 		object::Instantiate<HPbar>(eLayerType::UI);
-		/*mPeglin = new Peglin();
-		AddGameObject(mPeglin, eLayerType::Player);
-
-		Monster* monster = new Monster();
-		AddGameObject(monster, eLayerType::Monster);*/
-
-		/*mHPbar = new HPbar();
-		AddGameObject(mHPbar, eLayerType::UI);*/
+		object::Instantiate<Bag>(Vector2(140.0f, 0.0f), Vector2(2.4f, 2.4f), eLayerType::UI);
+		object::Instantiate<SpeedUp>(eLayerType::UI);
 
 		forest1_bg = Resources::Load<Image>(L"forest1_bg", L"..\\Resources\\sprite\\Background\\forest_1_background.bmp");
 		forest1_tile = Resources::Load<Image>(L"forest1_tile", L"..\\Resources\\sprite\\Background\\forest_1_tile.bmp");
-
 	}
 
 	void FightScene::Update()
@@ -68,6 +68,16 @@ namespace b
 			, forest1_bg->GetHdc(), 0, 0
 			, forest1_bg->GetWidth(), forest1_bg->GetHeight(), SRCCOPY);
 
+		for (size_t i = 0; i < 35; i++)
+		{
+			int x = forest1_tile->GetWidth() * 3 * i;
+			StretchBlt(hdc, x, 220
+				, forest1_tile->GetWidth() * 3
+				, forest1_tile->GetHeight() * 3
+				, forest1_tile->GetHdc(), 0, 0
+				, forest1_tile->GetWidth(), forest1_tile->GetHeight(), SRCCOPY);
+		}
+
 		Scene::Render(hdc);
 
 		DeleteObject(oldBrush);
@@ -82,6 +92,7 @@ namespace b
 
 	void FightScene::OnEnter()
 	{
+		Camera::StartFadeIn();
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 	}
 

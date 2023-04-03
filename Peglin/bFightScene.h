@@ -26,8 +26,8 @@ namespace b
 
 		Image* forest1_bg;
 		Image* forest1_tile;
-		Image* forest2_bg;
-		Image* forest2_tile;
+		//Image* forest2_bg;
+		//Image* forest2_tile;
 	};
 }
 

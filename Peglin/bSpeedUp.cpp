@@ -52,7 +52,7 @@ namespace b
 
 	void SpeedUp::Render(HDC hdc)
 	{
-		TransparentBlt(hdc, 100, 750
+		TransparentBlt(hdc, 140, 780
 			, indicator->GetWidth() * 2.4
 			, indicator->GetHeight() * 2.4
 			, indicator->GetHdc(), 0, 0
