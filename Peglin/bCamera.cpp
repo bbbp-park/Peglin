@@ -77,7 +77,8 @@ namespace b
 			}
 		}
 
-		mDistance = mLookPosition - (mResolution / 2.0f);
+		mDistance.x = mLookPosition.x - (mResolution.x / 2.0f);
+		mDistance.y = mLookPosition.y - (mResolution.y / 2.0f);
 	}
 
 	void Camera::Render(HDC hdc)

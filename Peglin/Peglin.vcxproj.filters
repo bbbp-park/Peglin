@@ -57,9 +57,6 @@
     <Filter Include="Contents\Monster">
       <UniqueIdentifier>{84d0a424-7b6d-41a8-98a2-4e79ec36bf20}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Ball">
-      <UniqueIdentifier>{54a874bf-8fb9-478c-a0ff-122a2d5cb2a9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Component\Collider">
       <UniqueIdentifier>{893273f9-34ad-46aa-aaf2-7fbf82734c39}</UniqueIdentifier>
     </Filter>
@@ -83,6 +80,9 @@
     </Filter>
     <Filter Include="Contents\Tile">
       <UniqueIdentifier>{8b146db8-9cb5-45ef-847f-aaaed51d7f23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Orb">
+      <UniqueIdentifier>{54a874bf-8fb9-478c-a0ff-122a2d5cb2a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +168,7 @@
       <Filter>Contents\Logo</Filter>
     </ClInclude>
     <ClInclude Include="bBall.h">
-      <Filter>Contents\Ball</Filter>
+      <Filter>Contents\Orb</Filter>
     </ClInclude>
     <ClInclude Include="bCollider.h">
       <Filter>Engine\Component\Collider</Filter>
@@ -223,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="bBag.h">
       <Filter>Contents\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="bBomb.h">
+      <Filter>Contents\Orb</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -290,7 +293,7 @@
       <Filter>Contents\Logo</Filter>
     </ClCompile>
     <ClCompile Include="bBall.cpp">
-      <Filter>Contents\Ball</Filter>
+      <Filter>Contents\Orb</Filter>
     </ClCompile>
     <ClCompile Include="bCollider.cpp">
       <Filter>Engine\Component\Collider</Filter>
@@ -342,6 +345,9 @@
     </ClCompile>
     <ClCompile Include="bBag.cpp">
       <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="bBomb.cpp">
+      <Filter>Contents\Orb</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

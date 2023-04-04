@@ -9,11 +9,13 @@
 #include "bCollider.h"
 #include "bScene.h"
 #include "bObject.h"
+#include "bBomb.h"
 
 namespace b
 {
 	Peglin::Peglin()
 		: mAnimator(nullptr)
+		, mState(ePeglinState::Idle)
 	{
 	}
 
@@ -36,8 +38,8 @@ namespace b
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Shoot Bomb", Vector2::Zero, 0.15f);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-40.0f, -80.0f));
-		collider->SetSize(Vector2(80.0f, 80.0f));
+		collider->SetCenter(Vector2(0.0f, -10.0f));
+		collider->SetSize(Vector2(70.0f, 70.0f));
 
 		mAnimator->GetCompleteEvent(L"PeglinDeath") = std::bind(&Peglin::deathCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"PeglinShoot Ball") = std::bind(&Peglin::shoot_ballCompleteEvent, this);
@@ -45,6 +47,7 @@ namespace b
 		
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;
+
 		GameObject::Initialize();
 	}
 
@@ -52,8 +55,6 @@ namespace b
 	{
 		GameObject::Update();
 
-		//Transform* tr = GetComponent<Transform>();
-		//Vector2 pos = tr->GetPos();
 
 		switch (mState)
 		{
@@ -133,10 +134,6 @@ namespace b
 			mState = ePeglinState::Death;
 		}
 
-
-
-
-
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
@@ -166,17 +163,9 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 		pos.x += 40.0f;
-		pos.y -= 40.0f;
+		pos.y += 20.0f;
 
-		Scene* curScene = SceneManager::GetActiveScene();
-
-		/*Ball* ball = new Ball();
-		
-		ball->GetComponent<Transform>()->SetPos(pos);
-		ball->GetComponent<Transform>()->SetScale(Vector2(4.0f, 4.0f));
-		curScene->AddGameObject(ball, eLayerType::Ball);*/
-		object::Instantiate<Ball>(pos, eLayerType::Ball);
-
+		object::Instantiate<Ball>(Vector2(460.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Ball);
 
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;
@@ -184,6 +173,13 @@ namespace b
 
 	void Peglin::shoot_bombCompleteEvent()
 	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		pos.x += 40.0f;
+		pos.y += 20.0f;
+
+		object::Instantiate<Bomb>(Vector2(460.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Effect);
+
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;
 	}

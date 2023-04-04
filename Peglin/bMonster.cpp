@@ -26,7 +26,7 @@ namespace b
 		mAnimator->Play(L"GreenSlimeIdle", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2::Zero);
+		collider->SetCenter(Vector2(-15.0f, -20.0f));
 		collider->SetSize(Vector2(60.0f, 60.0f));
 
 		GameObject::Initialize();
@@ -45,5 +45,14 @@ namespace b
 	void Monster::Release()
 	{
 		GameObject::Release();
+	}
+	void Monster::OnCollisionEnter(Collider* other)
+	{
+	}
+	void Monster::OnCollisionStay(Collider* other)
+	{
+	}
+	void Monster::OnCollisionExit(Collider* other)
+	{
 	}
 }

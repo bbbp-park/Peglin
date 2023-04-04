@@ -23,7 +23,7 @@ namespace b
 	{
 		Scene::Initialize();
 
-		logo = object::Instantiate<Logo>(Vector2(100.0f, -200.0f), Vector2(7.0f, 7.0f), eLayerType::BG);
+		logo = object::Instantiate<Logo>(Vector2(100.0f, 240.0f), Vector2(7.0f, 7.0f), eLayerType::BG);
 		
 		titleBackground = Resources::Load<Image>(L"titleBackground", L"..\\Resources\\sprite\\Background\\TitleSceneBackground.bmp");
 	}
