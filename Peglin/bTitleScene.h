@@ -22,7 +22,7 @@ namespace b
 	private:
 		Image* titleBackground;
 		Logo* logo;
-		HFONT font;
+		int font;
 	};
 }
 

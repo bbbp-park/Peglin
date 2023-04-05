@@ -3,6 +3,8 @@
 #include "bTime.h"
 #include "bResources.h"
 #include "bImage.h"
+#include "bRigidBody.h"
+#include "bCollider.h"
 
 namespace b
 {
@@ -10,6 +12,7 @@ namespace b
 
 	Bomb::Bomb()
 		: mImage(nullptr)
+		, mRigidbody(nullptr)
 	{
 	}
 
@@ -20,29 +23,34 @@ namespace b
 	void Bomb::Initialize()
 	{
 		bTop = false;
+
+		Collider* collider = AddComponent<Collider>();
+		collider->SetCenter(Vector2(5.0f, 5.0f));
+		collider->SetSize(Vector2(35.0f, 35.0f));
+
+		mRigidbody = AddComponent<RigidBody>();
+		mRigidbody->SetMass(1.0f);
+
 		GameObject::Initialize();
 	}
 
 	void Bomb::Update()
 	{
+		GameObject::Update();
+
 		Transform* tr = GetComponent<Transform>();
 
 		Vector2 pos = tr->GetPos();
 
-		if (pos.x < 900.0f)
-			pos.x += 180.0f * Time::DeltaTime();
 
-		if (pos.y < 100.0f)
-			bTop = true;
-
-		if (bTop)
-			pos.y += 120.0f * Time::DeltaTime();
+		Vector2 velocity = mRigidbody->GetVelocity();
+		
+		if (pos.x < 850.0f)
+			velocity.x += 10.0f;
 		else
-			pos.y -= 120.0f * Time::DeltaTime();
-
-		tr->SetPos(pos);
-
-		GameObject::Update();
+			velocity.x = 0.0f;
+		
+		mRigidbody->SetVelocity(velocity);
 	}
 
 	void Bomb::Render(HDC hdc)
@@ -65,6 +73,7 @@ namespace b
 
 	void Bomb::OnCollisionEnter(Collider* other)
 	{
+		mRigidbody->SetGround(true);
 	}
 
 	void Bomb::OnCollisionStay(Collider* other)

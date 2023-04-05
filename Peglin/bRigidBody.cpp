@@ -12,8 +12,8 @@ namespace b
 		, mAccelation(Vector2::Zero)
 		, mVelocity(Vector2::Zero)
 	{
-		mLimitedVelocity.x = 200.0f;
-		mLimitedVelocity.y = 1000.0f;
+		mLimitedVelocity.x = 800.0f;
+		mLimitedVelocity.y = 200.0f;
 		mbGround = false;
 		mGravity = Vector2(0.0f, 800.0f);
 		mFriction = 100.0f;
@@ -64,8 +64,8 @@ namespace b
 
 		if (mLimitedVelocity.x < gravity.Length())
 		{
-			gravity.Normalize();
-			gravity *= mLimitedVelocity.x;
+			sideVelocity.Normalize();
+			sideVelocity *= mLimitedVelocity.x;
 		}
 
 		// 마찰력 조건 ( 적용된 힘이 없고, 속도가 0이 아님)

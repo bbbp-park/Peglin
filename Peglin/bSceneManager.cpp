@@ -20,7 +20,7 @@ namespace b
 		mScenes[(UINT)eSceneType::Map] = new MapScene();
 		mScenes[(UINT)eSceneType::Fight] = new FightScene();
 		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
-		mScenes[(UINT)eSceneType::Tool] = new ToolScene();
+		//mScenes[(UINT)eSceneType::Tool] = new ToolScene();
 
 		for (Scene* scene : mScenes)
 		{

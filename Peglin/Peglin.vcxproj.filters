@@ -84,6 +84,9 @@
     <Filter Include="Contents\Orb">
       <UniqueIdentifier>{54a874bf-8fb9-478c-a0ff-122a2d5cb2a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Object">
+      <UniqueIdentifier>{35951011-59aa-4c91-95f5-03d4e3d56880}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -227,6 +230,9 @@
     <ClInclude Include="bBomb.h">
       <Filter>Contents\Orb</Filter>
     </ClInclude>
+    <ClInclude Include="bGround.h">
+      <Filter>Contents\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -348,6 +354,9 @@
     </ClCompile>
     <ClCompile Include="bBomb.cpp">
       <Filter>Contents\Orb</Filter>
+    </ClCompile>
+    <ClCompile Include="bGround.cpp">
+      <Filter>Contents\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

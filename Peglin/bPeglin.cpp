@@ -10,6 +10,8 @@
 #include "bScene.h"
 #include "bObject.h"
 #include "bBomb.h"
+#include "bGround.h"
+#include "bFightScene.h"
 
 namespace b
 {
@@ -25,11 +27,6 @@ namespace b
 
 	void Peglin::Initialize()
 	{
-		/*Transform* tr = GetComponent<Transform>();
-		tr->SetScale(Vector2(3.0f, 3.0f));
-		tr->SetPos(Vector2(430.0f, 240.0f));
-		tr->SetName(L"peglin's transform");*/
-
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Idle", Vector2::Zero, 0.15f);
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Angel", Vector2::Zero, 0.15f);
@@ -162,10 +159,9 @@ namespace b
 	{
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
-		pos.x += 40.0f;
-		pos.y += 20.0f;
+		//pos.x += 40.0f;
 
-		object::Instantiate<Ball>(Vector2(460.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Ball);
+		object::Instantiate<Ball>(pos, Vector2(3.0f, 3.0f), eLayerType::Ball);
 
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;
@@ -176,9 +172,10 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 		pos.x += 40.0f;
-		pos.y += 20.0f;
 
-		object::Instantiate<Bomb>(Vector2(460.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Effect);
+		Bomb* mBomb = object::Instantiate<Bomb>(pos, Vector2(3.0f, 3.0f), eLayerType::Effect);
+
+		//mGround->SetGameObject(mBomb);
 
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;

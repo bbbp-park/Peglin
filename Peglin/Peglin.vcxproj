@@ -145,6 +145,7 @@
     <ClInclude Include="bEnums.h" />
     <ClInclude Include="bFightScene.h" />
     <ClInclude Include="bGameObject.h" />
+    <ClInclude Include="bGround.h" />
     <ClInclude Include="bHPbar.h" />
     <ClInclude Include="bImage.h" />
     <ClInclude Include="bInput.h" />
@@ -192,6 +193,7 @@
     <ClCompile Include="bEntity.cpp" />
     <ClCompile Include="bFightScene.cpp" />
     <ClCompile Include="bGameObject.cpp" />
+    <ClCompile Include="bGround.cpp" />
     <ClCompile Include="bHPbar.cpp" />
     <ClCompile Include="bImage.cpp" />
     <ClCompile Include="bInput.cpp" />

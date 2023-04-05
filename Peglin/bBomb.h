@@ -21,6 +21,7 @@ namespace b
 
 	private:
 		Image* mImage;
+		class RigidBody* mRigidbody;
 	};
 }
 

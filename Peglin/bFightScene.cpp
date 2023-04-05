@@ -10,6 +10,7 @@
 #include "bCamera.h"
 #include "bSpeedUp.h"
 #include "bBag.h"
+#include "bGround.h"
 
 namespace b
 {
@@ -37,6 +38,8 @@ namespace b
 
 		//mPeglin = new Peglin();
 		//AddGameObject(mPeglin, eLayerType::Player);
+
+		//mGround = object::Instantiate<Ground>(Vector2(0.0f, 220.0f), eLayerType::Ground);
 
 		object::Instantiate<Peglin>(Vector2(410.0f, 170.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
 
@@ -176,6 +179,7 @@ namespace b
 		
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Ball, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Ground, true);
 	}
 
 	void FightScene::OnExit()

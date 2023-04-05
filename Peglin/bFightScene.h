@@ -20,6 +20,7 @@ namespace b
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
 
+
 	private:
 		Peglin* mPeglin;
 		HPbar* mHPbar;
@@ -32,6 +33,8 @@ namespace b
 		Image* tileSet2;
 		Image* plunger;
 		Image* backScreen;
+
+		class Ground* mGround;
 	};
 }
 

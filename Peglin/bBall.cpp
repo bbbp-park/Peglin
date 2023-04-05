@@ -5,12 +5,13 @@
 #include "bImage.h"
 #include "bObject.h"
 #include "bCollider.h"
+#include "bRigidBody.h"
 
 namespace b
 {
 	Ball::Ball()
 		: mImage(nullptr)
-		, mTime(0.0f)
+		, mRigidbody(nullptr)
 	{
 	}
 
@@ -20,31 +21,31 @@ namespace b
 
 	void Ball::Initialize()
 	{
-		/*mImage = Resources::Load<Image>(L"Rock", L"..\\Resources\\sprite\\Ball\\rock.bmp");*/
+		//mImage = Resources::Load<Image>(L"Rock", L"..\\Resources\\sprite\\Ball\\rock.bmp");
+
+		Transform* tr = GetComponent<Transform>();
+		tr->SetScale(Vector2(2.0f, 2.0f));
 
 		Collider* collider = AddComponent<Collider>();
 		collider->SetCenter(Vector2(5.0f, 5.0f));
 		collider->SetSize(Vector2(35.0f, 35.0f));
+
+		mRigidbody = AddComponent<RigidBody>();
+		mRigidbody->SetMass(1.0f);
 
 		GameObject::Initialize();
 	}
 
 	void Ball::Update()
 	{
-		Transform* tr = GetComponent<Transform>();
-		
-		Vector2 pos = tr->GetPos();
-		pos.x += 600.0f * Time::DeltaTime();
-		tr->SetPos(pos);
-
-		mTime += Time::DeltaTime();
-
-		if (mTime > 2.0f)
-		{
-			//object::Destory(this);
-		}
-
 		GameObject::Update();
+
+
+		Vector2 velocity = mRigidbody->GetVelocity();
+		velocity.x += 180.0f;
+
+		mRigidbody->SetVelocity(velocity);
+		mRigidbody->SetGround(true);
 	}
 
 	void Ball::Render(HDC hdc)
@@ -52,6 +53,7 @@ namespace b
 		mImage = Resources::Load<Image>(L"Rock", L"..\\Resources\\sprite\\Ball\\Rock\\rock.bmp");
 
 		Transform* tr = GetComponent<Transform>();
+		
 		Vector2 scale = tr->GetScale();
 		Vector2 pos = tr->GetPos();
 

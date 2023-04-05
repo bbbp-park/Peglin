@@ -41,6 +41,8 @@ namespace b
 	private:
 		Animator* mAnimator;
 		ePeglinState mState;
+
+		class Ground* mGround;
 	};
 }
 

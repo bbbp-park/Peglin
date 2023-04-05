@@ -45,15 +45,11 @@ namespace b
 		if (Input::GetKeyState(eKeyCode::O) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Title);
-			tr->SetPos(Vector2(800.0f, 0.0f));
-			Camera::Clear();
 		}
 
 		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Fight);
-			tr->SetPos(Vector2(800.0f, 0.0f));
-			Camera::Clear();
 		}
 
 		Scene::Update();
@@ -81,6 +77,7 @@ namespace b
 
 	void MapScene::OnExit()
 	{
+		Camera::Clear();
 		Camera::SetTarget(nullptr);
 	}
 }
