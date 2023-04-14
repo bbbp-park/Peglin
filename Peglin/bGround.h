@@ -22,7 +22,6 @@ namespace b
 
 	private:
 		class Collider* mCollider;
-		class Image* mImage;
 		class GameObject* mGameObject;
 	};
 }

@@ -143,6 +143,7 @@
     <ClInclude Include="bEngine.h" />
     <ClInclude Include="bEntity.h" />
     <ClInclude Include="bEnums.h" />
+    <ClInclude Include="bExplosion.h" />
     <ClInclude Include="bFightScene.h" />
     <ClInclude Include="bGameObject.h" />
     <ClInclude Include="bGround.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="bComponent.cpp" />
     <ClCompile Include="bEndingScene.cpp" />
     <ClCompile Include="bEntity.cpp" />
+    <ClCompile Include="bExplosion.cpp" />
     <ClCompile Include="bFightScene.cpp" />
     <ClCompile Include="bGameObject.cpp" />
     <ClCompile Include="bGround.cpp" />

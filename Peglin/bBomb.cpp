@@ -5,13 +5,15 @@
 #include "bImage.h"
 #include "bRigidBody.h"
 #include "bCollider.h"
+#include "bAnimator.h"
+#include "bObject.h"
+#include "bExplosion.h"
 
 namespace b
 {
-	bool bTop = false;
-
 	Bomb::Bomb()
 		: mImage(nullptr)
+		, mAnimator(nullptr)
 		, mRigidbody(nullptr)
 	{
 	}
@@ -22,14 +24,25 @@ namespace b
 
 	void Bomb::Initialize()
 	{
-		bTop = false;
+		mAnimator = AddComponent<Animator>();
+		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Ball\\Bomb\\Hit bomb", Vector2::Zero, 0.1f);
+
+		mAnimator->Play(L"BombHit bomb", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(5.0f, 5.0f));
-		collider->SetSize(Vector2(35.0f, 35.0f));
+		collider->SetCenter(Vector2(-10.0f, -10.0f));
+		collider->SetSize(Vector2(30.0f, 30.0f));
 
 		mRigidbody = AddComponent<RigidBody>();
 		mRigidbody->SetMass(1.0f);
+
+		Vector2 velocity = mRigidbody->GetVelocity();
+
+		velocity.x = 250.0f;
+		velocity.y = -250.0f;
+
+		mRigidbody->SetVelocity(velocity);
+		mRigidbody->SetGround(false);
 
 		GameObject::Initialize();
 	}
@@ -38,31 +51,10 @@ namespace b
 	{
 		GameObject::Update();
 
-		Transform* tr = GetComponent<Transform>();
-
-		Vector2 pos = tr->GetPos();
-
-
-		Vector2 velocity = mRigidbody->GetVelocity();
-		
-		if (pos.x < 850.0f)
-			velocity.x += 10.0f;
-		else
-			velocity.x = 0.0f;
-		
-		mRigidbody->SetVelocity(velocity);
 	}
 
 	void Bomb::Render(HDC hdc)
 	{
-		mImage = Resources::Load<Image>(L"Bomb", L"..\\Resources\\sprite\\Ball\\Bomb\\Hit bomb 2.bmp");
-
-		Transform* tr = GetComponent<Transform>();
-		Vector2 scale = tr->GetScale();
-		Vector2 pos = tr->GetPos();
-
-		TransparentBlt(hdc, pos.x, pos.y, mImage->GetWidth() * scale.x, mImage->GetHeight() * scale.y, mImage->GetHdc(), 0, 0, mImage->GetWidth(), mImage->GetHeight(), RGB(255, 0, 255));
-
 		GameObject::Render(hdc);
 	}
 
@@ -73,7 +65,18 @@ namespace b
 
 	void Bomb::OnCollisionEnter(Collider* other)
 	{
-		mRigidbody->SetGround(true);
+		Vector2 velocity = mRigidbody->GetVelocity();
+
+		//velocity = Vector2::Zero;
+		velocity.x = 0.0f;
+		mRigidbody->SetVelocity(velocity);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		pos.x += 60.0f;
+		pos.y += 120.0f;
+		object::Instantiate<Explosion>(pos, Vector2(0.8f, 0.8f), eLayerType::Effect);
+		object::Destory(this);
 	}
 
 	void Bomb::OnCollisionStay(Collider* other)

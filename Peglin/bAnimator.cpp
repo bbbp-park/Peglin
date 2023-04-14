@@ -42,9 +42,6 @@ namespace b
 
 				if (events != nullptr)
 					events->mCompleteEvent();
-
-				mActiveAnimation->Reset();
-
 			}
 			if (mbLoop && mActiveAnimation->IsComplete())
 				mActiveAnimation->Reset();

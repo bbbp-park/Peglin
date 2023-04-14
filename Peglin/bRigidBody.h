@@ -18,7 +18,9 @@ namespace b
 		void AddForce(Vector2 force);
 		void SetGround(bool ground) { mbGround = ground; }
 		void SetVelocity(Vector2 velocity) { mVelocity = velocity; }
+
 		Vector2 GetVelocity() { return mVelocity; }
+		bool GetGround() { return mbGround; }
 
 	private:
 		float mMass;

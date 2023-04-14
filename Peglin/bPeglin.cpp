@@ -11,13 +11,13 @@
 #include "bObject.h"
 #include "bBomb.h"
 #include "bGround.h"
-#include "bFightScene.h"
 
 namespace b
 {
 	Peglin::Peglin()
 		: mAnimator(nullptr)
 		, mState(ePeglinState::Idle)
+		, mGround(nullptr)
 	{
 	}
 
@@ -27,6 +27,9 @@ namespace b
 
 	void Peglin::Initialize()
 	{
+		//mGround = new Ground();
+		mGround = object::Instantiate<Ground>(Vector2(0.0f, 220.0f), eLayerType::Ground);
+
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Idle", Vector2::Zero, 0.15f);
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Angel", Vector2::Zero, 0.15f);
@@ -131,22 +134,22 @@ namespace b
 			mState = ePeglinState::Death;
 		}
 
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
+		//Transform* tr = GetComponent<Transform>();
+		//Vector2 pos = tr->GetPos();
 
-		if (Input::GetKey(eKeyCode::A))
-			pos.x -= 100.0f * Time::DeltaTime();
+		//if (Input::GetKey(eKeyCode::A))
+		//	pos.x -= 100.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::D))
-			pos.x += 100.0f * Time::DeltaTime();
+		//if (Input::GetKey(eKeyCode::D))
+		//	pos.x += 100.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::W))
-			pos.y -= 100.0f * Time::DeltaTime();
+		//if (Input::GetKey(eKeyCode::W))
+		//	pos.y -= 100.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::S))
-			pos.y += 100.0f * Time::DeltaTime();
+		//if (Input::GetKey(eKeyCode::S))
+		//	pos.y += 100.0f * Time::DeltaTime();
 
-		tr->SetPos(pos);
+		//tr->SetPos(pos);
 	}
 
 	void Peglin::deathCompleteEvent()
@@ -173,9 +176,9 @@ namespace b
 		Vector2 pos = tr->GetPos();
 		pos.x += 40.0f;
 
-		Bomb* mBomb = object::Instantiate<Bomb>(pos, Vector2(3.0f, 3.0f), eLayerType::Effect);
+		Bomb* mBomb = object::Instantiate<Bomb>(pos, Vector2(3.0f, 3.0f), eLayerType::Bomb);
 
-		//mGround->SetGameObject(mBomb);
+		mGround->SetGameObject(mBomb);
 
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;

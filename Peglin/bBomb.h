@@ -4,6 +4,8 @@
 namespace b
 {
 	class Image;
+	class Animator;
+	class Rigidbody;
 	class Bomb : public GameObject
 	{
 	public:
@@ -19,9 +21,13 @@ namespace b
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
 
+	public:
+		void explosionCompleteEvent();
+
 	private:
 		Image* mImage;
-		class RigidBody* mRigidbody;
+		Animator* mAnimator;
+		RigidBody* mRigidbody;
 	};
 }
 

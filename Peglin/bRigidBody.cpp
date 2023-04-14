@@ -12,10 +12,10 @@ namespace b
 		, mAccelation(Vector2::Zero)
 		, mVelocity(Vector2::Zero)
 	{
-		mLimitedVelocity.x = 800.0f;
-		mLimitedVelocity.y = 200.0f;
+		mLimitedVelocity.x = 600.0f;
+		mLimitedVelocity.y = 600.0f;
 		mbGround = false;
-		mGravity = Vector2(0.0f, 800.0f);
+		mGravity = Vector2(0.0f, 400.0f);
 		mFriction = 100.0f;
 	}
 
@@ -54,37 +54,37 @@ namespace b
 		float dot = math::Dot(mVelocity, gravity);
 		gravity = gravity * dot;
 
-		Vector2 sideVelocity = mVelocity - gravity;
+		//Vector2 sideVelocity = mVelocity - gravity;
 
-		if (mLimitedVelocity.y < gravity.Length())
-		{
-			gravity.Normalize();
-			gravity *= mLimitedVelocity.y;
-		}
+		//if (mLimitedVelocity.y < gravity.Length())
+		//{
+		//	gravity.Normalize();
+		//	gravity *= mLimitedVelocity.y;
+		//}
 
-		if (mLimitedVelocity.x < gravity.Length())
-		{
-			sideVelocity.Normalize();
-			sideVelocity *= mLimitedVelocity.x;
-		}
+		//if (mLimitedVelocity.x < gravity.Length())
+		//{
+		//	sideVelocity.Normalize();
+		//	sideVelocity *= mLimitedVelocity.x;
+		//}
 
-		// 마찰력 조건 ( 적용된 힘이 없고, 속도가 0이 아님)
-		if (!(mVelocity == Vector2::Zero))
-		{
-			// 속도 반대 방향으로 마찰력 적용
-			Vector2 friction = -mVelocity;
-			friction = friction.Normalize() * mFriction * mMass * Time::DeltaTime();
+		//// 마찰력 조건 ( 적용된 힘이 없고, 속도가 0이 아님)
+		//if (!(mVelocity == Vector2::Zero))
+		//{
+		//	// 속도 반대 방향으로 마찰력 적용
+		//	Vector2 friction = -mVelocity;
+		//	friction = friction.Normalize() * mFriction * mMass * Time::DeltaTime();
 
-			// 마찰력으로 인한 속도 감소가 현재 속도보다 큰 경우
-			if (mVelocity.Length() < friction.Length())
-			{
-				mVelocity = Vector2::Zero;
-			}
-			else
-			{
-				mVelocity += friction;
-			}
-		}
+		//	// 마찰력으로 인한 속도 감소가 현재 속도보다 큰 경우
+		//	if (mVelocity.Length() < friction.Length())
+		//	{
+		//		mVelocity = Vector2::Zero;
+		//	}
+		//	else
+		//	{
+		//		mVelocity += friction;
+		//	}
+		//}
 
 		// 속도에 맞게끔 물체를 이동
 		Transform* tr = GetOwner()->GetComponent<Transform>();

@@ -87,6 +87,9 @@
     <Filter Include="Contents\Object">
       <UniqueIdentifier>{35951011-59aa-4c91-95f5-03d4e3d56880}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Effect">
+      <UniqueIdentifier>{6e83f8c9-ee1e-496c-9b02-f572e6123139}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -233,6 +236,9 @@
     <ClInclude Include="bGround.h">
       <Filter>Contents\Object</Filter>
     </ClInclude>
+    <ClInclude Include="bExplosion.h">
+      <Filter>Contents\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -357,6 +363,9 @@
     </ClCompile>
     <ClCompile Include="bGround.cpp">
       <Filter>Contents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="bExplosion.cpp">
+      <Filter>Contents\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
