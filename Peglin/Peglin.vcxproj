@@ -156,6 +156,8 @@
     <ClInclude Include="bMath.h" />
     <ClInclude Include="bMonster.h" />
     <ClInclude Include="bObject.h" />
+    <ClInclude Include="bOrb.h" />
+    <ClInclude Include="bPeg.h" />
     <ClInclude Include="bPeglin.h" />
     <ClInclude Include="bMapScene.h" />
     <ClInclude Include="bResource.h" />
@@ -173,6 +175,7 @@
     <ClInclude Include="bToolScene.h" />
     <ClInclude Include="bTransform.h" />
     <ClInclude Include="bTrees.h" />
+    <ClInclude Include="bWall.h" />
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Peglin.h" />
@@ -204,6 +207,8 @@
     <ClCompile Include="bMapPeglin.cpp" />
     <ClCompile Include="bMath.cpp" />
     <ClCompile Include="bMonster.cpp" />
+    <ClCompile Include="bOrb.cpp" />
+    <ClCompile Include="bPeg.cpp" />
     <ClCompile Include="bPeglin.cpp" />
     <ClCompile Include="bMapScene.cpp" />
     <ClCompile Include="bResource.cpp" />
@@ -221,6 +226,7 @@
     <ClCompile Include="bToolScene.cpp" />
     <ClCompile Include="bTransform.cpp" />
     <ClCompile Include="bTrees.cpp" />
+    <ClCompile Include="bWall.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

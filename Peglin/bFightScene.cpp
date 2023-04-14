@@ -36,18 +36,13 @@ namespace b
 
 		Scene::Initialize();
 
-		//mPeglin = new Peglin();
-		//AddGameObject(mPeglin, eLayerType::Player);
-
-		//mGround = object::Instantiate<Ground>(Vector2(0.0f, 220.0f), eLayerType::Ground);
-
 		object::Instantiate<Peglin>(Vector2(410.0f, 170.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
 
 		object::Instantiate<Monster>(Vector2(1000.0f, 200.0f), Vector2(3.0f, 3.0f), eLayerType::Monster);
 
 		object::Instantiate<HPbar>(eLayerType::UI);
-		object::Instantiate<Bag>(Vector2(140.0f, 0.0f), Vector2(2.4f, 2.4f), eLayerType::UI);
-		object::Instantiate<SpeedUp>(eLayerType::UI);
+		//object::Instantiate<Bag>(Vector2(140.0f, 0.0f), Vector2(2.4f, 2.4f), eLayerType::UI);
+		//object::Instantiate<SpeedUp>(eLayerType::UI);
 
 		forest1_bg = Resources::Load<Image>(L"forest1_bg", L"..\\Resources\\sprite\\Background\\forest_1_background.bmp");
 		forest1_tile = Resources::Load<Image>(L"forest1_tile", L"..\\Resources\\sprite\\Background\\forest_1_tile.bmp");

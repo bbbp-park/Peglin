@@ -31,7 +31,7 @@ namespace b
 		mMapPeglin = object::Instantiate<MapPeglin>(Vector2(800.0f, 450.0f), Vector2(2.2f, 2.2f), eLayerType::Player);
 
 		object::Instantiate<Trees>(eLayerType::BG);
-		object::Instantiate<SpeedUp>(eLayerType::UI);
+		//object::Instantiate<SpeedUp>(eLayerType::UI);
 
 		
 	}

@@ -20,7 +20,7 @@ enum class eLayerType
 	Ball,
 	Bomb,
 	Ground,
-	Test,
+	Wall,
 	Effect,
 	UI,
 	End

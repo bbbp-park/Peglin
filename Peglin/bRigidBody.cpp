@@ -12,8 +12,8 @@ namespace b
 		, mAccelation(Vector2::Zero)
 		, mVelocity(Vector2::Zero)
 	{
-		mLimitedVelocity.x = 600.0f;
-		mLimitedVelocity.y = 600.0f;
+		mLimitedVelocity.x = 400.0f;
+		mLimitedVelocity.y = 400.0f;
 		mbGround = false;
 		mGravity = Vector2(0.0f, 400.0f);
 		mFriction = 100.0f;

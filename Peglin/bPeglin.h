@@ -4,7 +4,7 @@
 
 namespace b
 {
-	class Animator;
+	Animator;
 	class Peglin : public GameObject
 	{
 	public:
@@ -39,10 +39,14 @@ namespace b
 		void shoot_bombCompleteEvent();
 
 	private:
-		Animator* mAnimator;
+		class Animator* mAnimator;
 		ePeglinState mState;
 
 		class Ground* mGround;
+		class Wall* leftWall;
+		class Wall* rightWall;
+
+		class Orb* mOrb;
 	};
 }
 

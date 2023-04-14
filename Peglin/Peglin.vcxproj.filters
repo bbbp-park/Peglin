@@ -81,14 +81,20 @@
     <Filter Include="Contents\Tile">
       <UniqueIdentifier>{8b146db8-9cb5-45ef-847f-aaaed51d7f23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Orb">
-      <UniqueIdentifier>{54a874bf-8fb9-478c-a0ff-122a2d5cb2a9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Object">
       <UniqueIdentifier>{35951011-59aa-4c91-95f5-03d4e3d56880}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Effect">
       <UniqueIdentifier>{6e83f8c9-ee1e-496c-9b02-f572e6123139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\ThrowObj">
+      <UniqueIdentifier>{54a874bf-8fb9-478c-a0ff-122a2d5cb2a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Peg">
+      <UniqueIdentifier>{fb6d2cad-5c68-4d43-8cad-2eafbba32211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Orb">
+      <UniqueIdentifier>{fd6851ff-6508-4131-9e03-8ab8190f626c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -174,7 +180,7 @@
       <Filter>Contents\Logo</Filter>
     </ClInclude>
     <ClInclude Include="bBall.h">
-      <Filter>Contents\Orb</Filter>
+      <Filter>Contents\ThrowObj</Filter>
     </ClInclude>
     <ClInclude Include="bCollider.h">
       <Filter>Engine\Component\Collider</Filter>
@@ -231,13 +237,22 @@
       <Filter>Contents\UI</Filter>
     </ClInclude>
     <ClInclude Include="bBomb.h">
-      <Filter>Contents\Orb</Filter>
+      <Filter>Contents\ThrowObj</Filter>
     </ClInclude>
     <ClInclude Include="bGround.h">
       <Filter>Contents\Object</Filter>
     </ClInclude>
     <ClInclude Include="bExplosion.h">
       <Filter>Contents\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="bPeg.h">
+      <Filter>Contents\Peg</Filter>
+    </ClInclude>
+    <ClInclude Include="bWall.h">
+      <Filter>Contents\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="bOrb.h">
+      <Filter>Contents\Orb</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -305,7 +320,7 @@
       <Filter>Contents\Logo</Filter>
     </ClCompile>
     <ClCompile Include="bBall.cpp">
-      <Filter>Contents\Orb</Filter>
+      <Filter>Contents\ThrowObj</Filter>
     </ClCompile>
     <ClCompile Include="bCollider.cpp">
       <Filter>Engine\Component\Collider</Filter>
@@ -359,13 +374,22 @@
       <Filter>Contents\UI</Filter>
     </ClCompile>
     <ClCompile Include="bBomb.cpp">
-      <Filter>Contents\Orb</Filter>
+      <Filter>Contents\ThrowObj</Filter>
     </ClCompile>
     <ClCompile Include="bGround.cpp">
       <Filter>Contents\Object</Filter>
     </ClCompile>
     <ClCompile Include="bExplosion.cpp">
       <Filter>Contents\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="bPeg.cpp">
+      <Filter>Contents\Peg</Filter>
+    </ClCompile>
+    <ClCompile Include="bWall.cpp">
+      <Filter>Contents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="bOrb.cpp">
+      <Filter>Contents\Orb</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

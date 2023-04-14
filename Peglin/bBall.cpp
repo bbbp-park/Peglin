@@ -42,7 +42,7 @@ namespace b
 
 
 		Vector2 velocity = mRigidbody->GetVelocity();
-		velocity.x += 180.0f;
+		velocity.x += 100.0f;
 
 		mRigidbody->SetVelocity(velocity);
 		mRigidbody->SetGround(true);
