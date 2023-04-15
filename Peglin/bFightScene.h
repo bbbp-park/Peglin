@@ -35,6 +35,9 @@ namespace b
 		Image* backScreen;
 
 		class Ground* mGround;
+		class Bouncer* bouncer;
+
+		class Orb* mOrb;
 	};
 }
 

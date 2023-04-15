@@ -1,7 +1,7 @@
 #include "bGround.h"
 #include "bCollider.h"
 #include "bTransform.h"
-#include "bRigidBody.h"
+#include "bRigidbody.h"
 #include "bBomb.h"
 
 namespace b
@@ -27,23 +27,6 @@ namespace b
 	void Ground::Update()
 	{
 		GameObject::Update();
-
-		//if (mGameObject != nullptr)
-		//{
-		//	Transform* objTr = mGameObject->GetComponent<Transform>();
-
-		//	RigidBody* rb = mGameObject->GetComponent<RigidBody>();
-
-		//	// obj가 땅 위에 있을 때
-		//	if (rb->GetGround())
-		//	{
-		//		Vector2 pos = objTr->GetPos();
-		//		pos.y -= 1;
-		//		objTr->SetPos(pos);
-		//	}
-
-			//rb->SetGround(true);
-		//}
 	}
 
 	void Ground::Render(HDC hdc)
@@ -63,7 +46,7 @@ namespace b
 		if (bomb == nullptr)
 			return;
 
-		RigidBody* rb = bomb->GetComponent<RigidBody>();
+		Rigidbody* rb = bomb->GetComponent<Rigidbody>();
 		rb->SetGround(true);
 
 		Collider* bombCol = bomb->GetComponent<Collider>();

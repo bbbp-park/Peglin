@@ -1,11 +1,11 @@
-#include "bRigidBody.h"
+#include "bRigidbody.h"
 #include "bTime.h"
 #include "bGameObject.h"
 #include "bTransform.h"
 
 namespace b
 {
-	RigidBody::RigidBody()
+	Rigidbody::Rigidbody()
 		: Component(eComponentType::Rigidbody)
 		, mMass(0.0f)
 		, mForce(Vector2::Zero)
@@ -19,15 +19,15 @@ namespace b
 		mFriction = 100.0f;
 	}
 
-	RigidBody::~RigidBody()
+	Rigidbody::~Rigidbody()
 	{
 	}
 
-	void RigidBody::Initialize()
+	void Rigidbody::Initialize()
 	{
 	}
 
-	void RigidBody::Update()
+	void Rigidbody::Update()
 	{
 		// F = M * A
 		mAccelation = mForce / mMass;
@@ -99,15 +99,15 @@ namespace b
 		mForce.Clear();
 	}
 
-	void RigidBody::Render(HDC hdc)
+	void Rigidbody::Render(HDC hdc)
 	{
 	}
 
-	void RigidBody::Release()
+	void Rigidbody::Release()
 	{
 	}
 
-	void RigidBody::AddForce(Vector2 force)
+	void Rigidbody::AddForce(Vector2 force)
 	{
 		mForce += force;
 	}

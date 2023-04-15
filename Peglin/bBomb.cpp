@@ -3,7 +3,7 @@
 #include "bTime.h"
 #include "bResources.h"
 #include "bImage.h"
-#include "bRigidBody.h"
+#include "bRigidbody.h"
 #include "bCollider.h"
 #include "bAnimator.h"
 #include "bObject.h"
@@ -33,7 +33,7 @@ namespace b
 		collider->SetCenter(Vector2(-10.0f, -10.0f));
 		collider->SetSize(Vector2(30.0f, 30.0f));
 
-		mRigidbody = AddComponent<RigidBody>();
+		mRigidbody = AddComponent<Rigidbody>();
 		mRigidbody->SetMass(1.0f);
 
 		Vector2 velocity = mRigidbody->GetVelocity();

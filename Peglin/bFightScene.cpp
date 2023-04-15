@@ -11,6 +11,8 @@
 #include "bSpeedUp.h"
 #include "bBag.h"
 #include "bGround.h"
+#include "bOrb.h"
+#include "bBouncer.h"
 
 namespace b
 {
@@ -44,6 +46,12 @@ namespace b
 		//object::Instantiate<Bag>(Vector2(140.0f, 0.0f), Vector2(2.4f, 2.4f), eLayerType::UI);
 		//object::Instantiate<SpeedUp>(eLayerType::UI);
 
+		bouncer = object::Instantiate<Bouncer>(Vector2(800.0f, 791.0f), eLayerType::Wall);
+
+		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 350.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+
+		bouncer->SetOrb(mOrb);
+
 		forest1_bg = Resources::Load<Image>(L"forest1_bg", L"..\\Resources\\sprite\\Background\\forest_1_background.bmp");
 		forest1_tile = Resources::Load<Image>(L"forest1_tile", L"..\\Resources\\sprite\\Background\\forest_1_tile.bmp");
 
@@ -62,6 +70,13 @@ namespace b
 		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Ending);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::R))
+		{
+			mOrb = object::Instantiate<Orb>(Vector2(900.0f, 350.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+
+			bouncer->SetOrb(mOrb);
 		}
 
 		Scene::Update();
@@ -175,6 +190,8 @@ namespace b
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Ball, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Wall, true);
+		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Ground, true);
 	}
 
 	void FightScene::OnExit()

@@ -30,16 +30,16 @@ namespace b
 	{
 		Scene::Update();
 		Vector2  temp = Input::GetMousePos();
-		if (Input::GetKeyDown(eKeyCode::LBUTTON))
-		{
-			Vector2 pos = Input::GetMousePos();
-			pos -= Camera::CalculatePos(Vector2::Zero);
+		//if (Input::GetKeyDown(eKeyCode::LBUTTON))
+		//{
+		//	Vector2 pos = Input::GetMousePos();
+		//	pos -= Camera::CalculatePos(Vector2::Zero);
 
-			pos = TilePalatte::GetTilePos(pos);
+		//	pos = TilePalatte::GetTilePos(pos);
 
-			UINT tileIndxe = TilePalatte::GetIndex();
-			TilePalatte::CreateTile(tileIndxe, pos);
-		}
+		//	UINT tileIndxe = TilePalatte::GetIndex();
+		//	TilePalatte::CreateTile(tileIndxe, pos);
+		//}
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			TilePalatte::Save();

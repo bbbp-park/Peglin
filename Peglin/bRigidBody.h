@@ -3,11 +3,11 @@
 
 namespace b
 {
-	class RigidBody : public Component
+	class Rigidbody : public Component
 	{
 	public:
-		RigidBody();
-		~RigidBody();
+		Rigidbody();
+		~Rigidbody();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -18,9 +18,11 @@ namespace b
 		void AddForce(Vector2 force);
 		void SetGround(bool ground) { mbGround = ground; }
 		void SetVelocity(Vector2 velocity) { mVelocity = velocity; }
+		void SetForce(Vector2 force) { mForce = force; }
+		void SetGravity(Vector2 gravity) { mGravity = gravity; }
 
 		Vector2 GetVelocity() { return mVelocity; }
-		bool GetGround() { return mbGround; }
+		Vector2 GetForce() { return mForce; }
 
 	private:
 		float mMass;

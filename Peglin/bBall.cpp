@@ -5,7 +5,7 @@
 #include "bImage.h"
 #include "bObject.h"
 #include "bCollider.h"
-#include "bRigidBody.h"
+#include "bRigidbody.h"
 
 namespace b
 {
@@ -30,7 +30,7 @@ namespace b
 		collider->SetCenter(Vector2(5.0f, 5.0f));
 		collider->SetSize(Vector2(35.0f, 35.0f));
 
-		mRigidbody = AddComponent<RigidBody>();
+		mRigidbody = AddComponent<Rigidbody>();
 		mRigidbody->SetMass(1.0f);
 
 		GameObject::Initialize();
@@ -45,7 +45,7 @@ namespace b
 		velocity.x += 100.0f;
 
 		mRigidbody->SetVelocity(velocity);
-		mRigidbody->SetGround(true);
+		mRigidbody->SetGravity(Vector2::Zero);
 	}
 
 	void Ball::Render(HDC hdc)

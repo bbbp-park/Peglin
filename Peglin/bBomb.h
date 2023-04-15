@@ -27,7 +27,7 @@ namespace b
 	private:
 		Image* mImage;
 		Animator* mAnimator;
-		RigidBody* mRigidbody;
+		Rigidbody* mRigidbody;
 	};
 }
 

@@ -21,6 +21,7 @@ enum class eLayerType
 	Bomb,
 	Ground,
 	Wall,
+	Orb,
 	Effect,
 	UI,
 	End

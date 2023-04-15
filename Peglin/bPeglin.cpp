@@ -11,6 +11,7 @@
 #include "bObject.h"
 #include "bBomb.h"
 #include "bGround.h"
+#include "bBouncer.h"
 
 namespace b
 {
@@ -33,8 +34,11 @@ namespace b
 		mGround = object::Instantiate<Ground>(Vector2(0.0f, 220.0f), eLayerType::Ground);
 		leftWall = object::Instantiate<Wall>(Vector2(469.0f, 250.0f), eLayerType::Wall);
 		rightWall = object::Instantiate<Wall>(Vector2(1273.0f, 250.0f), eLayerType::Wall);
+		/*bouncer = object::Instantiate<Bouncer>(Vector2(800.0f, 791.0f), eLayerType::Wall);
 
-		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 350.0f), Vector2(2.0f, 2.0f), eLayerType::Ball);
+		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 350.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+
+		bouncer->SetOrb(mOrb);*/
 
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Idle", Vector2::Zero, 0.15f);
@@ -140,12 +144,7 @@ namespace b
 			mState = ePeglinState::Death;
 		}
 
-		if (Input::GetKeyDown(eKeyCode::LBUTTON))
-		{
-			Vector2 mousePos = Input::GetMousePos();
-
-			int a = 0;
-		}
+		
 		//Transform* tr = GetComponent<Transform>();
 		//Vector2 pos = tr->GetPos();
 

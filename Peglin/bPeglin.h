@@ -46,6 +46,8 @@ namespace b
 		class Wall* leftWall;
 		class Wall* rightWall;
 
+		class Bouncer* bouncer;
+
 		class Orb* mOrb;
 	};
 }

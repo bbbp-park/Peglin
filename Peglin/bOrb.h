@@ -3,6 +3,8 @@
 
 namespace b
 {
+	class Animator;
+	class Rigidbody;
 	class Orb : public GameObject
 	{
 	public:
@@ -19,8 +21,10 @@ namespace b
 		virtual void OnCollisionExit(class Collider* other) override;
 
 	private:
-		class Animator* mAnimator;
-		
+		Animator* mAnimator;
+		Rigidbody* mRigidbody;
+
+		Vector2 mForce;
 		bool bShoot;
 	};
 }

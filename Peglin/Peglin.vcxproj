@@ -135,6 +135,7 @@
     <ClInclude Include="bApplication.h" />
     <ClInclude Include="bBall.h" />
     <ClInclude Include="bBomb.h" />
+    <ClInclude Include="bBouncer.h" />
     <ClInclude Include="bCamera.h" />
     <ClInclude Include="bCollider.h" />
     <ClInclude Include="bCollisionManager.h" />
@@ -162,7 +163,7 @@
     <ClInclude Include="bMapScene.h" />
     <ClInclude Include="bResource.h" />
     <ClInclude Include="bResources.h" />
-    <ClInclude Include="bRigidBody.h" />
+    <ClInclude Include="bRigidbody.h" />
     <ClInclude Include="bScene.h" />
     <ClInclude Include="bSceneManager.h" />
     <ClInclude Include="bSound.h" />
@@ -189,6 +190,7 @@
     <ClCompile Include="bApplication.cpp" />
     <ClCompile Include="bBall.cpp" />
     <ClCompile Include="bBomb.cpp" />
+    <ClCompile Include="bBouncer.cpp" />
     <ClCompile Include="bCamera.cpp" />
     <ClCompile Include="bCollider.cpp" />
     <ClCompile Include="bCollisionManager.cpp" />
@@ -213,7 +215,7 @@
     <ClCompile Include="bMapScene.cpp" />
     <ClCompile Include="bResource.cpp" />
     <ClCompile Include="bResources.cpp" />
-    <ClCompile Include="bRigidBody.cpp" />
+    <ClCompile Include="bRigidbody.cpp" />
     <ClCompile Include="bScene.cpp" />
     <ClCompile Include="bSceneManager.cpp" />
     <ClCompile Include="bSound.cpp" />

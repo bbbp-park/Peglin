@@ -2,12 +2,16 @@
 #include "bAnimator.h"
 #include "bTransform.h"
 #include "bInput.h"
+#include "bRigidbody.h"
+#include "bObject.h"
 
 namespace b
 {
 	Orb::Orb()
 		: mAnimator(nullptr)
+		, mRigidbody(nullptr)
 		, bShoot(false)
+		, mForce(Vector2::One)
 	{
 	}
 
@@ -24,10 +28,35 @@ namespace b
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Ball\\Rock", Vector2::Zero, 0.1f);
 
 		mAnimator->Play(L"BallRock", true);
+
+		mRigidbody = AddComponent<Rigidbody>();
+		mRigidbody->SetMass(1.0f);
+		mRigidbody->SetGravity(Vector2::Zero);
+		mRigidbody->SetGround(false);
 	}
 
 	void Orb::Update()
 	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		if (pos.y > 900.0f)
+			object::Destory(this);
+
+		if (!bShoot && Input::GetKeyDown(eKeyCode::LBUTTON))
+		{
+			bShoot = true;
+			
+			Vector2 dir = Input::GetMousePos();
+			dir -= pos;
+			dir.Normalize();
+			mForce = dir * 17000;
+			mRigidbody->SetForce(mForce);
+			mRigidbody->SetGravity(Vector2(0.0f, 400.0f));
+
+
+		}
+
 		GameObject::Update();
 	}
 

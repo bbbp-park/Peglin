@@ -22,7 +22,7 @@ namespace b
 	private:
 		Image* mImage;
 		float mTime;
-		class RigidBody* mRigidbody;
+		class Rigidbody* mRigidbody;
 	};
 
 }
