@@ -10,9 +10,7 @@ namespace b
 {
 	Bouncer::Bouncer()
 		: bouncerImage(nullptr)
-		, tileImage(nullptr)
 		, bouncerCol(nullptr)
-		, tileCol(nullptr)
 		, mOrb(nullptr)
 	{
 	}
@@ -24,25 +22,24 @@ namespace b
 	void Bouncer::Initialize()
 	{
 		bouncerImage = Resources::Load<Image>(L"Bouncer", L"..\\Resources\\sprite\\Background\\bouncer.bmp");
-		tileImage = Resources::Load<Image>(L"BouncerTile", L"..\\Resources\\sprite\\Background\\tileset_33.bmp");
 
-		Transform* tr = GetComponent<Transform>();
+		//Transform* tr = GetComponent<Transform>();
 
-		Vector2 bPos;
-		bPos.x = tr->GetPos().x;
-		bPos.y = tr->GetPos().y;
+		//Vector2 bPos = tr->GetPos();
 
-		Vector2 tPos;
+		/*Vector2 tPos;
 		tPos.x = bPos.x + 15;
-		tPos.y = bPos.y + (bouncerImage->GetHeight() * 3);
+		tPos.y = bPos.y + (bouncerImage->GetHeight() * 3);*/
 
 		bouncerCol = AddComponent<Collider>();
 		bouncerCol->SetSize(Vector2(bouncerImage->GetWidth() * 3 + 10, bouncerImage->GetHeight() * 3 + 10));
 
 
-		/*tileCol = AddComponent<Collider>();
-		tileCol->SetSize(Vector2(tileImage->GetWidth() * 3, tileImage->GetHeight() * 3));*/
-		//bouncerCol->SetShape()
+		//tileCol = AddComponent<Collider>();
+		//tileCol->SetSize(Vector2(tileImage->GetWidth() * 3, tileImage->GetHeight() * 3));
+		bouncerCol->SetShape(eColliderType::Ellipse);
+		bouncerCol->SetCenter(Vector2(-2.0f, 0.0f));
+		bouncerCol->SetSize(Vector2(bouncerImage->GetWidth() * 3, bouncerImage->GetHeight() * 3));
 
 		
 		GameObject::Initialize();
@@ -62,9 +59,7 @@ namespace b
 
 		Transform* tr = GetComponent<Transform>();
 
-		Vector2 bPos;
-		bPos.x = tr->GetPos().x;
-		bPos.y = tr->GetPos().y;
+		Vector2 bPos = tr->GetPos();
 
 		Vector2 tPos;
 		tPos.x = bPos.x + 15;
@@ -76,14 +71,6 @@ namespace b
 			, 0, 0
 			, bouncerImage->GetWidth(), bouncerImage->GetHeight()
 			, RGB(255, 0, 255));
-
-		TransparentBlt(hdc, tPos.x, tPos.y
-			, tileImage->GetWidth() * 3, tileImage->GetHeight() * 3
-			, tileImage->GetHdc()
-			, 0, 0
-			, tileImage->GetWidth(), tileImage->GetHeight()
-			, RGB(255, 0, 255));
-		
 	}
 
 	void Bouncer::Release()

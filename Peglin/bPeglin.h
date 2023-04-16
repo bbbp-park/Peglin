@@ -43,10 +43,6 @@ namespace b
 		ePeglinState mState;
 
 		class Ground* mGround;
-		class Wall* leftWall;
-		class Wall* rightWall;
-
-		class Bouncer* bouncer;
 
 		class Orb* mOrb;
 	};

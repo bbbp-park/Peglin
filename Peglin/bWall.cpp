@@ -38,6 +38,15 @@ namespace b
 
 	void Wall::OnCollisionEnter(Collider* other)
 	{
+		if (this->GetName() == L"LeftWall")
+		{
+			int a = 0;
+		}
+
+		if (this->GetName() == L"RightWall")
+		{
+			int a = 0;
+		}
 	}
 
 	void Wall::OnCollisionStay(Collider* other)

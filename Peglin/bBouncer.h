@@ -3,8 +3,6 @@
 
 namespace b
 {
-	class Image;
-	class Collider;
 	class Bouncer : public GameObject
 	{
 	public:
@@ -26,10 +24,7 @@ namespace b
 		class Orb* mOrb;
 
 		Image* bouncerImage;
-		Image* tileImage;
-
 		Collider* bouncerCol;
-		Collider* tileCol;
 	};
 }
 

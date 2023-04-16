@@ -13,6 +13,8 @@
 #include "bGround.h"
 #include "bOrb.h"
 #include "bBouncer.h"
+#include "bBouncerTile.h"
+#include "bWall.h"
 
 namespace b
 {
@@ -26,6 +28,7 @@ namespace b
 		, tileSet2(nullptr)
 		, plunger(nullptr)
 		, backScreen(nullptr)
+		, bTile(nullptr)
 	{
 	}
 
@@ -46,11 +49,19 @@ namespace b
 		//object::Instantiate<Bag>(Vector2(140.0f, 0.0f), Vector2(2.4f, 2.4f), eLayerType::UI);
 		//object::Instantiate<SpeedUp>(eLayerType::UI);
 
-		bouncer = object::Instantiate<Bouncer>(Vector2(800.0f, 791.0f), eLayerType::Wall);
+		leftWall = object::Instantiate<Wall>(Vector2(469.0f, 250.0f), eLayerType::Wall);
+		leftWall->SetName(L"LeftWall");
+		rightWall = object::Instantiate<Wall>(Vector2(1273.0f, 250.0f), eLayerType::Wall);
+		rightWall->SetName(L"RightWall");
+		bouncer = object::Instantiate<Bouncer>(Vector2(800.0f, 800.0f), eLayerType::Wall);
+		bTile = object::Instantiate<BouncerTile>(Vector2(815.0f, 875.0f), eLayerType::Wall);
 
 		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 350.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
-
+		
+		leftWall->SetOrb(mOrb);
+		rightWall->SetOrb(mOrb);
 		bouncer->SetOrb(mOrb);
+		bTile->SetOrb(mOrb);
 
 		forest1_bg = Resources::Load<Image>(L"forest1_bg", L"..\\Resources\\sprite\\Background\\forest_1_background.bmp");
 		forest1_tile = Resources::Load<Image>(L"forest1_tile", L"..\\Resources\\sprite\\Background\\forest_1_tile.bmp");
@@ -76,7 +87,10 @@ namespace b
 		{
 			mOrb = object::Instantiate<Orb>(Vector2(900.0f, 350.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
 
+			leftWall->SetOrb(mOrb);
+			rightWall->SetOrb(mOrb);
 			bouncer->SetOrb(mOrb);
+			bTile->SetOrb(mOrb);
 		}
 
 		Scene::Update();

@@ -19,7 +19,7 @@ namespace b
 	void Ground::Initialize()
 	{
 		mCollider = AddComponent<Collider>();
-		mCollider->SetSize(Vector2(1600.0f, 40.0f));
+		mCollider->SetSize(Vector2(1600.0f, 45.0f));
 
 		GameObject::Initialize();
 	}

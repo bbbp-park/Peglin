@@ -6,12 +6,6 @@ namespace b
 	class Collider : public Component
 	{
 	public:
-		enum class eColliderShape
-		{
-			Ellipse,
-			Rectangle,
-		};
-
 		Collider();
 		~Collider();
 
@@ -26,7 +20,7 @@ namespace b
 
 		void SetCenter(Vector2 center) { mCenter = center; }
 		void SetSize(Vector2 size) { mSize = size; }
-		void SetShape(eColliderShape shape) { mShape = shape; }
+		void SetShape(eColliderType shape) { mShape = shape; }
 
 		Vector2 GetPos() { return mPos; }
 		Vector2 GetSize() { return mSize; }
@@ -41,7 +35,7 @@ namespace b
 		Vector2 mSize;
 		Vector2 mPos;
 
-		eColliderShape mShape;
+		eColliderType mShape;
 	};
 }
 

@@ -254,6 +254,9 @@
     <ClInclude Include="bTrees.h">
       <Filter>Contents\Object</Filter>
     </ClInclude>
+    <ClInclude Include="bBouncerTile.h">
+      <Filter>Contents\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -392,6 +395,9 @@
       <Filter>Contents\Object</Filter>
     </ClCompile>
     <ClCompile Include="bTrees.cpp">
+      <Filter>Contents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="bBouncerTile.cpp">
       <Filter>Contents\Object</Filter>
     </ClCompile>
   </ItemGroup>

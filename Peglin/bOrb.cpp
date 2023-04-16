@@ -4,6 +4,7 @@
 #include "bInput.h"
 #include "bRigidbody.h"
 #include "bObject.h"
+#include "bCollider.h"
 
 namespace b
 {
@@ -11,7 +12,8 @@ namespace b
 		: mAnimator(nullptr)
 		, mRigidbody(nullptr)
 		, bShoot(false)
-		, mForce(Vector2::One)
+		, mForce(Vector2(Vector2::One))
+		, power(17000.0f)
 	{
 	}
 
@@ -29,6 +31,11 @@ namespace b
 
 		mAnimator->Play(L"BallRock", true);
 
+		Collider* collider = AddComponent<Collider>();
+		collider->SetShape(eColliderType::Ellipse);
+		collider->SetSize(Vector2(25.0f, 25.0f));
+		collider->SetCenter(Vector2(-5.0f, -15.0f));
+
 		mRigidbody = AddComponent<Rigidbody>();
 		mRigidbody->SetMass(1.0f);
 		mRigidbody->SetGravity(Vector2::Zero);
@@ -43,6 +50,11 @@ namespace b
 		if (pos.y > 900.0f)
 			object::Destory(this);
 
+		if (bShoot)
+		{
+
+		}
+
 		if (!bShoot && Input::GetKeyDown(eKeyCode::LBUTTON))
 		{
 			bShoot = true;
@@ -50,11 +62,11 @@ namespace b
 			Vector2 dir = Input::GetMousePos();
 			dir -= pos;
 			dir.Normalize();
-			mForce = dir * 17000;
+			mForce = dir * power;
 			mRigidbody->SetForce(mForce);
 			mRigidbody->SetGravity(Vector2(0.0f, 400.0f));
 
-
+			power *= 0.5;
 		}
 
 		GameObject::Update();
@@ -88,6 +100,7 @@ namespace b
 
 	void Orb::OnCollisionEnter(Collider* other)
 	{
+		// นÝป็
 	}
 
 	void Orb::OnCollisionStay(Collider* other)

@@ -37,3 +37,9 @@ enum class eComponentType
 	Audio,
 	End,
 };
+
+enum class eColliderType
+{
+	Ellipse,
+	Rectangle,
+};

@@ -24,8 +24,10 @@ namespace b
 		Animator* mAnimator;
 		Rigidbody* mRigidbody;
 
-		Vector2 mForce;
 		bool bShoot;
+		
+		float power;
+		Vector2 mForce;
 	};
 }
 

@@ -18,11 +18,12 @@ namespace b
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
 
-		void SetGameObject(class GameObject* gameObj) { mGameObject = gameObj; }
+		void SetOrb(class Orb* orb) { mOrb = orb; }
 
 	private:
 		class Collider* mCollider;
 		class GameObject* mGameObject;
+		class Orb* mOrb;
 	};
 }
 
