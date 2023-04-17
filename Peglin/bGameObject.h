@@ -12,6 +12,7 @@ namespace b
 			Active,
 			Pause,
 			Death,
+			None,
 		};
 
 		GameObject();

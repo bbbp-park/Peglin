@@ -5,15 +5,17 @@
 #include "bRigidbody.h"
 #include "bObject.h"
 #include "bCollider.h"
+#include "bWall.h"
 
 namespace b
 {
 	Orb::Orb()
 		: mAnimator(nullptr)
 		, mRigidbody(nullptr)
+		, mCollider(nullptr)
 		, bShoot(false)
 		, mForce(Vector2(Vector2::One))
-		, power(17000.0f)
+		, power(20000.0f)
 	{
 	}
 
@@ -31,10 +33,10 @@ namespace b
 
 		mAnimator->Play(L"BallRock", true);
 
-		Collider* collider = AddComponent<Collider>();
-		collider->SetShape(eColliderType::Ellipse);
-		collider->SetSize(Vector2(25.0f, 25.0f));
-		collider->SetCenter(Vector2(-5.0f, -15.0f));
+		mCollider = AddComponent<Collider>();
+		mCollider->SetShape(eColliderType::Ellipse);
+		mCollider->SetSize(Vector2(25.0f, 25.0f));
+		mCollider->SetCenter(Vector2(-5.0f, -15.0f));
 
 		mRigidbody = AddComponent<Rigidbody>();
 		mRigidbody->SetMass(1.0f);
@@ -47,7 +49,8 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		if (pos.y > 900.0f)
+		// 오브가 떨어졌을 때
+		if (pos.y >= 910.0f)
 			object::Destory(this);
 
 		if (bShoot)
@@ -67,6 +70,12 @@ namespace b
 			mRigidbody->SetGravity(Vector2(0.0f, 400.0f));
 
 			power *= 0.5;
+		}
+
+		if (Input::GetKey(eKeyCode::RBUTTON))
+		{
+			Vector2 mouse = Input::GetMousePos();
+			int a = 0;
 		}
 
 		GameObject::Update();
@@ -100,7 +109,8 @@ namespace b
 
 	void Orb::OnCollisionEnter(Collider* other)
 	{
-		// 반사
+		
+
 	}
 
 	void Orb::OnCollisionStay(Collider* other)

@@ -29,8 +29,8 @@ namespace b
 
 	void Peglin::Initialize()
 	{
-		mGround = object::Instantiate<Ground>(Vector2(0.0f, 220.0f), eLayerType::Ground);
-		
+		mGround = object::Instantiate<Ground>(Vector2(0.0f, 220.0f), eLayerType::Wall);
+		mGround->SetName(L"Ground");
 		/*bouncer = object::Instantiate<Bouncer>(Vector2(800.0f, 791.0f), eLayerType::Wall);
 
 		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 350.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
@@ -185,6 +185,7 @@ namespace b
 		pos.x += 40.0f;
 
 		Bomb* mBomb = object::Instantiate<Bomb>(pos, Vector2(3.0f, 3.0f), eLayerType::Bomb);
+		mBomb->SetName(L"Bomb");
 
 		mGround->SetGameObject(mBomb);
 

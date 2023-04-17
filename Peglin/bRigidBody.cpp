@@ -92,7 +92,7 @@ namespace b
 		Vector2 pos = tr->GetPos();
 		pos += mVelocity * Time::DeltaTime();
 
-		if (pos.y > 900.0f)
+		if (pos.y > 950.0f)
 			mbGround = true;
 
 		tr->SetPos(pos);

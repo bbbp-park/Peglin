@@ -19,7 +19,6 @@ enum class eLayerType
 	Player,
 	Ball,
 	Bomb,
-	Ground,
 	Wall,
 	Orb,
 	Effect,

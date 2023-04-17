@@ -58,6 +58,7 @@ namespace b
 		float fLen = fabs(bombPos.y - groundPos.y);
 		float fSize = (bombCol->GetSize().y / 2.0f) + (groundCol->GetSize().y / 2.0f);
 
+
 		if (fLen < fSize)
 		{
 			Transform* bombTr = bomb->GetComponent<Transform>();
@@ -66,9 +67,18 @@ namespace b
 			Vector2 bombPos = bombTr->GetPos();
 			Vector2 groundPos = groundTr->GetPos();
 
-			bombPos -= (fSize - fLen) - 1.0f;
-			bombTr->SetPos(bombPos);
+			if (bomb->GetName() == L"Bomb")
+			{
+				bombPos -= (fSize - fLen) - 1.0f;
+				bombTr->SetPos(bombPos);
+			}
+
+			if (bomb->GetName() == L"Orb")
+			{
+
+			}
 		}
+
 	}
 
 	void Ground::OnCollisionStay(Collider* other)

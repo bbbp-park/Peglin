@@ -133,6 +133,12 @@ struct Vector2
 		y -= value;
 	}
 
+	void operator+=(const float& value)
+	{
+		x += value;
+		y += value;
+	}
+
 	void Clear()
 	{
 		x = 0.0f;

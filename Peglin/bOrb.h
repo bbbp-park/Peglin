@@ -20,9 +20,12 @@ namespace b
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		bool GetIsShoot() { return bShoot; }
+
 	private:
 		Animator* mAnimator;
 		Rigidbody* mRigidbody;
+		Collider* mCollider;
 
 		bool bShoot;
 		

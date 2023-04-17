@@ -38,8 +38,10 @@ namespace b
 
 	void FightScene::Initialize()
 	{
-
 		Scene::Initialize();
+
+		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 350.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+		mOrb->SetName(L"Orb");
 
 		object::Instantiate<Peglin>(Vector2(410.0f, 170.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
 
@@ -56,10 +58,10 @@ namespace b
 		bouncer = object::Instantiate<Bouncer>(Vector2(800.0f, 800.0f), eLayerType::Wall);
 		bTile = object::Instantiate<BouncerTile>(Vector2(815.0f, 875.0f), eLayerType::Wall);
 
-		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 350.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
 		
-		leftWall->SetOrb(mOrb);
-		rightWall->SetOrb(mOrb);
+	
+		//leftWall->SetOrb(mOrb);
+		//rightWall->SetOrb(mOrb);
 		bouncer->SetOrb(mOrb);
 		bTile->SetOrb(mOrb);
 
@@ -73,6 +75,9 @@ namespace b
 
 	void FightScene::Update()
 	{
+		Scene::Update();
+
+
 		if (Input::GetKeyState(eKeyCode::O) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Map);
@@ -86,14 +91,14 @@ namespace b
 		if (Input::GetKeyDown(eKeyCode::R))
 		{
 			mOrb = object::Instantiate<Orb>(Vector2(900.0f, 350.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+			mOrb->SetName(L"Orb");
 
-			leftWall->SetOrb(mOrb);
-			rightWall->SetOrb(mOrb);
+			//leftWall->SetOrb(mOrb);
+			//rightWall->SetOrb(mOrb);
 			bouncer->SetOrb(mOrb);
 			bTile->SetOrb(mOrb);
 		}
 
-		Scene::Update();
 	}
 
 	void FightScene::Render(HDC hdc)
@@ -203,9 +208,8 @@ namespace b
 		
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Ball, eLayerType::Monster, true);
-		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Wall, true);
-		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Ground, true);
 	}
 
 	void FightScene::OnExit()
