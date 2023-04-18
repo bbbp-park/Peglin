@@ -3,6 +3,7 @@
 #include "bTransform.h"
 #include "bRigidbody.h"
 #include "bBomb.h"
+#include "bOrb.h"
 
 namespace b
 {
@@ -41,42 +42,71 @@ namespace b
 
 	void Ground::OnCollisionEnter(Collider* other)
 	{
-		Bomb* bomb = dynamic_cast<Bomb*>(other->GetOwner());
+		//if (other->GetName() == L"Bomb")
+		//{
+		//	Bomb* obj = dynamic_cast<Bomb*>(other->GetOwner());
 
-		if (bomb == nullptr)
+		//	if (obj == nullptr)
+		//		return;
+
+		//	Rigidbody* rb = obj->GetComponent<Rigidbody>();
+		//	rb->SetGround(true);
+
+		//	Collider* bombCol = obj->GetComponent<Collider>();
+		//	Vector2 bombPos = bombCol->GetPos();
+
+		//	Collider* groundCol = this->GetComponent<Collider>();
+		//	Vector2 groundPos = groundCol->GetPos();
+
+		//	float fLen = fabs(bombPos.y - groundPos.y);
+		//	float fSize = (bombCol->GetSize().y / 2.0f) + (groundCol->GetSize().y / 2.0f);
+
+
+		//	if (fLen < fSize)
+		//	{
+		//		Transform* objTr = obj->GetComponent<Transform>();
+		//		Transform* groundTr = this->GetComponent<Transform>();
+
+		//		Vector2 objPos = objTr->GetPos();
+		//		Vector2 groundPos = groundTr->GetPos();
+
+		//		if (obj->GetName() == L"Bomb")
+		//		{
+		//			objPos -= (fSize - fLen) - 1.0f;
+		//			objTr->SetPos(objPos);
+		//		}
+		//	}
+		//}
+
+		Orb* orb = dynamic_cast<Orb*>(other->GetOwner());
+
+		if (orb == nullptr)
 			return;
 
-		Rigidbody* rb = bomb->GetComponent<Rigidbody>();
-		rb->SetGround(true);
+		Rigidbody* rb = orb->GetComponent<Rigidbody>();
+		//rb->SetGround(true);
 
-		Collider* bombCol = bomb->GetComponent<Collider>();
-		Vector2 bombPos = bombCol->GetPos();
+		Collider* orbCol = orb->GetComponent<Collider>();
+		Vector2 orbPos = orbCol->GetCenterPos();
 
 		Collider* groundCol = this->GetComponent<Collider>();
-		Vector2 groundPos = groundCol->GetPos();
+		//Vector2 groundPos = groundCol->GetPos();
+		//groundPos.y += groundCol->GetSize().y;
+		Vector2 groundPos = groundCol->GetCenterPos();
+		groundPos.x = 0.0f;
 
-		float fLen = fabs(bombPos.y - groundPos.y);
-		float fSize = (bombCol->GetSize().y / 2.0f) + (groundCol->GetSize().y / 2.0f);
-
-
-		if (fLen < fSize)
+		if (orb->GetIsShoot())
 		{
-			Transform* bombTr = bomb->GetComponent<Transform>();
-			Transform* groundTr = this->GetComponent<Transform>();
+			Vector2 dir = orbPos;
+			dir -= groundPos;
+			dir.Normalize();
 
-			Vector2 bombPos = bombTr->GetPos();
-			Vector2 groundPos = groundTr->GetPos();
+			Vector2 vel = rb->GetVelocity();
 
-			if (bomb->GetName() == L"Bomb")
-			{
-				bombPos -= (fSize - fLen) - 1.0f;
-				bombTr->SetPos(bombPos);
-			}
-
-			if (bomb->GetName() == L"Orb")
-			{
-
-			}
+			Vector2 rVec = math::Reflect(vel, dir);
+			rVec *= rb->GetPower();
+			rVec *= -1.0f;
+			rb->SetVelocity(rVec);
 		}
 
 	}

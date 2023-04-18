@@ -17,6 +17,7 @@ namespace b
 		mbGround = false;
 		mGravity = Vector2(0.0f, 400.0f);
 		mFriction = 100.0f;
+		mPower = 0.0f;
 	}
 
 	Rigidbody::~Rigidbody()
@@ -86,6 +87,10 @@ namespace b
 		//	}
 		//}
 
+		if (mVelocity.x >= mLimitedVelocity.x)
+			//mVelocity.x = mLimitedVelocity.x;
+		if (mVelocity.y >= mLimitedVelocity.y)
+			mVelocity.y = mLimitedVelocity.y;
 		// 속도에 맞게끔 물체를 이동
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 

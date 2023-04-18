@@ -20,9 +20,11 @@ namespace b
 		void SetVelocity(Vector2 velocity) { mVelocity = velocity; }
 		void SetForce(Vector2 force) { mForce = force; }
 		void SetGravity(Vector2 gravity) { mGravity = gravity; }
+		void SetPower(float power) { mPower = power; }
 
 		Vector2 GetVelocity() { return mVelocity; }
 		Vector2 GetForce() { return mForce; }
+		float GetPower() { return mPower; }
 
 	private:
 		float mMass;
@@ -32,6 +34,7 @@ namespace b
 		Vector2 mLimitedVelocity;
 
 		Vector2 mGravity;
+		float mPower;
 		float mFriction;
 		bool mbGround;
 	};

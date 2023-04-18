@@ -5,6 +5,7 @@
 #include "bOrb.h"
 #include "bRigidbody.h"
 #include "bCollider.h"
+#include "bInput.h"
 
 namespace b
 {
@@ -48,9 +49,6 @@ namespace b
 	void Bouncer::Update()
 	{
 		GameObject::Update();
-
-		Transform* orbTr = mOrb->GetComponent<Transform>();
-		
 	}
 
 	void Bouncer::Render(HDC hdc)
@@ -60,10 +58,6 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 
 		Vector2 bPos = tr->GetPos();
-
-		Vector2 tPos;
-		tPos.x = bPos.x + 15;
-		tPos.y = bPos.y + (bouncerImage->GetHeight() * 3);
 
 		TransparentBlt(hdc, bPos.x, bPos.y
 			, bouncerImage->GetWidth() * 3, bouncerImage->GetHeight() * 3
@@ -80,6 +74,31 @@ namespace b
 
 	void Bouncer::OnCollisionEnter(Collider* other)
 	{
+		Orb* orb = dynamic_cast<Orb*>(other->GetOwner());
+
+		if (orb == nullptr)
+			return;
+
+		Rigidbody* rb = orb->GetComponent<Rigidbody>();
+
+		Collider* orbCol = orb->GetComponent<Collider>();
+		Vector2 orbPos = orbCol->GetCenterPos();
+
+		Collider* bCol = this->GetComponent<Collider>();
+		Vector2 bPos = bCol->GetCenterPos();
+
+		if (orb->GetIsShoot())
+		{
+			Vector2 dir = orbPos;
+			dir -= bPos;
+			dir.Normalize();
+
+			Vector2 vel = rb->GetVelocity();
+
+			Vector2 rVec = math::Reflect(vel, dir);
+			rVec *= rb->GetPower();
+			rb->SetVelocity(rVec);
+		}
 	}
 
 	void Bouncer::OnCollisionStay(Collider* other)

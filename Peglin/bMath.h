@@ -183,4 +183,14 @@ namespace b::math
 	{
 		return v1.x * v2.y - v1.y * v2.x;
 	}
+
+	inline static Vector2 Reflect(Vector2& v1, Vector2& v2)
+	{
+		// v1 = velocity, v2 = dir
+		Vector2 reflect = v1 - v2 * math::Dot(v1, v2);
+		reflect -= v2 * math::Dot(v1, v2);
+		reflect.Normalize();
+
+		return reflect;
+	}
 }

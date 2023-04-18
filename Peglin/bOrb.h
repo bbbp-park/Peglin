@@ -29,8 +29,10 @@ namespace b
 
 		bool bShoot;
 		
-		float power;
+		float mPower;
 		Vector2 mForce;
+
+		const float mResistance = 0.7f;
 	};
 }
 

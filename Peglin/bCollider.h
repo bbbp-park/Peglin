@@ -25,6 +25,7 @@ namespace b
 		Vector2 GetPos() { return mPos; }
 		Vector2 GetSize() { return mSize; }
 		UINT GetID() { return mID; }
+		Vector2 GetCenterPos();
 
 	private:
 		static UINT ColliderNumber;
@@ -36,6 +37,7 @@ namespace b
 		Vector2 mPos;
 
 		eColliderType mShape;
+		bool bRender;
 	};
 }
 

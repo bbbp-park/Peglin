@@ -34,11 +34,8 @@ namespace b
 		Image* plunger;
 		Image* backScreen;
 
-		class Ground* mGround;
 		class Bouncer* bouncer;
 		class BouncerTile* bTile;
-		class Wall* leftWall;
-		class Wall* rightWall;
 
 		class Orb* mOrb;
 	};

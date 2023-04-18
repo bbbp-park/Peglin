@@ -4,7 +4,6 @@
 
 namespace b
 {
-	Animator;
 	class Peglin : public GameObject
 	{
 	public:

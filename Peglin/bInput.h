@@ -10,6 +10,7 @@ namespace b
 		Z, X, C, V, B, N, M,
 		UP, DOWN, LEFT, RIGHT,
 		LBUTTON, RBUTTON,
+		TAB,
 		END,
 	};
 

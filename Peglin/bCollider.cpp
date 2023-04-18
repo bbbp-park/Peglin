@@ -2,6 +2,7 @@
 #include "bTransform.h"
 #include "bGameObject.h"
 #include "bCamera.h"
+#include "bInput.h"
 
 namespace b
 {
@@ -15,6 +16,7 @@ namespace b
 		, mID(ColliderNumber++)
 		, mCollisionCount(0)
 		, mShape(eColliderType::Rectangle)
+		, bRender(false)
 	{
 	}
 
@@ -32,35 +34,46 @@ namespace b
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		mPos = tr->GetPos() + mCenter;
+
+		if (Input::GetKey(eKeyCode::TAB))
+		{
+			if (bRender)
+				bRender = false;
+			else
+				bRender = true;
+		}
 	}
 
 	void Collider::Render(HDC hdc)
 	{
-		HPEN pen = NULL;
-		if (mCollisionCount <= 0)
-			pen = CreatePen(BS_SOLID, 2, RGB(0, 255, 0));
-		else
-			pen = CreatePen(BS_SOLID, 2, RGB(255, 0, 0));
-
-		HPEN oldPen = (HPEN)SelectObject(hdc, pen);
-		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
-		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
-
-		Vector2 pos = Camera::CalculatePos(mPos);
-		if (mShape == eColliderType::Rectangle)
+		if (bRender)
 		{
-			Rectangle(hdc, pos.x, pos.y, pos.x + mSize.x, pos.y + mSize.y);
-		}
-		else if (mShape == eColliderType::Ellipse)
-		{
-			Ellipse(hdc, pos.x, pos.y, pos.x + mSize.x, pos.y + mSize.y);
-		}
+			HPEN pen = NULL;
+			if (mCollisionCount <= 0)
+				pen = CreatePen(BS_SOLID, 2, RGB(0, 255, 0));
+			else
+				pen = CreatePen(BS_SOLID, 2, RGB(255, 0, 0));
 
-		(HPEN)SelectObject(hdc, oldPen);
-		(HBRUSH)SelectObject(hdc, oldBrush);
-		DeleteObject(pen);
+			HPEN oldPen = (HPEN)SelectObject(hdc, pen);
+			HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
+			HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
 
-		mCollisionCount = 0;
+			Vector2 pos = Camera::CalculatePos(mPos);
+			if (mShape == eColliderType::Rectangle)
+			{
+				Rectangle(hdc, pos.x, pos.y, pos.x + mSize.x, pos.y + mSize.y);
+			}
+			else if (mShape == eColliderType::Ellipse)
+			{
+				Ellipse(hdc, pos.x, pos.y, pos.x + mSize.x, pos.y + mSize.y);
+			}
+
+			(HPEN)SelectObject(hdc, oldPen);
+			(HBRUSH)SelectObject(hdc, oldBrush);
+			DeleteObject(pen);
+
+			mCollisionCount = 0;
+		}
 	}
 
 	void Collider::Release()
@@ -81,5 +94,12 @@ namespace b
 	void Collider::OnCollisionExit(Collider* other)
 	{
 		GetOwner()->OnCollisionExit(other);
+	}
+
+	Vector2 Collider::GetCenterPos()
+	{
+		Vector2 pos = mPos;
+		pos += mSize * 0.5f;
+		return pos;
 	}
 }

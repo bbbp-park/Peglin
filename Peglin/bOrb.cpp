@@ -15,7 +15,7 @@ namespace b
 		, mCollider(nullptr)
 		, bShoot(false)
 		, mForce(Vector2(Vector2::One))
-		, power(20000.0f)
+		, mPower(500.0f)
 	{
 	}
 
@@ -26,7 +26,7 @@ namespace b
 	void Orb::Initialize()
 	{
 		GameObject::Initialize();
-
+		this->SetName(L"Orb");
 		mAnimator = AddComponent<Animator>();
 
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Ball\\Rock", Vector2::Zero, 0.1f);
@@ -53,11 +53,6 @@ namespace b
 		if (pos.y >= 910.0f)
 			object::Destory(this);
 
-		if (bShoot)
-		{
-
-		}
-
 		if (!bShoot && Input::GetKeyDown(eKeyCode::LBUTTON))
 		{
 			bShoot = true;
@@ -65,11 +60,12 @@ namespace b
 			Vector2 dir = Input::GetMousePos();
 			dir -= pos;
 			dir.Normalize();
-			mForce = dir * power;
-			mRigidbody->SetForce(mForce);
+			//mForce = dir;
+			mRigidbody->SetPower(mPower);
+			dir *= mRigidbody->GetPower();
+			mRigidbody->SetVelocity(dir);
+			//mRigidbody->SetForce(mForce);
 			mRigidbody->SetGravity(Vector2(0.0f, 400.0f));
-
-			power *= 0.5;
 		}
 
 		if (Input::GetKey(eKeyCode::RBUTTON))
@@ -109,8 +105,14 @@ namespace b
 
 	void Orb::OnCollisionEnter(Collider* other)
 	{
-		
-
+		if (bShoot)
+		{
+			float power = mRigidbody->GetPower() * 0.8f;
+			mRigidbody->SetPower(power);
+			//Vector2 vel = mRigidbody->GetVelocity();
+			//vel *= mResistance;
+			//mRigidbody->SetVelocity(vel);
+		}
 	}
 
 	void Orb::OnCollisionStay(Collider* other)

@@ -4,12 +4,12 @@
 #include "bImage.h"
 #include "bCollider.h"
 #include "bOrb.h"
+#include "bRigidbody.h"
 
 namespace b
 {
 	BouncerTile::BouncerTile()
-		: mOrb(nullptr)
-		, tileImage(nullptr)
+		: tileImage(nullptr)
 		, tileCol(nullptr)
 	{
 	}
@@ -35,8 +35,6 @@ namespace b
 	void BouncerTile::Update()
 	{
 		GameObject::Update();
-
-		Transform* orbTr = mOrb->GetComponent<Transform>();
 	}
 
 	void BouncerTile::Render(HDC hdc)
@@ -62,7 +60,36 @@ namespace b
 
 	void BouncerTile::OnCollisionEnter(Collider* other)
 	{
-		int a = 0;
+		Orb* orb = dynamic_cast<Orb*>(other->GetOwner());
+
+		if (orb == nullptr)
+			return;
+
+		Rigidbody* rb = orb->GetComponent<Rigidbody>();
+
+		Collider* orbCol = orb->GetComponent<Collider>();
+		Vector2 orbPos = orbCol->GetPos();
+
+		Collider* tileCol = this->GetComponent<Collider>();
+		Vector2 tilePos = tileCol->GetPos();
+
+		Vector2 fLen;
+		fLen.x = fabs(orbPos.x - tilePos.x);
+		fLen.y = fabs(orbPos.y - tilePos.y);
+
+		Vector2 fSize;
+		fSize.x = (orbCol->GetSize().x / 2.0f) + (tileCol->GetSize().x / 2.0f);
+		fSize.y = (orbCol->GetSize().y / 2.0f) + (tileCol->GetSize().y / 2.0f);
+
+		if (orb->GetIsShoot())
+		{
+			Transform* orbTr = orb->GetComponent<Transform>();
+			Vector2 pos = orbTr->GetPos();
+
+			Vector2 vel = rb->GetVelocity();
+			vel.x *= -1.0f;
+			rb->SetVelocity(vel);
+		}
 	}
 
 	void BouncerTile::OnCollisionStay(Collider* other)

@@ -2,6 +2,7 @@
 #include "bCollider.h"
 #include "bOrb.h"
 #include "bTransform.h"
+#include "bRigidbody.h"
 
 namespace b
 {
@@ -48,55 +49,25 @@ namespace b
 		Rigidbody* rb = orb->GetComponent<Rigidbody>();
 
 		Collider* orbCol = orb->GetComponent<Collider>();
-		Vector2 orbPos = orbCol->GetPos();
+		Vector2 orbPos = orbCol->GetCenterPos();
 
 		Collider* wallCol = this->GetComponent<Collider>();
-		Vector2 wallPos = wallCol->GetPos();
-		if (this->GetName() == L"LeftWall")
-			wallPos.x += wallCol->GetSize().x;
-
-		Vector2 fLen;
-		fLen.x = fabs(orbPos.x - wallPos.x);
-		fLen.y = fabs(orbPos.y - wallPos.y);
-
-		Vector2 fSize;
-		fSize.x = (orbCol->GetSize().x / 2.0f) + (wallCol->GetSize().x / 2.0f);
-		fSize.y = (orbCol->GetSize().y / 2.0f) + (wallCol->GetSize().y / 2.0f);
-
+		Vector2 wallPos = wallCol->GetCenterPos();
+		wallPos.y = 0.0f;
 		
-		if (fLen.x < fSize.x && orb->GetIsShoot())
+		if (orb->GetIsShoot())
 		{
-			Transform* orbTr = orb->GetComponent<Transform>();
-			Vector2 pos = orbTr->GetPos();
+			Vector2 dir = orbPos;
+			dir -= wallPos;
+			dir.Normalize();
 
-			if (this->GetName() == L"LeftWall")
-			{
-				pos += (fSize.x - fLen.x) + 1.0f;
-				orbTr->SetPos(pos);
-			}
+			Vector2 vel = rb->GetVelocity();
 
-			if (this->GetName() == L"RightWall")
-			{
-				pos -= (fSize.x - fLen.x) - 1.0f;
-				orbTr->SetPos(pos);
-			}
-
-			
-
+			Vector2 rVec = math::Reflect(vel, dir);
+			rVec *= rb->GetPower();
+			rVec *= -1.0f;
+			rb->SetVelocity(rVec);
 		}
-
-		/*if (fLen.y < fSize.y)
-		{
-			Transform* orbTr = orb->GetComponent<Transform>();
-			Vector2 orbPos = orbTr->GetPos();
-
-			if (orbPos.y < (220.0f + 45.0f))
-			{
-				orbPos -= (fSize.y - fLen.y) + 1.0f;
-			}
-			orbTr->SetPos(orbPos);
-		}*/
-
 	}
 
 	void Wall::OnCollisionStay(Collider* other)
