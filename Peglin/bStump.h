@@ -4,11 +4,11 @@
 namespace b
 {
 	class Animator;
-	class Monster : public GameObject
+	class Stump : public GameObject
 	{
 	public:
-		Monster();
-		~Monster();
+		Stump();
+		~Stump();
 
 		virtual void Initialize() override;
 		virtual void Update() override;

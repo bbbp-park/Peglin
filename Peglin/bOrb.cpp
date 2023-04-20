@@ -6,6 +6,7 @@
 #include "bObject.h"
 #include "bCollider.h"
 #include "bWall.h"
+#include "bPeg.h"
 
 namespace b
 {
@@ -15,7 +16,11 @@ namespace b
 		, mCollider(nullptr)
 		, bShoot(false)
 		, mForce(Vector2(Vector2::One))
-		, mPower(500.0f)
+		, mPower(DEFAULT_POWER)
+		, hitCnt(0)
+		, damage(2)
+		, critDamage(4)
+		, totalDamage(0)
 	{
 	}
 
@@ -35,8 +40,8 @@ namespace b
 
 		mCollider = AddComponent<Collider>();
 		mCollider->SetShape(eColliderType::Ellipse);
-		mCollider->SetSize(Vector2(25.0f, 25.0f));
-		mCollider->SetCenter(Vector2(-5.0f, -15.0f));
+		mCollider->SetSize(Vector2(20.0f, 20.0f));
+		mCollider->SetCenter(Vector2(-2.0f, -10.0f));
 
 		mRigidbody = AddComponent<Rigidbody>();
 		mRigidbody->SetMass(1.0f);
@@ -74,6 +79,8 @@ namespace b
 			int a = 0;
 		}
 
+		totalDamage = damage * hitCnt;
+
 		GameObject::Update();
 	}
 
@@ -95,6 +102,10 @@ namespace b
 		(HPEN)SelectObject(hdc, oldPen);
 		DeleteObject(pen);
 
+		wchar_t tDamage[50] = {};
+		swprintf_s(tDamage, 50, L"damage : %d", totalDamage);
+		TextOut(hdc, 800, 40, tDamage, wcsnlen_s(tDamage, 50));
+
 		GameObject::Render(hdc);
 	}
 
@@ -107,11 +118,20 @@ namespace b
 	{
 		if (bShoot)
 		{
-			float power = mRigidbody->GetPower() * 0.8f;
+			float power = mRigidbody->GetPower() * 0.9f;
 			mRigidbody->SetPower(power);
-			//Vector2 vel = mRigidbody->GetVelocity();
-			//vel *= mResistance;
-			//mRigidbody->SetVelocity(vel);
+			
+			if (other->GetPoint())
+			{
+				Peg* peg = dynamic_cast<Peg*>(other->GetOwner());
+
+				if (peg->GetType() == ePegType::Normal
+					|| peg->GetType() == ePegType::Crit
+					|| peg->GetType() == ePegType::Refresh)
+				{
+					hitCnt++;
+				}
+			}
 		}
 	}
 

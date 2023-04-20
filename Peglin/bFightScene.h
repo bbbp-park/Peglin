@@ -34,10 +34,11 @@ namespace b
 		Image* plunger;
 		Image* backScreen;
 
-		class Bouncer* bouncer;
-		class BouncerTile* bTile;
+		std::vector<class Bouncer*> mBouncers;
+		std::vector<class BouncerTile*> mBouncerTiles;
 
 		class Orb* mOrb;
+		std::vector<class Peg*> mPegs;
 	};
 }
 

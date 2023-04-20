@@ -71,24 +71,20 @@ namespace b
 		Vector2 orbPos = orbCol->GetPos();
 
 		Collider* tileCol = this->GetComponent<Collider>();
-		Vector2 tilePos = tileCol->GetPos();
-
-		Vector2 fLen;
-		fLen.x = fabs(orbPos.x - tilePos.x);
-		fLen.y = fabs(orbPos.y - tilePos.y);
-
-		Vector2 fSize;
-		fSize.x = (orbCol->GetSize().x / 2.0f) + (tileCol->GetSize().x / 2.0f);
-		fSize.y = (orbCol->GetSize().y / 2.0f) + (tileCol->GetSize().y / 2.0f);
+		Vector2 tilePos = tileCol->GetCenterPos();
 
 		if (orb->GetIsShoot())
 		{
-			Transform* orbTr = orb->GetComponent<Transform>();
-			Vector2 pos = orbTr->GetPos();
+			Vector2 dir = orbPos;
+			dir -= tilePos;
+			dir.Normalize();
 
 			Vector2 vel = rb->GetVelocity();
-			vel.x *= -1.0f;
-			rb->SetVelocity(vel);
+
+			Vector2 rVec = math::Reflect(vel, dir);
+			rVec *= rb->GetPower();
+			rVec *= -1.0f;
+			rb->SetVelocity(rVec);
 		}
 	}
 

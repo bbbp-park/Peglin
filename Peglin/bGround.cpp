@@ -90,8 +90,6 @@ namespace b
 		Vector2 orbPos = orbCol->GetCenterPos();
 
 		Collider* groundCol = this->GetComponent<Collider>();
-		//Vector2 groundPos = groundCol->GetPos();
-		//groundPos.y += groundCol->GetSize().y;
 		Vector2 groundPos = groundCol->GetCenterPos();
 		groundPos.x = 0.0f;
 

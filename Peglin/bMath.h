@@ -193,4 +193,12 @@ namespace b::math
 
 		return reflect;
 	}
+
+	inline static int Random(int max)
+	{
+		srand((unsigned int)time(NULL));
+		int num = rand();
+
+		return (int)num % max;
+	}
 }

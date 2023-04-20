@@ -197,7 +197,7 @@
     <ClInclude Include="bCollisionManager.h">
       <Filter>Engine\Component\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="bMonster.h">
+    <ClInclude Include="bStump.h">
       <Filter>Contents\Monster</Filter>
     </ClInclude>
     <ClInclude Include="bCamera.h">
@@ -343,7 +343,7 @@
     <ClCompile Include="bCollisionManager.cpp">
       <Filter>Engine\Component\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="bMonster.cpp">
+    <ClCompile Include="bStump.cpp">
       <Filter>Contents\Monster</Filter>
     </ClCompile>
     <ClCompile Include="bCamera.cpp">

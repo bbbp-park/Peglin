@@ -21,11 +21,13 @@ namespace b
 		void SetCenter(Vector2 center) { mCenter = center; }
 		void SetSize(Vector2 size) { mSize = size; }
 		void SetShape(eColliderType shape) { mShape = shape; }
+		void SetPoint(bool p) { point = p; }
 
 		Vector2 GetPos() { return mPos; }
 		Vector2 GetSize() { return mSize; }
 		UINT GetID() { return mID; }
 		Vector2 GetCenterPos();
+		bool GetPoint() { return point; }
 
 	private:
 		static UINT ColliderNumber;
@@ -38,6 +40,7 @@ namespace b
 
 		eColliderType mShape;
 		bool bRender;
+		bool point;
 	};
 }
 

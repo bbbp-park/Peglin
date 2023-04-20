@@ -30,7 +30,7 @@ namespace b
 		if (mousPos.y >= 900.0f || mousPos.y <= 0.0f)
 			return;
 
-		Tile* tile = object::Instantiate<Tile>(eLayerType::Tile);
+		Tile* tile = object::Instantiate<Tile>(eLayerType::BG);
 		tile->InitializeTile(mImage, index);
 
 

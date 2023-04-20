@@ -3,6 +3,7 @@
 
 namespace b
 {
+	class Image;
 	class Peg : public GameObject
 	{
 	public:
@@ -18,8 +19,20 @@ namespace b
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
-	private:
+		void SetType(ePegType type) { mType = type; }
+		ePegType GetType() { return mType; }
 
+		void deletePeg();
+		void deleteBomb();
+
+	private:
+		Collider* collider;
+		class Animator* mAnimator;
+
+		std::vector<Image*> mImages;
+		ePegType mType;
+
+		int durability;
 	};
 
 }

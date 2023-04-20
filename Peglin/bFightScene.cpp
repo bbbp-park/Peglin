@@ -3,7 +3,7 @@
 #include "bInput.h"
 #include "bSceneManager.h"
 #include "bPeglin.h"
-#include "bMonster.h"
+#include "bStump.h"
 #include "bHPbar.h"
 #include "bCollisionManager.h"
 #include "bObject.h"
@@ -15,6 +15,7 @@
 #include "bBouncer.h"
 #include "bBouncerTile.h"
 #include "bWall.h"
+#include "bPeg.h"
 
 namespace b
 {
@@ -28,7 +29,9 @@ namespace b
 		, tileSet2(nullptr)
 		, plunger(nullptr)
 		, backScreen(nullptr)
-		, bTile(nullptr)
+		, mBouncers({})
+		, mBouncerTiles({})
+		, mPegs({})
 	{
 	}
 
@@ -45,7 +48,8 @@ namespace b
 
 		object::Instantiate<Peglin>(Vector2(410.0f, 170.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
 
-		object::Instantiate<Monster>(Vector2(1000.0f, 200.0f), Vector2(3.0f, 3.0f), eLayerType::Monster);
+		object::Instantiate<Stump>(Vector2(890.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster);
+		object::Instantiate<Stump>(Vector2(1300.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster);
 
 		object::Instantiate<HPbar>(eLayerType::UI);
 		//object::Instantiate<Bag>(Vector2(140.0f, 0.0f), Vector2(2.4f, 2.4f), eLayerType::UI);
@@ -54,8 +58,159 @@ namespace b
 		object::Instantiate<Wall>(Vector2(469.0f, 250.0f), eLayerType::Wall);
 		object::Instantiate<Wall>(Vector2(1273.0f, 250.0f), eLayerType::Wall);
 
-		bouncer = object::Instantiate<Bouncer>(Vector2(800.0f, 800.0f), eLayerType::Wall);
-		bTile = object::Instantiate<BouncerTile>(Vector2(815.0f, 875.0f), eLayerType::Wall);
+
+		// peg setting
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(528.0f, 506.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(528.0f, 667.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(551.0f, 461.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(551.0f, 714.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(551.0f, 764.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(551.0f, 810.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(576.0f, 366.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(576.0f, 416.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(576.0f, 592.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(576.0f, 638.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(598.0f, 687.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(598.0f, 734.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(598.0f, 781.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(611.0f, 444.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(634.0f, 486.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(634.0f, 532.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(634.0f, 580.0f), eLayerType::Peg));
+		
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(671.0f, 379.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(671.0f, 427.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(671.0f, 711.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(671.0f, 757.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(671.0f, 804.0f), eLayerType::Peg)); 
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(695.0f, 586.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(695.0f, 664.0f), eLayerType::Peg));
+
+		
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(730.0f, 627.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(753.0f, 390.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(753.0f, 438.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(753.0f, 733.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(753.0f, 783.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(790.0f, 487.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(790.0f, 533.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(790.0f, 580.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(790.0f, 638.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(790.0f, 699.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(811.0f, 757.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(822.0f, 787.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(836.0f, 426.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(848.0f, 628.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(848.0f, 722.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(860.0f, 676.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(872.0f, 474.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(883.0f, 580.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(896.0f, 522.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(910.0f, 676.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(918.0f, 462.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(918.0f, 628.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(918.0f, 722.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(944.0f, 787.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(954.0f, 757.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(953.0f, 426.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(977.0f, 486.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(977.0f, 532.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(977.0f, 580.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(977.0f, 638.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(977.0f, 698.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1014.0f, 390.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1014.0f, 438.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1014.0f, 736.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1014.0f, 784.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1036.0f, 630.0f), eLayerType::Peg));
+
+		
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1072.0f, 586.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1072.0f, 662.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1096.0f, 380.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1096.0f, 426.0f), eLayerType::Peg)); 
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1096.0f, 711.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1096.0f, 758.0f), eLayerType::Peg)); 
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1096.0f, 804.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1132.0f, 486.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1132.0f, 534.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1132.0f, 580.0f), eLayerType::Peg));
+		
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1154.0f, 444.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1166.0f, 688.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1166.0f, 734.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1166.0f, 782.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1190.0f, 370.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1190.0f, 416.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1190.0f, 592.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1190.0f, 640.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1214.0f, 464.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1214.0f, 712.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1214.0f, 760.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1214.0f, 806.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1238.0f, 510.0f), eLayerType::Peg));
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1238.0f, 662.0f), eLayerType::Peg));
+
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(634.0f, 634.0f), eLayerType::Peg)); // bomb 17
+		mPegs[84]->SetType(ePegType::Bomb);
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(719.0f, 514.0f), eLayerType::Peg)); // bomb 25
+		mPegs[85]->SetType(ePegType::Bomb);
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1050.0f, 516.0f), eLayerType::Peg)); // bomb 62
+		mPegs[86]->SetType(ePegType::Bomb);
+		mPegs.push_back(object::Instantiate<Peg>(Vector2(1132.0f, 632.0f), eLayerType::Peg)); // bomb 73
+		mPegs[87]->SetType(ePegType::Bomb);
+
+		// bouncer setting
+		Vector2 bDiff = Vector2(15.0f, 55.0f);
+		mBouncerTiles.push_back(object::Instantiate<BouncerTile>(Vector2(595.0f + bDiff.x, 805.0f + bDiff.y), eLayerType::Wall));
+		mBouncers.push_back(object::Instantiate<Bouncer>(Vector2
+		(595.0f, 805.0f), eLayerType::Wall));
+
+		mBouncerTiles.push_back(object::Instantiate<BouncerTile>(Vector2(762.0f + bDiff.x, 805.0f + bDiff.y), eLayerType::Wall));
+		mBouncers.push_back(object::Instantiate<Bouncer>(Vector2
+		(762.0f, 805.0f), eLayerType::Wall));
+
+		mBouncerTiles.push_back(object::Instantiate<BouncerTile>(Vector2(950.0f + bDiff.x, 805.0f + bDiff.y), eLayerType::Wall));
+		mBouncers.push_back(object::Instantiate<Bouncer>(Vector2
+		(950.0f, 805.0f), eLayerType::Wall));
+
+		mBouncerTiles.push_back(object::Instantiate<BouncerTile>(Vector2(1117.0f + bDiff.x, 805.0f + bDiff.y), eLayerType::Wall));
+		mBouncers.push_back(object::Instantiate<Bouncer>(Vector2
+		(1117.0f, 805.0f), eLayerType::Wall));
 
 		forest1_bg = Resources::Load<Image>(L"forest1_bg", L"..\\Resources\\sprite\\Background\\forest_1_background.bmp");
 		forest1_tile = Resources::Load<Image>(L"forest1_tile", L"..\\Resources\\sprite\\Background\\forest_1_tile.bmp");
@@ -178,6 +333,13 @@ namespace b
 			, plunger->GetHdc(), 0, 0
 			, plunger->GetWidth(), plunger->GetHeight(), SRCCOPY);
 
+		Vector2 mousePos = Input::GetMousePos();
+		wchar_t strX[50] = {};
+		swprintf_s(strX, 50, L"x : %f", mousePos.x);
+		TextOut(hdc, 800, 0, strX, wcsnlen_s(strX, 50));
+		wchar_t strY[50] = {};
+		swprintf_s(strY, 50, L"y : %f", mousePos.y);
+		TextOut(hdc, 800, 20, strY, wcsnlen_s(strY, 50));
 
 		Scene::Render(hdc);
 
@@ -197,6 +359,7 @@ namespace b
 		CollisionManager::SetLayer(eLayerType::Ball, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Wall, true);
+		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Peg, true);
 	}
 
 	void FightScene::OnExit()

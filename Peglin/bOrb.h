@@ -28,6 +28,10 @@ namespace b
 		Collider* mCollider;
 
 		bool bShoot;
+		int hitCnt;
+		int damage;
+		int critDamage;
+		int totalDamage;
 		
 		float mPower;
 		Vector2 mForce;
