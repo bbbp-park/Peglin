@@ -7,14 +7,18 @@
 #include "bCollider.h"
 #include "bWall.h"
 #include "bPeg.h"
+#include "bBall.h"
+#include "bPeglin.h"
 
 namespace b
 {
+	int Orb::bombCnt = 0;
+	bool Orb::bShoot = false;
+
 	Orb::Orb()
 		: mAnimator(nullptr)
 		, mRigidbody(nullptr)
 		, mCollider(nullptr)
-		, bShoot(false)
 		, mForce(Vector2(Vector2::One))
 		, mPower(DEFAULT_POWER)
 		, hitCnt(0)
@@ -22,6 +26,7 @@ namespace b
 		, critDamage(4)
 		, totalDamage(0)
 	{
+		bombCnt = 0;
 	}
 
 	Orb::~Orb()
@@ -56,7 +61,12 @@ namespace b
 
 		// 오브가 떨어졌을 때
 		if (pos.y >= 910.0f)
+		{
 			object::Destory(this);
+			bShoot = false;
+			Ball::SetPower(totalDamage);
+			Peglin::SetState(Peglin::ePeglinState::ShootBomb);
+		}
 
 		if (!bShoot && Input::GetKeyDown(eKeyCode::LBUTTON))
 		{
@@ -131,6 +141,9 @@ namespace b
 				{
 					hitCnt++;
 				}
+
+				
+
 			}
 		}
 	}

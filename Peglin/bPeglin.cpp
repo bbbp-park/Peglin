@@ -12,14 +12,22 @@
 #include "bBomb.h"
 #include "bGround.h"
 #include "bBouncer.h"
+#include "bOrb.h"
+#include "bFightScene.h"
 
 namespace b
 {
+	int Peglin::hp = 100;
+	Peglin::ePeglinState Peglin::mState = Peglin::ePeglinState::Idle;
+
+	bool dontGoSwitch = false;
+	float time = 0.0f;
+
 	Peglin::Peglin()
 		: mAnimator(nullptr)
-		, mState(ePeglinState::Idle)
 		, mGround(nullptr)
 		, mOrb(nullptr)
+		, mBombs({})
 	{
 	}
 
@@ -31,11 +39,6 @@ namespace b
 	{
 		mGround = object::Instantiate<Ground>(Vector2(0.0f, 220.0f), eLayerType::Wall);
 		mGround->SetName(L"Ground");
-		/*bouncer = object::Instantiate<Bouncer>(Vector2(800.0f, 791.0f), eLayerType::Wall);
-
-		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 350.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
-
-		bouncer->SetOrb(mOrb);*/
 
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Idle", Vector2::Zero, 0.15f);
@@ -51,7 +54,7 @@ namespace b
 		mAnimator->GetCompleteEvent(L"PeglinDeath") = std::bind(&Peglin::deathCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"PeglinShoot Ball") = std::bind(&Peglin::shoot_ballCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"PeglinShoot Bomb") = std::bind(&Peglin::shoot_bombCompleteEvent, this);
-		
+
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;
 
@@ -62,23 +65,36 @@ namespace b
 	{
 		GameObject::Update();
 
-
-		switch (mState)
+		if (hp <= 0 && mState == ePeglinState::Idle)
 		{
-		case b::Peglin::ePeglinState::ShootBall:
-			shoot_ball();
-			break;
-		case b::Peglin::ePeglinState::ShootBomb:
-			shoot_bomb();
-			break;
-		case b::Peglin::ePeglinState::Death:
-			death();
-			break;
-		case b::Peglin::ePeglinState::Idle:
-			idle();
-			break;
-		default:
-			break;
+			mAnimator->Play(L"PeglinDeath", true);
+			mState = ePeglinState::Death;
+		}
+
+		if (!dontGoSwitch)
+		{
+			switch (mState)
+			{
+			case b::Peglin::ePeglinState::ShootBall:
+				time += Time::DeltaTime();
+				if (time >= 0.8f)
+					shoot_ball();
+				break;
+			case b::Peglin::ePeglinState::ShootBomb:
+				time += Time::DeltaTime();
+				if (time >= 0.8f)
+					shoot_bomb();
+				if (time >= 3.0f)
+					break;
+			case b::Peglin::ePeglinState::Death:
+				death();
+				break;
+			case b::Peglin::ePeglinState::Idle:
+				idle();
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
@@ -94,7 +110,7 @@ namespace b
 
 	void Peglin::OnCollisionEnter(Collider* other)
 	{
-		int a = 0;
+
 	}
 
 	void Peglin::OnCollisionStay(Collider* other)
@@ -105,27 +121,49 @@ namespace b
 	{
 	}
 
+	void Peglin::CalHp(int damage)
+	{
+		hp -= damage;
+	}
+
 
 	void Peglin::shoot_ball()
 	{
-		
+		dontGoSwitch = true;
+
+		if (dontGoSwitch)
+			mAnimator->Play(L"PeglinShoot Ball", true);
 	}
 
 	void Peglin::shoot_bomb()
 	{
-		
+		int bCnt = Orb::GetBombCnt();
+		dontGoSwitch = true;
+
+		if (dontGoSwitch)
+		{
+			if (bCnt > 0)
+				mAnimator->Play(L"PeglinShoot Bomb", true);
+			else
+			{
+				mState = ePeglinState::ShootBall;
+				dontGoSwitch = false;
+			}
+		}
 	}
 
 	void Peglin::death()
 	{
-		
+		//mAnimator->Play(L"PeglinDeath", true);
 	}
 
 	void Peglin::idle()
 	{
+		
+
 		if (Input::GetKeyDown(eKeyCode::Q))
 		{
-			mAnimator->Play(L"PeglinShoot Ball", true);
+			//mAnimator->Play(L"PeglinShoot Ball", false);
 			mState = ePeglinState::ShootBall;
 		}
 
@@ -137,27 +175,9 @@ namespace b
 
 		if (Input::GetKeyDown(eKeyCode::E))
 		{
-			mAnimator->Play(L"PeglinDeath", true);
-			mState = ePeglinState::Death;
+			hp = 0;
 		}
 
-		
-		//Transform* tr = GetComponent<Transform>();
-		//Vector2 pos = tr->GetPos();
-
-		//if (Input::GetKey(eKeyCode::A))
-		//	pos.x -= 100.0f * Time::DeltaTime();
-
-		//if (Input::GetKey(eKeyCode::D))
-		//	pos.x += 100.0f * Time::DeltaTime();
-
-		//if (Input::GetKey(eKeyCode::W))
-		//	pos.y -= 100.0f * Time::DeltaTime();
-
-		//if (Input::GetKey(eKeyCode::S))
-		//	pos.y += 100.0f * Time::DeltaTime();
-
-		//tr->SetPos(pos);
 	}
 
 	void Peglin::deathCompleteEvent()
@@ -170,12 +190,15 @@ namespace b
 	{
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
-		//pos.x += 40.0f;
 
 		object::Instantiate<Ball>(pos, Vector2(3.0f, 3.0f), eLayerType::Ball);
 
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;
+		dontGoSwitch = false;
+		time = 0.0f;
+
+		FightScene::IsMonsterTurn(true);
 	}
 
 	void Peglin::shoot_bombCompleteEvent()
@@ -184,12 +207,23 @@ namespace b
 		Vector2 pos = tr->GetPos();
 		pos.x += 40.0f;
 
-		Bomb* mBomb = object::Instantiate<Bomb>(pos, Vector2(3.0f, 3.0f), eLayerType::Bomb);
-		mBomb->SetName(L"Bomb");
+		int bCnt = Orb::GetBombCnt();
 
-		mGround->SetGameObject(mBomb);
+		//mBombs.resize(bCnt);
+		if (mState == ePeglinState::ShootBomb)
+		{
+			for (int i = 0; i < bCnt; i++)
+			{
+				pos.x += i * 10.0f;
+				mBombs.push_back(object::Instantiate<Bomb>(pos, Vector2(3.0f, 3.0f), eLayerType::Bomb));
+				//mBombs[i]->SetName(L"Bomb");
 
-		mAnimator->Play(L"PeglinIdle", true);
-		mState = ePeglinState::Idle;
+				mGround->SetGameObject(mBombs[i]);
+			}
+		}
+
+		mState = ePeglinState::ShootBall;
+		dontGoSwitch = false;
+		time = 0.0f;
 	}
 }

@@ -19,6 +19,9 @@
 
 namespace b
 {
+	bool FightScene::mTurn = false;
+	int FightScene::cnt = 0;
+
 	FightScene::FightScene()
 		: mPeglin(nullptr)
 		, mHPbar(nullptr)
@@ -43,8 +46,8 @@ namespace b
 	{
 		Scene::Initialize();
 
-		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
-		mOrb->SetName(L"Orb");
+		object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+		
 
 		object::Instantiate<Peglin>(Vector2(410.0f, 170.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
 
@@ -237,8 +240,13 @@ namespace b
 
 		if (Input::GetKeyDown(eKeyCode::R))
 		{
-			mOrb = object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
-			mOrb->SetName(L"Orb");
+			CreateOrb();
+		}
+
+		if (mTurn && cnt == 0)
+		{
+			CreateOrb();
+			cnt++;
 		}
 
 	}
@@ -364,5 +372,11 @@ namespace b
 
 	void FightScene::OnExit()
 	{
+	}
+
+	void FightScene::CreateOrb()
+	{
+		object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+		
 	}
 }

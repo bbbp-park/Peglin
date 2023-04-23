@@ -5,6 +5,8 @@
 
 namespace b
 {
+	bool Explosion::mEnd = false;
+
 	Explosion::Explosion()
 		: mAnimator(nullptr)
 	{
@@ -47,5 +49,6 @@ namespace b
 	void Explosion::explosionCompleteEvent()
 	{
 		object::Destory(this);
+		mEnd = true;
 	}
 }

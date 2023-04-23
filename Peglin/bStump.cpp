@@ -2,11 +2,17 @@
 #include "bTransform.h"
 #include "bAnimator.h"
 #include "bCollider.h"
+#include "bBall.h"
+#include "bFightScene.h"
 
 namespace b
 {
+	bool delay = false;
+
 	Stump::Stump()
 		: mAnimator(nullptr)
+		, mInfo()
+		, mState(eStumpState::Idle)
 	{
 	}
 
@@ -30,8 +36,11 @@ namespace b
 		mAnimator->Play(L"StumpIdle", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-15.0f, -20.0f));
+		collider->SetCenter(Vector2(0.0f, -20.0f));
 		collider->SetSize(Vector2(60.0f, 60.0f));
+
+		mInfo.hp = 200;
+		mInfo.power = 2;
 
 		GameObject::Initialize();
 	}
@@ -39,6 +48,24 @@ namespace b
 	void Stump::Update()
 	{
 		GameObject::Update();
+
+		switch (mState)
+		{
+		case b::Stump::eStumpState::Attack:
+			attack();
+			break;
+		case b::Stump::eStumpState::Death:
+			death();
+			break;
+		case b::Stump::eStumpState::Idle:
+			idle();
+			break;
+		case b::Stump::eStumpState::Move:
+			move();
+			break;
+		default:
+			break;
+		}
 	}
 
 	void Stump::Render(HDC hdc)
@@ -53,6 +80,7 @@ namespace b
 
 	void Stump::OnCollisionEnter(Collider* other)
 	{
+		
 	}
 
 	void Stump::OnCollisionStay(Collider* other)
@@ -60,6 +88,22 @@ namespace b
 	}
 
 	void Stump::OnCollisionExit(Collider* other)
+	{
+	}
+
+	void Stump::attack()
+	{
+	}
+
+	void Stump::death()
+	{
+	}
+
+	void Stump::idle()
+	{
+	}
+
+	void Stump::move()
 	{
 	}
 }

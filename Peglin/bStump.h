@@ -7,6 +7,20 @@ namespace b
 	class Stump : public GameObject
 	{
 	public:
+		enum class eStumpState
+		{
+			Idle,
+			Move,
+			Attack,
+			Death,
+		};
+
+		struct Info
+		{
+			int hp;
+			int power;
+		};
+
 		Stump();
 		~Stump();
 
@@ -20,7 +34,14 @@ namespace b
 		virtual void OnCollisionExit(Collider* other);
 
 	private:
+		void attack();
+		void death();
+		void idle();
+
+	private:
 		Animator* mAnimator;
+		Info mInfo;
+		eStumpState mState;
 	};
 }
 

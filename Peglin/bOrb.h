@@ -20,14 +20,17 @@ namespace b
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
-		bool GetIsShoot() { return bShoot; }
+		static bool GetIsShoot() { return bShoot; }
+		static void AddBombCnt() { bombCnt++; }
+		static int GetBombCnt() { return bombCnt; }
 
 	private:
 		Animator* mAnimator;
 		Rigidbody* mRigidbody;
 		Collider* mCollider;
 
-		bool bShoot;
+		static bool bShoot;
+		static int bombCnt;
 		int hitCnt;
 		int damage;
 		int critDamage;

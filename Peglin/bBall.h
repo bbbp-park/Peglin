@@ -19,10 +19,13 @@ namespace b
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
 
+		static void SetPower(int p) { power = p; }
+
 	private:
 		Image* mImage;
-		float mTime;
 		class Rigidbody* mRigidbody;
+
+		static int power;
 	};
 
 }

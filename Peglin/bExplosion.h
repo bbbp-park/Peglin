@@ -15,11 +15,14 @@ namespace b
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		static bool GetEnd() { return mEnd; }
+
 	private:
 		void explosionCompleteEvent();
 
 	private:
 		Animator* mAnimator;
+		static bool mEnd;
 	};
 }
 

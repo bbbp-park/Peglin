@@ -104,17 +104,14 @@ namespace b
 
 		if (orb->GetIsShoot())
 		{
-			if (this->GetType() != ePegType::SmallRect)
+			if (this->GetType() != ePegType::SmallRect 
+				&& this->GetType() != ePegType::Null)
 			{
 				Vector2 dir = orbPos;
 				dir -= bPos;
 				dir.Normalize();
 
 				Vector2 vel = rb->GetVelocity();
-
-				Vector2 rVec = math::Reflect(vel, dir);
-				rVec *= rb->GetPower();
-				rb->SetVelocity(rVec);
 
 				if (this->GetType() == ePegType::Bomb)
 					durability++;
@@ -132,6 +129,10 @@ namespace b
 				{
 					deletePeg();
 				}
+
+				Vector2 rVec = math::Reflect(vel, dir);
+				rVec *= rb->GetPower();
+				rb->SetVelocity(rVec);
 			}
 		}
 	}
@@ -157,7 +158,8 @@ namespace b
 		else
 		{
 			// ³ª¸ÓÁö
-			this->SetType(ePegType::SmallRect);
+			if (this->GetType() != ePegType::Null)
+				this->SetType(ePegType::SmallRect);
 		}
 	}
 
@@ -169,6 +171,7 @@ namespace b
 		pos.y += 155.0f;
 		object::Instantiate<Explosion>(pos, Vector2(0.4f, 0.4f), eLayerType::Effect);
 
+		Orb::AddBombCnt();
 		this->SetType(ePegType::Null);
 	}
 }

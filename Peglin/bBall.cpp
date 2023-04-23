@@ -9,6 +9,8 @@
 
 namespace b
 {
+	int Ball::power = 0;
+
 	Ball::Ball()
 		: mImage(nullptr)
 		, mRigidbody(nullptr)
