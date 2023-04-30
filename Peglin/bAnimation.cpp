@@ -75,6 +75,8 @@ namespace b
           , UINT coulmn, UINT row, UINT spriteLength
           , Vector2 offset, float duration)
      {
+
+          
           mSheetImage = sheet;
 
           //UINT coulmn = mSheetImage->GetWidth() / size.x;

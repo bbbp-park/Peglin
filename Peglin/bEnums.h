@@ -38,7 +38,7 @@ enum class eComponentType
 	End,
 };
 
-enum class eColliderType
+enum class eColliderShape
 {
 	Ellipse,
 	Rectangle,

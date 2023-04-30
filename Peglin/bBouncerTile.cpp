@@ -81,10 +81,11 @@ namespace b
 
 			Vector2 vel = rb->GetVelocity();
 
-			Vector2 rVec = math::Reflect(vel, dir);
-			rVec *= rb->GetPower();
-			rVec *= -1.0f;
-			rb->SetVelocity(rVec);
+			//Vector2 rVec = math::Reflect(vel, dir);
+			//rVec *= rb->GetPower();
+			//rVec *= -1.0f;
+			vel.x *= -1.0f;
+			rb->SetVelocity(vel);
 		}
 	}
 

@@ -17,7 +17,6 @@ namespace b
 		mbGround = false;
 		mGravity = Vector2(0.0f, 400.0f);
 		mFriction = 100.0f;
-		mPower = 0.0f;
 	}
 
 	Rigidbody::~Rigidbody()

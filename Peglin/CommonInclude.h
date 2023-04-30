@@ -28,4 +28,4 @@
 #define TILE_SIZE_X 64
 #define TILE_SIZE_Y 64
 
-#define DEFAULT_POWER 500.0f
+#define DEFAULT_POWER 450.0f

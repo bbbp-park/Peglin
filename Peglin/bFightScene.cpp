@@ -3,7 +3,7 @@
 #include "bInput.h"
 #include "bSceneManager.h"
 #include "bPeglin.h"
-#include "bStump.h"
+#include "bMonster.h"
 #include "bHPbar.h"
 #include "bCollisionManager.h"
 #include "bObject.h"
@@ -19,8 +19,10 @@
 
 namespace b
 {
-	bool FightScene::mTurn = false;
+	bool FightScene::mTurn = true;
 	int FightScene::cnt = 0;
+
+	int i = 0;
 
 	FightScene::FightScene()
 		: mPeglin(nullptr)
@@ -35,6 +37,7 @@ namespace b
 		, mBouncers({})
 		, mBouncerTiles({})
 		, mPegs({})
+		, mMonsters({})
 	{
 	}
 
@@ -51,8 +54,10 @@ namespace b
 
 		object::Instantiate<Peglin>(Vector2(410.0f, 170.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
 
-		object::Instantiate<Stump>(Vector2(890.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster);
-		object::Instantiate<Stump>(Vector2(1300.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster);
+		mMonsters.push_back(object::Instantiate<Monster>(Vector2(890.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster));
+		mMonsters[0]->SetMonsterType(Monster::eMonsterType::Stump);
+		mMonsters.push_back(object::Instantiate<Monster>(Vector2(1300.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster));
+		mMonsters[1]->SetMonsterType(Monster::eMonsterType::Stump);
 
 		object::Instantiate<HPbar>(eLayerType::UI);
 		//object::Instantiate<Bag>(Vector2(140.0f, 0.0f), Vector2(2.4f, 2.4f), eLayerType::UI);
@@ -243,10 +248,51 @@ namespace b
 			CreateOrb();
 		}
 
-		if (mTurn && cnt == 0)
+		if (mTurn && cnt == 1)
 		{
 			CreateOrb();
-			cnt++;
+			cnt--;
+		}
+		
+		if (!mTurn && cnt == 0)
+		{
+			//int idx = 0;
+			//while (true)
+			//{
+			//	if (idx != 0)
+			//	{
+			//		if (mMonsters[idx - 1]->GetEventComplete())
+			//		{
+			//			mMonsters[idx]->StartEvent();
+			//			idx++;
+			//		}
+			//	}
+			//	else
+			//	{
+			//		mMonsters[idx]->StartEvent();
+			//	}
+
+			//	if (idx == mMonsters.size())
+			//		break;
+			//}
+
+			if (mMonsters[i]->GetEventComplete())
+				i++;
+
+			if (i < mMonsters.size())
+				mMonsters[i]->StartEvent();
+
+			if (mMonsters[mMonsters.size() - 1]->GetEventComplete())
+			{
+				cnt++;
+				mTurn = true;
+				i = 0;
+
+				for (size_t i = 0; i < mMonsters.size(); i++)
+				{
+					mMonsters[i]->SetEventComplete(false);
+				}
+			}
 		}
 
 	}
@@ -363,7 +409,7 @@ namespace b
 	{
 		Camera::StartFadeIn();
 		
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		//CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Ball, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Wall, true);

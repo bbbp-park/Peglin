@@ -44,7 +44,7 @@ namespace b
 		mAnimator->Play(L"BallRock", true);
 
 		mCollider = AddComponent<Collider>();
-		mCollider->SetShape(eColliderType::Ellipse);
+		mCollider->SetShape(eColliderShape::Ellipse);
 		mCollider->SetSize(Vector2(20.0f, 20.0f));
 		mCollider->SetCenter(Vector2(-2.0f, -10.0f));
 
@@ -81,12 +81,7 @@ namespace b
 			mRigidbody->SetVelocity(dir);
 			//mRigidbody->SetForce(mForce);
 			mRigidbody->SetGravity(Vector2(0.0f, 400.0f));
-		}
 
-		if (Input::GetKey(eKeyCode::RBUTTON))
-		{
-			Vector2 mouse = Input::GetMousePos();
-			int a = 0;
 		}
 
 		totalDamage = damage * hitCnt;
@@ -128,23 +123,43 @@ namespace b
 	{
 		if (bShoot)
 		{
-			float power = mRigidbody->GetPower() * 0.9f;
-			mRigidbody->SetPower(power);
-			
-			if (other->GetPoint())
+			Collider::eColliderType type = other->GetColliderType();
+
+			if (type != Collider::eColliderType::null)
 			{
-				Peg* peg = dynamic_cast<Peg*>(other->GetOwner());
+				float power = mRigidbody->GetPower() * 0.9f;
+				mRigidbody->SetPower(power);
 
-				if (peg->GetType() == ePegType::Normal
-					|| peg->GetType() == ePegType::Crit
-					|| peg->GetType() == ePegType::Refresh)
-				{
+				if (type == Collider::eColliderType::peg)
 					hitCnt++;
-				}
-
-				
-
 			}
+
+			//if (other->GetColliderType())
+			//{
+			//	float power = mRigidbody->GetPower() * 0.9f;
+			//	mRigidbody->SetPower(power);
+
+			//	Peg* peg = dynamic_cast<Peg*>(other->GetOwner());
+
+			//	if (peg->GetType() == ePegType::Normal)
+			//		hitCnt++;
+			//}
+			//
+			
+			//if (other->GetPoint())
+			//{
+			//	Peg* peg = dynamic_cast<Peg*>(other->GetOwner());
+
+			//	if (peg->GetType() == ePegType::Normal
+			//		|| peg->GetType() == ePegType::Crit
+			//		|| peg->GetType() == ePegType::Refresh)
+			//	{
+			//		hitCnt++;
+			//	}
+
+			//	
+
+			//}
 		}
 	}
 

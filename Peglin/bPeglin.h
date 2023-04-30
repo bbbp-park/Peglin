@@ -49,6 +49,9 @@ namespace b
 
 		class Orb* mOrb;
 		std::vector<class Bomb*> mBombs;
+
+		bool delay;
+
 	};
 }
 

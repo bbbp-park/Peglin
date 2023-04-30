@@ -6,6 +6,7 @@
 #include "bObject.h"
 #include "bCollider.h"
 #include "bRigidbody.h"
+#include "bFightScene.h"
 
 namespace b
 {
@@ -33,6 +34,7 @@ namespace b
 		collider->SetSize(Vector2(35.0f, 35.0f));
 
 		mRigidbody = AddComponent<Rigidbody>();
+		mRigidbody->SetGravity(Vector2::Zero);
 		mRigidbody->SetMass(1.0f);
 
 		GameObject::Initialize();
@@ -47,7 +49,7 @@ namespace b
 		velocity.x += 100.0f;
 
 		mRigidbody->SetVelocity(velocity);
-		mRigidbody->SetGravity(Vector2::Zero);
+		
 	}
 
 	void Ball::Render(HDC hdc)
@@ -72,6 +74,8 @@ namespace b
 	void Ball::OnCollisionEnter(Collider* other)
 	{
 		object::Destory(this);
+
+		FightScene::SetPlayerTurn(false);
 	}
 
 	void Ball::OnCollisionStay(Collider* other)

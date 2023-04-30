@@ -15,9 +15,9 @@ namespace b
 		, mPos(Vector2::Zero)
 		, mID(ColliderNumber++)
 		, mCollisionCount(0)
-		, mShape(eColliderType::Rectangle)
+		, mShape(eColliderShape::Rectangle)
 		, bRender(true)
-		, point(false)
+		, mType(eColliderType::null)
 	{
 	}
 
@@ -60,11 +60,11 @@ namespace b
 			HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
 
 			Vector2 pos = Camera::CalculatePos(mPos);
-			if (mShape == eColliderType::Rectangle)
+			if (mShape == eColliderShape::Rectangle)
 			{
 				Rectangle(hdc, pos.x, pos.y, pos.x + mSize.x, pos.y + mSize.y);
 			}
-			else if (mShape == eColliderType::Ellipse)
+			else if (mShape == eColliderShape::Ellipse)
 			{
 				Ellipse(hdc, pos.x, pos.y, pos.x + mSize.x, pos.y + mSize.y);
 			}

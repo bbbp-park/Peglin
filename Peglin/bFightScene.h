@@ -21,8 +21,11 @@ namespace b
 		virtual void OnExit() override;
 
 		static void CreateOrb();
-		static void IsMonsterTurn(bool turn) { mTurn = turn; }
+		static void SetPlayerTurn(bool turn) { mTurn = turn; }
 		static void SetCnt(int n) { cnt = n; }
+
+		// false = monster turn, true = player turn
+		static bool GetPlayerTurn() { return mTurn; }
 
 	private:
 		Peglin* mPeglin;
@@ -41,6 +44,7 @@ namespace b
 		std::vector<class BouncerTile*> mBouncerTiles;
 
 		std::vector<class Peg*> mPegs;
+		std::vector<class Monster*> mMonsters;
 
 		static bool mTurn;
 		static int cnt;

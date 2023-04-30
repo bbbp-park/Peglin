@@ -41,10 +41,10 @@ namespace b
 		//mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Ball\\Bomb\\Hit bomb", Vector2::Zero, 0.1f);
 
 		collider = AddComponent<Collider>();
-		collider->SetShape(eColliderType::Ellipse);
+		collider->SetShape(eColliderShape::Ellipse);
 		collider->SetCenter(Vector2(0.0f, 0.0f));
 		collider->SetSize(Vector2(mImages[(UINT)mType]->GetWidth() * 3, mImages[(UINT)mType]->GetHeight() * 3));
-		collider->SetPoint(true);
+		collider->SetColliderType(Collider::eColliderType::peg);
 	}
 
 	void Peg::Update()
@@ -63,6 +63,7 @@ namespace b
 		{
 			mImages[(UINT)ePegType::Bomb] = Resources::Load<Image>(L"BombPeg0", L"..\\Resources\\sprite\\Peg\\Bomb Peg0.bmp");
 		}
+
 	}
 
 	void Peg::Render(HDC hdc)
@@ -102,39 +103,41 @@ namespace b
 		Collider* bCol = this->GetComponent<Collider>();
 		Vector2 bPos = bCol->GetCenterPos();
 
+		if (this->GetType() == ePegType::SmallRect
+			|| this->GetType() == ePegType::Null)
+			return;
+
 		if (orb->GetIsShoot())
 		{
-			if (this->GetType() != ePegType::SmallRect 
-				&& this->GetType() != ePegType::Null)
+
+			Vector2 dir = orbPos;
+			dir -= bPos;
+			dir.Normalize();
+
+			Vector2 vel = rb->GetVelocity();
+
+			if (this->GetType() == ePegType::Bomb)
+				durability++;
+
+			if (this->GetType() == ePegType::Bomb)
 			{
-				Vector2 dir = orbPos;
-				dir -= bPos;
-				dir.Normalize();
-
-				Vector2 vel = rb->GetVelocity();
-
-				if (this->GetType() == ePegType::Bomb)
-					durability++;
-				
-				if (this->GetType() == ePegType::Bomb)
+				// 气藕 其弊 气惯
+				if (durability >= 2)
 				{
-					// 气藕 其弊 气惯
-					if (durability >= 2)
-					{
-						deleteBomb();
-						rb->SetPower(DEFAULT_POWER + 300.0f);
-					}
+					deleteBomb();
+					rb->SetPower(DEFAULT_POWER);
 				}
-				else if (this->GetType() != ePegType::SmallRect)
-				{
-					deletePeg();
-				}
-
-				Vector2 rVec = math::Reflect(vel, dir);
-				rVec *= rb->GetPower();
-				rb->SetVelocity(rVec);
 			}
+			else if (this->GetType() != ePegType::SmallRect)
+			{
+				deletePeg();
+			}
+
+			Vector2 rVec = math::Reflect(vel, dir);
+			rVec *= rb->GetPower();
+			rb->SetVelocity(rVec);
 		}
+
 	}
 
 	void Peg::OnCollisionStay(Collider* other)
@@ -161,6 +164,8 @@ namespace b
 			if (this->GetType() != ePegType::Null)
 				this->SetType(ePegType::SmallRect);
 		}
+
+		this->GetComponent<Collider>()->SetColliderType(Collider::eColliderType::null);
 	}
 
 	void Peg::deleteBomb()
@@ -173,5 +178,6 @@ namespace b
 
 		Orb::AddBombCnt();
 		this->SetType(ePegType::Null);
+		this->GetComponent<Collider>()->SetColliderType(Collider::eColliderType::null);
 	}
 }

@@ -20,7 +20,7 @@ namespace b
 	{
 		mCollider = AddComponent<Collider>();
 		mCollider->SetSize(Vector2(50.0f, 680.0f));
-
+		mCollider->SetColliderType(Collider::eColliderType::wall);
 		GameObject::Initialize();
 	}
 
@@ -62,11 +62,11 @@ namespace b
 			dir.Normalize();
 
 			Vector2 vel = rb->GetVelocity();
-
-			Vector2 rVec = math::Reflect(vel, dir);
-			rVec *= rb->GetPower();
-			rVec *= -1.0f;
-			rb->SetVelocity(rVec);
+			vel.x *= -1.0f;
+			//Vector2 rVec = math::Reflect(vel, dir);
+			//rVec *= rb->GetPower();
+			//rVec *= -1.0f;
+			rb->SetVelocity(vel);
 		}
 	}
 

@@ -20,7 +20,6 @@ namespace b
 	int Peglin::hp = 100;
 	Peglin::ePeglinState Peglin::mState = Peglin::ePeglinState::Idle;
 
-	bool dontGoSwitch = false;
 	float time = 0.0f;
 
 	Peglin::Peglin()
@@ -28,6 +27,7 @@ namespace b
 		, mGround(nullptr)
 		, mOrb(nullptr)
 		, mBombs({})
+		, delay(false)
 	{
 	}
 
@@ -71,7 +71,7 @@ namespace b
 			mState = ePeglinState::Death;
 		}
 
-		if (!dontGoSwitch)
+		if (!delay)
 		{
 			switch (mState)
 			{
@@ -129,25 +129,25 @@ namespace b
 
 	void Peglin::shoot_ball()
 	{
-		dontGoSwitch = true;
+		delay = true;
 
-		if (dontGoSwitch)
+		if (delay)
 			mAnimator->Play(L"PeglinShoot Ball", true);
 	}
 
 	void Peglin::shoot_bomb()
 	{
 		int bCnt = Orb::GetBombCnt();
-		dontGoSwitch = true;
+		delay = true;
 
-		if (dontGoSwitch)
+		if (delay)
 		{
 			if (bCnt > 0)
 				mAnimator->Play(L"PeglinShoot Bomb", true);
 			else
 			{
 				mState = ePeglinState::ShootBall;
-				dontGoSwitch = false;
+				delay = false;
 			}
 		}
 	}
@@ -195,10 +195,10 @@ namespace b
 
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;
-		dontGoSwitch = false;
+		delay = false;
 		time = 0.0f;
 
-		FightScene::IsMonsterTurn(true);
+		/*FightScene::GetPlayerTurn(true);*/
 	}
 
 	void Peglin::shoot_bombCompleteEvent()
@@ -223,7 +223,7 @@ namespace b
 		}
 
 		mState = ePeglinState::ShootBall;
-		dontGoSwitch = false;
+		delay = false;
 		time = 0.0f;
 	}
 }

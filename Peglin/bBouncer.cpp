@@ -26,10 +26,10 @@ namespace b
 
 		bouncerCol = AddComponent<Collider>();
 		//bouncerCol->SetSize(Vector2(bouncerImage->GetWidth() * 3 + 10, bouncerImage->GetHeight() * 3 + 10));
-		bouncerCol->SetShape(eColliderType::Ellipse);
+		bouncerCol->SetShape(eColliderShape::Ellipse);
 		bouncerCol->SetCenter(Vector2(-2.0f, 0.0f));
 		bouncerCol->SetSize(Vector2(bouncerImage->GetWidth() * 3, bouncerImage->GetHeight() * 3));
-
+		bouncerCol->SetColliderType(Collider::eColliderType::bouncer);
 		
 		GameObject::Initialize();
 	}

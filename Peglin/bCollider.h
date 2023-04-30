@@ -6,6 +6,15 @@ namespace b
 	class Collider : public Component
 	{
 	public:
+		enum class eColliderType
+		{
+			peg,
+			bouncer,
+			wall,
+			bomb,
+			null,
+		};
+
 		Collider();
 		~Collider();
 
@@ -20,14 +29,14 @@ namespace b
 
 		void SetCenter(Vector2 center) { mCenter = center; }
 		void SetSize(Vector2 size) { mSize = size; }
-		void SetShape(eColliderType shape) { mShape = shape; }
-		void SetPoint(bool p) { point = p; }
+		void SetShape(eColliderShape shape) { mShape = shape; }
+		void SetColliderType(eColliderType type) { mType = type; }
 
 		Vector2 GetPos() { return mPos; }
 		Vector2 GetSize() { return mSize; }
 		UINT GetID() { return mID; }
 		Vector2 GetCenterPos();
-		bool GetPoint() { return point; }
+		eColliderType GetColliderType() { return mType; }
 
 	private:
 		static UINT ColliderNumber;
@@ -38,9 +47,9 @@ namespace b
 		Vector2 mSize;
 		Vector2 mPos;
 
-		eColliderType mShape;
+		eColliderShape mShape;
 		bool bRender;
-		bool point;
+		eColliderType mType;
 	};
 }
 
