@@ -2,11 +2,14 @@
 #include "bResources.h"
 #include "bInput.h"
 #include "bSceneManager.h"
+#include "bObject.h"
+#include "bText.h"
 
 namespace b
 {
 	EndingScene::EndingScene()
 		: endScreen(nullptr)
+		, mText(nullptr)
 	{
 	}
 
@@ -20,32 +23,28 @@ namespace b
 		
 		endScreen = Resources::Load<Image>(L"endScreen", L"..\\Resources\\sprite\\Background\\endscreen2.bmp");
 
+		mText = object::Instantiate<Text>(Vector2(800.0f, 100.0f), eLayerType::UI);
+		wchar_t str[50] = L"½£ ¿Ï·á!";
+		mText->SetText(*str);
+		mText->SetIsChange(false);
+		mText->SetTextHeight(80);
+
 	}
 
 	void EndingScene::Update()
 	{
-		if (Input::GetKeyState(eKeyCode::O) == eKeyState::Down)
-		{
-			SceneManager::LoadScene(eSceneType::Fight);
-		}
-
-		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
-		{
-			SceneManager::LoadScene(eSceneType::Title);
-		}
-
 		Scene::Update();
 	}
 
 	void EndingScene::Render(HDC hdc)
 	{
-		Scene::Render(hdc);
-
 		StretchBlt(hdc, 0, 0
 			, 1600
 			, 900
 			, endScreen->GetHdc(), 0, 0
 			, endScreen->GetWidth(), endScreen->GetHeight(), SRCCOPY);
+
+		Scene::Render(hdc);
 	}
 
 	void EndingScene::Release()

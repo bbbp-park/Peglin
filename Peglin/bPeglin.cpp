@@ -27,7 +27,6 @@ namespace b
 		, mOrb(nullptr)
 		, mBombs({})
 		, hpBar(nullptr)
-		//, hp(100)
 		, maxHp(100)
 		, delay(false)
 	{

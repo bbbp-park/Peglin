@@ -234,22 +234,12 @@ namespace b
 	{
 		Scene::Update();
 
-		if (Input::GetKeyState(eKeyCode::O) == eKeyState::Down)
-		{
-			SceneManager::LoadScene(eSceneType::Map);
-		}
-
-		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
-		{
-			SceneManager::LoadScene(eSceneType::Ending);
-		}
-
 		if (isClear)
 		{
 			mTime += Time::DeltaTime();
 			if (mTime >= 2.0f)
 			{
-				SceneManager::LoadScene(eSceneType::Map);
+				SceneManager::LoadScene(eSceneType::Ending);
 				//return;
 			}
 		}
@@ -273,11 +263,6 @@ namespace b
 				cnt++;
 				mTurn = true;
 				i = 0;
-
-				/*for (size_t i = 0; i < mMonsters.size(); i++)
-				{
-					mMonsters[i]->SetEventComplete(false);
-				}*/
 
 				for (auto mon : mMonsters)
 				{
@@ -391,14 +376,6 @@ namespace b
 			, plunger->GetHdc(), 0, 0
 			, plunger->GetWidth(), plunger->GetHeight(), SRCCOPY);
 
-		/*Vector2 mousePos = Input::GetMousePos();
-		wchar_t strX[50] = {};
-		swprintf_s(strX, 50, L"x : %f", mousePos.x);
-		TextOut(hdc, 800, 0, strX, wcsnlen_s(strX, 50));
-		wchar_t strY[50] = {};
-		swprintf_s(strY, 50, L"y : %f", mousePos.y);
-		TextOut(hdc, 800, 20, strY, wcsnlen_s(strY, 50));*/
-
 		Scene::Render(hdc);
 
 		DeleteObject(oldBrush);
@@ -413,7 +390,6 @@ namespace b
 	{
 		Camera::StartFadeIn();
 		
-		//CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Ball, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Wall, true);

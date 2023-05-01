@@ -70,7 +70,6 @@ namespace b
 	{
 		Vector2 velocity = mRigidbody->GetVelocity();
 
-		//velocity = Vector2::Zero;
 		velocity.x = 0.0f;
 		mRigidbody->SetVelocity(velocity);
 

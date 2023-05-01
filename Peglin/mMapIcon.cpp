@@ -11,6 +11,7 @@ namespace b
 		, mImages({})
 		, mType(eIconType::Skull)
 		, mPos(Vector2::Zero)
+		, lockPos(Vector2::Zero)
 	{
 	}
 
@@ -24,9 +25,6 @@ namespace b
 		mImages.push_back(Resources::Load<Image>(L"moleIcon", L"..\\Resources\\sprite\\Background\\Mole_map_icon.bmp"));
 
 		mImage = mImages[0];
-
-		Transform* tr = GetComponent<Transform>();
-		mPos = tr->GetPos();
 	}
 
 	void MapIcon::Update()
@@ -36,23 +34,16 @@ namespace b
 
 		if (mType == eIconType::Mole)
 			mImage = mImages[(UINT)eIconType::Mole];
-
-		/*Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-		pos = Camera::CalculatePos(pos);
-		tr->SetPos(pos);*/
-		//Vector2 mPos;
-		mPos = Vector2(800, 600);
-		mPos = Camera::CalculatePos(mPos);
 		Transform* tr = GetComponent<Transform>();
+		
+		mPos = lockPos;
+		mPos = Camera::CalculatePos(mPos);
 		tr->SetPos(mPos);
+
 	}
 
 	void MapIcon::Render(HDC hdc)
 	{
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-
 		TransparentBlt(hdc, mPos.x, mPos.y
 			, mImage->GetWidth() * 4.0f
 			, mImage->GetHeight() * 4.0f

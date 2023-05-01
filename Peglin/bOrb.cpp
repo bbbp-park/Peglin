@@ -104,10 +104,6 @@ namespace b
 		(HPEN)SelectObject(hdc, oldPen);
 		DeleteObject(pen);
 
-		/*wchar_t tDamage[50] = {};
-		swprintf_s(tDamage, 50, L"damage : %d", totalDamage);
-		TextOut(hdc, 800, 40, tDamage, wcsnlen_s(tDamage, 50));*/
-
 		GameObject::Render(hdc);
 	}
 
@@ -130,33 +126,6 @@ namespace b
 				if (type == eColliderType::peg)
 					hitCnt++;
 			}
-
-			//if (other->GetColliderType())
-			//{
-			//	float power = mRigidbody->GetPower() * 0.9f;
-			//	mRigidbody->SetPower(power);
-
-			//	Peg* peg = dynamic_cast<Peg*>(other->GetOwner());
-
-			//	if (peg->GetType() == ePegType::Normal)
-			//		hitCnt++;
-			//}
-			//
-			
-			//if (other->GetPoint())
-			//{
-			//	Peg* peg = dynamic_cast<Peg*>(other->GetOwner());
-
-			//	if (peg->GetType() == ePegType::Normal
-			//		|| peg->GetType() == ePegType::Crit
-			//		|| peg->GetType() == ePegType::Refresh)
-			//	{
-			//		hitCnt++;
-			//	}
-
-			//	
-
-			//}
 		}
 	}
 

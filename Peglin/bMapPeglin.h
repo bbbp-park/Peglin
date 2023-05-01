@@ -11,6 +11,7 @@ namespace b
 		{
 			Move,
 			Idle,
+			Pass,
 		};
 
 		MapPeglin();
@@ -24,10 +25,16 @@ namespace b
 	private:
 		void move();
 		void idle();
+		void pass();
 
 	private:
 		Animator* mAnimator;
 		eMapPeglinState mState;
+
+		class Rigidbody* mRigidbody;
+		Vector2 target;
+		Vector2 dir;
+		float mTime;
 	};
 
 }

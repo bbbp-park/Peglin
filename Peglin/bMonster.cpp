@@ -14,7 +14,6 @@
 namespace b
 {
 	bool isMove = false;
-	//Monster::Info Monster::mInfo;
 
 	Monster::Monster()
 		: mAnimator(nullptr)
@@ -26,7 +25,7 @@ namespace b
 		, bombCnt(0)
 	{
 		// stump
-		mInfo.maxHp = 1;
+		mInfo.maxHp = 200;
 		mInfo.hp = mInfo.maxHp;
 		mInfo.power = 2;
 	}
@@ -96,8 +95,6 @@ namespace b
 					object::Destory(hpBar);
 					this->SetState(eState::Death);
 					return;
-					//object::Destory(this);
-					//mState = eMonsterState::None;
 				}
 			}
 		}
@@ -137,11 +134,6 @@ namespace b
 			Ball* ball = dynamic_cast<Ball*>(other->GetOwner());
 			int power = ball->GetPower();
 			mInfo.hp -= power;
-
-			//if (mInfo.hp <= 0)
-			//{
-			//	mAnimator->Play(L"StumpDie", true);
-			//}
 		}
 	}
 
@@ -204,14 +196,11 @@ namespace b
 		Vector2 pos = tr->GetPos();
 		Vector2 peglinPos = Vector2(450.0f, 200.0f);
 		distance = pos - peglinPos;
-		//Sleep(idx * 2000);
 
 			if (mType == eMonsterType::Stump)
 			{
 				if (mState == eMonsterState::Dead)
 				{
-					/*if (mInfo.hp < 0)
-						object::Destory(this);*/
 					eventComplete = true;
 					return;
 				}
@@ -249,7 +238,6 @@ namespace b
 
 	void Monster::idle()
 	{
-		//mAnimator->Play(L"StumpIdle", true);
 	}
 
 	void Monster::move()

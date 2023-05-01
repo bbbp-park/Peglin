@@ -76,7 +76,6 @@ namespace b
 	void Ball::OnCollisionEnter(Collider* other)
 	{
 		object::Destory(this);
-		//Monster::CalHp(power);
 		FightScene::SetPlayerTurn(false);
 	}
 

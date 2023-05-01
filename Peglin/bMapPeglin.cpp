@@ -4,10 +4,18 @@
 #include "bResources.h"
 #include "bInput.h"
 #include "bTime.h"
+#include "bRigidbody.h"
+#include "bSceneManager.h"
 
 namespace b
 {
 	MapPeglin::MapPeglin()
+		: mAnimator(nullptr)
+		, mState(eMapPeglinState::Idle)
+		, mRigidbody(nullptr)
+		, target(Vector2::Zero)
+		, dir(Vector2::Zero)
+		, mTime(0.0f)
 	{
 	}
 
@@ -25,6 +33,11 @@ namespace b
 
 		mState = eMapPeglinState::Idle;
 
+		mRigidbody = AddComponent<Rigidbody>();
+		mRigidbody->SetMass(1.0f);
+		mRigidbody->SetGravity(Vector2::Zero);
+		mRigidbody->SetGround(false);
+
 		GameObject::Initialize();
 	}
 
@@ -40,14 +53,20 @@ namespace b
 		case b::MapPeglin::eMapPeglinState::Idle:
 			idle();
 			break;
+		case b::MapPeglin::eMapPeglinState::Pass:
+			pass();
+			break;
 		default:
 			break;
 		}
+
 	}
 
 	void MapPeglin::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
+
+		// 820 625
 	}
 
 	void MapPeglin::Release()
@@ -57,42 +76,53 @@ namespace b
 
 	void MapPeglin::move()
 	{
-		if (Input::GetKeyUp(eKeyCode::W)
-			|| Input::GetKeyUp(eKeyCode::D)
-			|| Input::GetKeyUp(eKeyCode::S)
-			|| Input::GetKeyUp(eKeyCode::A))
-		{
-			mState = eMapPeglinState::Idle;
-			mAnimator->Play(L"PeglinIdle", true);
-		}
-
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
+		Vector2 vel = mRigidbody->GetVelocity();
+		vel -= dir * 5;
 
-		if (Input::GetKey(eKeyCode::A))
-			pos.x -= 100.0f * Time::DeltaTime();
+		mRigidbody->SetVelocity(vel);
 
-		if (Input::GetKey(eKeyCode::D))
-			pos.x += 100.0f * Time::DeltaTime();
-
-		if (Input::GetKey(eKeyCode::W))
-			pos.y -= 100.0f * Time::DeltaTime();
-
-		if (Input::GetKey(eKeyCode::S))
-			pos.y += 100.0f * Time::DeltaTime();
-
-		tr->SetPos(pos);
+		if (pos.x >= 795 && pos.x <= 815
+			&& pos.y >= 580 && pos.y <= 595)
+		{
+			mAnimator->Play(L"PeglinIdle", true);
+			mState = eMapPeglinState::Idle;
+			vel = Vector2::Zero;
+			mRigidbody->SetVelocity(Vector2::Zero);
+			mState = eMapPeglinState::Pass;
+		}
 	}
 
 	void MapPeglin::idle()
 	{
-		if (Input::GetKeyDown(eKeyCode::W)
-			|| Input::GetKeyDown(eKeyCode::A)
-			|| Input::GetKeyDown(eKeyCode::S)
-			|| Input::GetKeyDown(eKeyCode::D))
+		if (Input::GetKeyDown(eKeyCode::LBUTTON))
 		{
-			mState = eMapPeglinState::Move;
-			mAnimator->Play(L"PeglinMove", true);
+			Vector2 mousePos = Input::GetMousePos();
+
+			if (mousePos.x >= 785 && mousePos.x <= 860
+				&& mousePos.y >= 580 && mousePos.y <= 660)
+			{
+				mAnimator->Play(L"PeglinMove", true);
+				Transform* tr = GetComponent<Transform>();
+				Vector2 pos = tr->GetPos();
+				target = Vector2(805.0f, 590.0f);
+				dir = pos - target;
+				dir.Normalize();
+				mRigidbody->SetVelocity(dir * 100);
+				mState = eMapPeglinState::Move;
+				mTime = 0.0f;
+			}
+		}
+	}
+
+	void MapPeglin::pass()
+	{
+		mTime += Time::DeltaTime();
+
+		if (mTime >= 1.5f)
+		{
+			SceneManager::LoadScene(eSceneType::Fight);
 		}
 	}
 }

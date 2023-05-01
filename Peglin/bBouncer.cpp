@@ -25,7 +25,6 @@ namespace b
 		bouncerImage = Resources::Load<Image>(L"Bouncer", L"..\\Resources\\sprite\\Background\\bouncer.bmp");
 
 		bouncerCol = AddComponent<Collider>();
-		//bouncerCol->SetSize(Vector2(bouncerImage->GetWidth() * 3 + 10, bouncerImage->GetHeight() * 3 + 10));
 		bouncerCol->SetShape(eColliderShape::Ellipse);
 		bouncerCol->SetCenter(Vector2(-2.0f, 0.0f));
 		bouncerCol->SetSize(Vector2(bouncerImage->GetWidth() * 3, bouncerImage->GetHeight() * 3));

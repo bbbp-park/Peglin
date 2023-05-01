@@ -20,7 +20,7 @@ namespace b
 	void Trees::Initialize()
 	{
 		treeTop = Resources::Load<Image>(L"treeTop", L"..\\Resources\\sprite\\Background\\treetop_.bmp");
-		treeBottom = Resources::Load<Image>(L"treeTop", L"..\\Resources\\sprite\\Background\\treetop_.bmp");
+		treeBottom = Resources::Load<Image>(L"treeBottom", L"..\\Resources\\sprite\\Background\\treebottom.bmp");
 	}
 
 	void Trees::Update()

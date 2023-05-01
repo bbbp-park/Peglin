@@ -32,28 +32,13 @@ namespace b
 		mMapPeglin = object::Instantiate<MapPeglin>(Vector2(800.0f, 450.0f), Vector2(2.2f, 2.2f), eLayerType::Player);
 
 		object::Instantiate<Trees>(eLayerType::BG);
-		//object::Instantiate<SpeedUp>(eLayerType::UI);
 
-		object::Instantiate<MapIcon>(Vector2(800, 600), eLayerType::BG);
-		//object::Instantiate<MapIcon>(eLayerType::BG);
+		MapIcon* mIcon = object::Instantiate<MapIcon>(eLayerType::BG);
+		mIcon->SetLockPos(Vector2(800, 600));
 	}
 
 	void MapScene::Update()
 	{
-		//Camera::SetTarget(mMapPeglin);
-
-		Transform* tr = mMapPeglin->GetComponent<Transform>();
-
-		if (Input::GetKeyState(eKeyCode::O) == eKeyState::Down)
-		{
-			SceneManager::LoadScene(eSceneType::Title);
-		}
-
-		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
-		{
-			SceneManager::LoadScene(eSceneType::Fight);
-		}
-
 		Scene::Update();
 	}
 

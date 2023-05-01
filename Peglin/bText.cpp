@@ -43,10 +43,12 @@ namespace b
 			if (mousePos.x >= pos.x - 150.0f && mousePos.x <= pos.x + 150.0f
 				&& mousePos.y >= pos.y - 10.0f && mousePos.y <= pos.y + 90.0f)
 			{
+				// white
 				SetTextColor(hdc, RGB(219, 219, 219));
 			}
 			else
 			{
+				// gray
 				SetTextColor(hdc, RGB(106, 107, 110));
 			}
 		}
@@ -55,18 +57,6 @@ namespace b
 		SetTextAlign(hdc, TA_CENTER);
 		HFONT oldFont = (HFONT)SelectObject(hdc, hFont);
 		TextOut(hdc, pos.x, pos.y, str, wcslen(str));
-
-		///*HFONT hFont = CreateFont(50, 0, 0, 0, 0, 0, 0, 0, HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH || FF_ROMAN, TEXT("..\\Resources\\font\\Silver.ttf"));
-		//HFONT oldFont = (HFONT)SelectObject(hdc, hFont);*/
-		//TextOut(hdc, 20, 20, L"´Ù¶÷Áã", strlen("´Ù¶÷Áã"));
-
-		Vector2 mPos = Input::GetMousePos();
-		wchar_t strX[50] = {};
-		swprintf_s(strX, 50, L"x : %f", mPos.y);
-		TextOut(hdc, 800, 0, strX, wcsnlen_s(strX, 50));
-
-		// 219, 219, 219
-		// 106, 107, 110
 	}
 
 	void Text::Release()

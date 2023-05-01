@@ -16,6 +16,7 @@ namespace b
 		virtual void Release() override;
 
 		void SetIconType(eIconType type) { mType = type; }
+		void SetLockPos(Vector2 pos) { lockPos = pos; }
 
 	private:
 		Image* mImage;
@@ -23,6 +24,7 @@ namespace b
 
 		eIconType mType;
 		Vector2 mPos;
+		Vector2 lockPos;
 	};
 }
 

@@ -22,10 +22,6 @@ namespace b
 	{
 		tileImage = Resources::Load<Image>(L"BouncerTile", L"..\\Resources\\sprite\\Background\\tileset_33.bmp");
 
-		//Transform* tr = GetComponent<Transform>();
-
-		//Vector2 tPos = tr->GetPos();
-
 		tileCol = AddComponent<Collider>();
 		tileCol->SetSize(Vector2(tileImage->GetWidth() * 3, tileImage->GetHeight() * 3));
 
@@ -80,10 +76,6 @@ namespace b
 			dir.Normalize();
 
 			Vector2 vel = rb->GetVelocity();
-
-			//Vector2 rVec = math::Reflect(vel, dir);
-			//rVec *= rb->GetPower();
-			//rVec *= -1.0f;
 			vel.x *= -1.0f;
 			rb->SetVelocity(vel);
 		}
