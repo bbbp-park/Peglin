@@ -6,22 +6,28 @@
 #include "bFightScene.h"
 #include "bRigidbody.h"
 #include "bTime.h"
+#include "bHPbar.h"
+#include "bObject.h"
+#include "bOrb.h"
+#include "bPeglin.h"
 
 namespace b
 {
 	bool isMove = false;
+	//Monster::Info Monster::mInfo;
 
 	Monster::Monster()
 		: mAnimator(nullptr)
 		, mType(eMonsterType::Stump)
 		, mRigidbody(nullptr)
-		, idx(0)
-		, mTime(0.0f)
 		, eventComplete(false)
-		, stumpState(eStumpState::Idle)
+		, mState(eMonsterState::Idle)
+		, hpBar(nullptr)
+		, bombCnt(0)
 	{
 		// stump
-		mInfo.hp = 200;
+		mInfo.maxHp = 1;
+		mInfo.hp = mInfo.maxHp;
 		mInfo.power = 2;
 	}
 
@@ -45,6 +51,11 @@ namespace b
 		mAnimator->GetCompleteEvent(L"StumpAttack") = std::bind(&Monster::StumpAttackCompleteEvent, this);
 
 		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		hpBar = object::Instantiate<HPbar>(pos, Vector2(3.7f, 3.7f), eLayerType::UI);
+		hpBar->SetHpType(eHpType::Monster);
+
 
 		Collider* collider = AddComponent<Collider>();
 		collider->SetCenter(Vector2(5.0f, -20.0f));
@@ -53,8 +64,6 @@ namespace b
 		mRigidbody = AddComponent<Rigidbody>();
 		mRigidbody->SetGround(true);
 		mRigidbody->SetMass(1.0f);
-		//mInfo.hp = 200;
-		//mInfo.power = 2;
 
 		GameObject::Initialize();
 	}
@@ -63,46 +72,49 @@ namespace b
 	{
 		GameObject::Update();
 
+		hpBar->SetHp(mInfo.hp);
+		hpBar->SetMaxHp(mInfo.maxHp);
 		Vector2 velocity = mRigidbody->GetVelocity();
-
-		if (mType == eMonsterType::Stump)
-		{
-			if (mInfo.hp <= 0)
-			{
-				mAnimator->Play(L"StumpDie", false);
-			}
-		}
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 		Vector2 peglinPos = Vector2(450.0f, 200.0f);
 		distance = pos - peglinPos;
-
-		if (distance.x <= 50.0f)
+		this;
+		if (mInfo.hp <= 0)
 		{
-			velocity = Vector2::Zero;
-			isMove = false;
-			mRigidbody->SetVelocity(velocity);
+			if (mType == eMonsterType::Stump)
+			{
+				if (mState != eMonsterState::Dead)
+				{
+					mState = eMonsterState::Dead;
+					mInfo.hp = mInfo.maxHp;
+					mAnimator->Play(L"StumpDie", false);
+				}
+				else
+				{
+					object::Destory(hpBar);
+					this->SetState(eState::Death);
+					return;
+					//object::Destory(this);
+					//mState = eMonsterState::None;
+				}
+			}
 		}
+		else
+		{
+			if (distance.x <= 60.0f && distance.x >= 45.0f)
+			{
+				velocity = Vector2::Zero;
+				isMove = false;
+				mRigidbody->SetVelocity(velocity);
+			}
 
-		//bool flag = FightScene::GetPlayerTurn();
-		//Vector2 peglinPos = Vector2(450.0f, 200.0f);
-		//distance = pos - peglinPos;
 
-		//if (!flag)
-		//	mTime += Time::DeltaTime();
-
-		//if (!flag && mTime >= idx * 4.0f)
-		//{
-		//	mAnimator->Play(L"StumpMove", false);
-		//	move();
-		//}
-		//if (isMove)
-		//{
-		//	velocity.x -= 10.0f;
-		//	//velocity.y = 0.0f;
-		//	mRigidbody->SetVelocity(velocity);
-		//}
+		}
+		Transform* hpTr = hpBar->GetComponent<Transform>();
+		Vector2 hpPos = pos;
+		hpTr->SetPos(hpPos);
 	}
 
 	void Monster::Render(HDC hdc)
@@ -117,7 +129,20 @@ namespace b
 
 	void Monster::OnCollisionEnter(Collider* other)
 	{
+		eColliderType type = other->GetColliderType();
 
+		if (type == eColliderType::ball)
+		{
+			// 데미지 적용
+			Ball* ball = dynamic_cast<Ball*>(other->GetOwner());
+			int power = ball->GetPower();
+			mInfo.hp -= power;
+
+			//if (mInfo.hp <= 0)
+			//{
+			//	mAnimator->Play(L"StumpDie", true);
+			//}
+		}
 	}
 
 	void Monster::OnCollisionStay(Collider* other)
@@ -140,7 +165,10 @@ namespace b
 
 	void Monster::StumpDeathCompleteEvent()
 	{
-		mAnimator->Play(L"StumpDead", true);
+		mAnimator->Play(L"StumpDead", false);
+		mInfo.hp = mInfo.maxHp;
+
+		eventComplete = true;
 	}
 
 	void Monster::StumpMoveCompleteEvent()
@@ -152,7 +180,7 @@ namespace b
 		mRigidbody->SetVelocity(velocity);
 
 		mAnimator->Play(L"StumpIdle", true);
-		stumpState = eStumpState::Idle;
+		mState = eMonsterState::Idle;
 
 		eventComplete = true;
 	}
@@ -160,38 +188,53 @@ namespace b
 	void Monster::StumpAttackCompleteEvent()
 	{
 		mAnimator->Play(L"StumpIdle", true);
-		stumpState = eStumpState::Idle;
+		mState = eMonsterState::Idle;
 
 		eventComplete = true;
+
+		Peglin::CalHp(mInfo.power);
 	}
 
 	void Monster::StartEvent()
 	{
+		if (this->GetState() != eState::Active || mState == eMonsterState::Dead)
+			return;
+
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 		Vector2 peglinPos = Vector2(450.0f, 200.0f);
 		distance = pos - peglinPos;
 		//Sleep(idx * 2000);
 
-		if (mType == eMonsterType::Stump)
-		{
-			if (stumpState == eStumpState::Idle)
+			if (mType == eMonsterType::Stump)
 			{
-				if (distance.x > 55.0f)
+				if (mState == eMonsterState::Dead)
 				{
-					// 페글린과의 거리 계산 후 움직이거나 공격
-					mAnimator->Play(L"StumpMove", true);
-					stumpState = eStumpState::Move;
-					move();
+					/*if (mInfo.hp < 0)
+						object::Destory(this);*/
+					eventComplete = true;
+					return;
 				}
-				else
+
+				if (mState == eMonsterState::Idle)
 				{
-					mAnimator->Play(L"StumpAttack", false);
-					stumpState = eStumpState::Attack;
-					attack();
+					if (distance.x <= 60.0f && distance.x >= 45.0f)
+					{
+						// 페글린과의 거리 계산 후 움직이거나 공격
+						mAnimator->Play(L"StumpAttack", false);
+						mState = eMonsterState::Attack;
+						attack();
+
+					}
+					else
+					{
+						mAnimator->Play(L"StumpMove", true);
+						mState = eMonsterState::Move;
+						move();
+					}
 				}
 			}
-		}
+		
 	}
 
 	void Monster::attack()

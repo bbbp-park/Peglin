@@ -27,7 +27,7 @@ namespace b
 	{
 		Transform* tr = GetComponent<Transform>();
 
-		mPos = Vector2(-990, -600);
+		mPos = Vector2(-1000, -300);
 		mPos = Camera::CalculatePos(mPos);
 		tr->SetPos(mPos);
 	}

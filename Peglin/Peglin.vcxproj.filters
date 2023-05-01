@@ -257,6 +257,12 @@
     <ClInclude Include="bBouncerTile.h">
       <Filter>Contents\Object</Filter>
     </ClInclude>
+    <ClInclude Include="bText.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="mMapIcon.h">
+      <Filter>Contents\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -398,6 +404,12 @@
       <Filter>Contents\Object</Filter>
     </ClCompile>
     <ClCompile Include="bBouncerTile.cpp">
+      <Filter>Contents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="bText.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="mMapIcon.cpp">
       <Filter>Contents\Object</Filter>
     </ClCompile>
   </ItemGroup>

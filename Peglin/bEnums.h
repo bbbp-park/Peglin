@@ -44,6 +44,16 @@ enum class eColliderShape
 	Rectangle,
 };
 
+enum class eColliderType
+{
+	ball,
+	peg,
+	bouncer,
+	wall,
+	bomb,
+	null,
+};
+
 enum class ePegType
 {
 	Normal,
@@ -54,4 +64,30 @@ enum class ePegType
 	SmallRect,
 	Null,
 	End,
+};
+
+enum class eHpType
+{
+	Player,
+	Monster,
+};
+
+enum class eMonsterType
+{
+	Stump
+};
+
+enum class eMonsterState
+{
+	Idle,
+	Move,
+	Attack,
+	Dead,
+	None,
+};
+
+enum class eIconType
+{
+	Skull,
+	Mole,
 };

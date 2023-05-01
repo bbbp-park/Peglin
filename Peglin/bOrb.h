@@ -37,9 +37,6 @@ namespace b
 		int totalDamage;
 		
 		float mPower;
-		Vector2 mForce;
-
-		const float mResistance = 0.7f;
 	};
 }
 

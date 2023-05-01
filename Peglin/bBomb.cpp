@@ -8,6 +8,9 @@
 #include "bAnimator.h"
 #include "bObject.h"
 #include "bExplosion.h"
+#include "bMonster.h"
+#include "bFightScene.h"
+#include "bPeglin.h"
 
 namespace b
 {
@@ -76,6 +79,17 @@ namespace b
 		pos.x += 60.0f;
 		pos.y += 120.0f;
 		object::Instantiate<Explosion>(pos, Vector2(0.8f, 0.8f), eLayerType::Effect);
+
+		std::vector<Monster*> mons = FightScene::GetMonsters();
+
+		for (auto mon : mons)
+		{
+			int hp = mon->GetHp();
+			hp -= 50;
+			mon->SetHp(hp);
+		}
+
+		Peglin::SetState(Peglin::ePeglinState::ShootBall);
 		object::Destory(this);
 	}
 

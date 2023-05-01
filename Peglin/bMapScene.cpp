@@ -10,6 +10,7 @@
 #include "bTransform.h"
 #include "bObject.h"
 #include "bTrees.h"
+#include "mMapIcon.h"
 
 namespace b
 {
@@ -33,7 +34,8 @@ namespace b
 		object::Instantiate<Trees>(eLayerType::BG);
 		//object::Instantiate<SpeedUp>(eLayerType::UI);
 
-		
+		object::Instantiate<MapIcon>(Vector2(800, 600), eLayerType::BG);
+		//object::Instantiate<MapIcon>(eLayerType::BG);
 	}
 
 	void MapScene::Update()

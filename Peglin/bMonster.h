@@ -7,22 +7,11 @@ namespace b
 	class Monster : public GameObject
 	{
 	public:
-		enum class eMonsterType
-		{
-			Stump
-		};
-
-		enum class eStumpState
-		{
-			Idle,
-			Move,
-			Attack,
-			Dead,
-		};
-
+		
 		struct Info
 		{
 			int hp;
+			int maxHp;
 			int power;
 		};
 
@@ -38,21 +27,19 @@ namespace b
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
 
-		void SetIdx(int i) { idx = i; }
-
 		void SetMonsterType(eMonsterType type);
 		void SetHp(int hp) { mInfo.hp = hp; }
 		void SetPower(int power) { mInfo.power = power; }
 
 		void SetEventComplete(bool b) { eventComplete = b; }
 		bool GetEventComplete() { return eventComplete; }
+		eMonsterState GetMonsterState() { return mState; }
 
 		void StumpDeathCompleteEvent();
 		void StumpMoveCompleteEvent();
 		void StumpAttackCompleteEvent();
 
-
-
+		int GetHp() { return mInfo.hp; }
 
 		void StartEvent();
 
@@ -64,6 +51,7 @@ namespace b
 
 
 	private:
+		class HPbar* hpBar;
 		Animator* mAnimator;
 		Info mInfo;
 		eMonsterType mType;
@@ -71,11 +59,11 @@ namespace b
 		class Rigidbody* mRigidbody;
 		bool eventComplete;
 
-		int idx;
-		float mTime;
 		Vector2 distance;
+		int bombCnt;
 
-		eStumpState stumpState;
+		eMonsterState mState;
+		//int idx;
 	};
 }
 

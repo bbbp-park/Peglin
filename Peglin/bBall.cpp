@@ -7,6 +7,7 @@
 #include "bCollider.h"
 #include "bRigidbody.h"
 #include "bFightScene.h"
+#include "bMonster.h"
 
 namespace b
 {
@@ -32,6 +33,7 @@ namespace b
 		Collider* collider = AddComponent<Collider>();
 		collider->SetCenter(Vector2(5.0f, 5.0f));
 		collider->SetSize(Vector2(35.0f, 35.0f));
+		collider->SetColliderType(eColliderType::ball);
 
 		mRigidbody = AddComponent<Rigidbody>();
 		mRigidbody->SetGravity(Vector2::Zero);
@@ -74,7 +76,7 @@ namespace b
 	void Ball::OnCollisionEnter(Collider* other)
 	{
 		object::Destory(this);
-
+		//Monster::CalHp(power);
 		FightScene::SetPlayerTurn(false);
 	}
 

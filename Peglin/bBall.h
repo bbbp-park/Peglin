@@ -20,6 +20,7 @@ namespace b
 		virtual void OnCollisionExit(Collider* other);
 
 		static void SetPower(int p) { power = p; }
+		static int GetPower() { return power; }
 
 	private:
 		Image* mImage;

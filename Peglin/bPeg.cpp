@@ -44,7 +44,7 @@ namespace b
 		collider->SetShape(eColliderShape::Ellipse);
 		collider->SetCenter(Vector2(0.0f, 0.0f));
 		collider->SetSize(Vector2(mImages[(UINT)mType]->GetWidth() * 3, mImages[(UINT)mType]->GetHeight() * 3));
-		collider->SetColliderType(Collider::eColliderType::peg);
+		collider->SetColliderType(eColliderType::peg);
 	}
 
 	void Peg::Update()
@@ -165,7 +165,7 @@ namespace b
 				this->SetType(ePegType::SmallRect);
 		}
 
-		this->GetComponent<Collider>()->SetColliderType(Collider::eColliderType::null);
+		this->GetComponent<Collider>()->SetColliderType(eColliderType::null);
 	}
 
 	void Peg::deleteBomb()
@@ -178,6 +178,6 @@ namespace b
 
 		Orb::AddBombCnt();
 		this->SetType(ePegType::Null);
-		this->GetComponent<Collider>()->SetColliderType(Collider::eColliderType::null);
+		this->GetComponent<Collider>()->SetColliderType(eColliderType::null);
 	}
 }

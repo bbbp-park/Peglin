@@ -6,15 +6,6 @@ namespace b
 	class Collider : public Component
 	{
 	public:
-		enum class eColliderType
-		{
-			peg,
-			bouncer,
-			wall,
-			bomb,
-			null,
-		};
-
 		Collider();
 		~Collider();
 

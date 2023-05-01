@@ -33,7 +33,7 @@ namespace b
 		static void StartFadeOut()
 		{
 			mType = eCameraEffectType::FadeOut;
-			mCuttonAlpha = 1.0f;
+			mCuttonAlpha = 0.0f;
 			mAlphaTime = 0.0f;
 		}
 

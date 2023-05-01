@@ -16,6 +16,7 @@ namespace b
 		virtual void Release() override;
 
 		static bool GetEnd() { return mEnd; }
+		static void SetEnd(bool b) { mEnd = b; }
 
 	private:
 		void explosionCompleteEvent();

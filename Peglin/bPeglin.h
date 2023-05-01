@@ -27,8 +27,9 @@ namespace b
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
 
-		static void CalHp(int damage);
 		static void SetState(ePeglinState state) { mState = state; }
+
+		static void CalHp(int damage) { hp -= damage; }
 
 	private:
 		void shoot_ball();
@@ -43,7 +44,10 @@ namespace b
 	private:
 		class Animator* mAnimator;
 		static ePeglinState mState;
+
+		class HPbar* hpBar;
 		static int hp;
+		int maxHp;
 
 		class Ground* mGround;
 
@@ -51,7 +55,6 @@ namespace b
 		std::vector<class Bomb*> mBombs;
 
 		bool delay;
-
 	};
 }
 

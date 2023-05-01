@@ -16,7 +16,7 @@ namespace b
 		, mID(ColliderNumber++)
 		, mCollisionCount(0)
 		, mShape(eColliderShape::Rectangle)
-		, bRender(true)
+		, bRender(false)
 		, mType(eColliderType::null)
 	{
 	}

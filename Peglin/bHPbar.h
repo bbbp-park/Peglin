@@ -15,8 +15,20 @@ namespace b
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		void SetHpType(eHpType type) { mType = type; }
+		eHpType GetHpType() { return mType; }
+
+		void SetHp(int h) { hp = h; }
+		void SetMaxHp(int h) { maxHp = h; }
+
 	private:
-		Image* image;
+		std::vector<Image*> hpUIs;
+		std::vector<Image*> bars;
+
+		eHpType mType;
+
+		int hp;
+		int maxHp;
 	};
 }
 

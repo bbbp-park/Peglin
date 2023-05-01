@@ -16,11 +16,14 @@
 #include "bBouncerTile.h"
 #include "bWall.h"
 #include "bPeg.h"
+#include "bGameObject.h"
+#include "bTime.h"
 
 namespace b
 {
 	bool FightScene::mTurn = true;
 	int FightScene::cnt = 0;
+	std::vector<Monster*> FightScene::mMonsters = {};
 
 	int i = 0;
 
@@ -37,7 +40,8 @@ namespace b
 		, mBouncers({})
 		, mBouncerTiles({})
 		, mPegs({})
-		, mMonsters({})
+		, isClear(false)
+		, mTime(0.0f)
 	{
 	}
 
@@ -49,17 +53,15 @@ namespace b
 	{
 		Scene::Initialize();
 
-		object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
-		
+		mPeglin = object::Instantiate<Peglin>(Vector2(410.0f, 170.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
 
-		object::Instantiate<Peglin>(Vector2(410.0f, 170.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
+		object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
 
 		mMonsters.push_back(object::Instantiate<Monster>(Vector2(890.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster));
-		mMonsters[0]->SetMonsterType(Monster::eMonsterType::Stump);
+		mMonsters[0]->SetMonsterType(eMonsterType::Stump);
 		mMonsters.push_back(object::Instantiate<Monster>(Vector2(1300.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster));
-		mMonsters[1]->SetMonsterType(Monster::eMonsterType::Stump);
+		mMonsters[1]->SetMonsterType(eMonsterType::Stump);
 
-		object::Instantiate<HPbar>(eLayerType::UI);
 		//object::Instantiate<Bag>(Vector2(140.0f, 0.0f), Vector2(2.4f, 2.4f), eLayerType::UI);
 		//object::Instantiate<SpeedUp>(eLayerType::UI);
 
@@ -232,7 +234,6 @@ namespace b
 	{
 		Scene::Update();
 
-
 		if (Input::GetKeyState(eKeyCode::O) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Map);
@@ -243,9 +244,14 @@ namespace b
 			SceneManager::LoadScene(eSceneType::Ending);
 		}
 
-		if (Input::GetKeyDown(eKeyCode::R))
+		if (isClear)
 		{
-			CreateOrb();
+			mTime += Time::DeltaTime();
+			if (mTime >= 2.0f)
+			{
+				SceneManager::LoadScene(eSceneType::Map);
+				//return;
+			}
 		}
 
 		if (mTurn && cnt == 1)
@@ -256,26 +262,6 @@ namespace b
 		
 		if (!mTurn && cnt == 0)
 		{
-			//int idx = 0;
-			//while (true)
-			//{
-			//	if (idx != 0)
-			//	{
-			//		if (mMonsters[idx - 1]->GetEventComplete())
-			//		{
-			//			mMonsters[idx]->StartEvent();
-			//			idx++;
-			//		}
-			//	}
-			//	else
-			//	{
-			//		mMonsters[idx]->StartEvent();
-			//	}
-
-			//	if (idx == mMonsters.size())
-			//		break;
-			//}
-
 			if (mMonsters[i]->GetEventComplete())
 				i++;
 
@@ -288,13 +274,31 @@ namespace b
 				mTurn = true;
 				i = 0;
 
-				for (size_t i = 0; i < mMonsters.size(); i++)
+				/*for (size_t i = 0; i < mMonsters.size(); i++)
 				{
 					mMonsters[i]->SetEventComplete(false);
+				}*/
+
+				for (auto mon : mMonsters)
+				{
+					mon->SetEventComplete(false);
 				}
 			}
 		}
 
+		if (isClear == false)
+		{
+			for (auto mon : mMonsters)
+			{
+				if (mon->GetState() != GameObject::eState::Active || mon->GetMonsterState() == eMonsterState::Dead)
+					isClear = true;
+				else
+				{
+					isClear = false;
+					break;
+				}
+			}
+		}
 	}
 
 	void FightScene::Render(HDC hdc)
@@ -387,13 +391,13 @@ namespace b
 			, plunger->GetHdc(), 0, 0
 			, plunger->GetWidth(), plunger->GetHeight(), SRCCOPY);
 
-		Vector2 mousePos = Input::GetMousePos();
+		/*Vector2 mousePos = Input::GetMousePos();
 		wchar_t strX[50] = {};
 		swprintf_s(strX, 50, L"x : %f", mousePos.x);
 		TextOut(hdc, 800, 0, strX, wcsnlen_s(strX, 50));
 		wchar_t strY[50] = {};
 		swprintf_s(strY, 50, L"y : %f", mousePos.y);
-		TextOut(hdc, 800, 20, strY, wcsnlen_s(strY, 50));
+		TextOut(hdc, 800, 20, strY, wcsnlen_s(strY, 50));*/
 
 		Scene::Render(hdc);
 
@@ -418,11 +422,16 @@ namespace b
 
 	void FightScene::OnExit()
 	{
+		Camera::StartFadeOut();
+
+		CollisionManager::SetLayer(eLayerType::Ball, eLayerType::Monster, false);
+		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Wall, false);
+		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Wall, false);
+		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Peg, false);
 	}
 
 	void FightScene::CreateOrb()
 	{
-		object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
-		
+		Orb* orb = object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
 	}
 }

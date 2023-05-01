@@ -5,6 +5,7 @@
 namespace b
 {
 	class Logo;
+	class Text;
 	class TitleScene : public Scene
 	{
 	public:
@@ -22,7 +23,13 @@ namespace b
 	private:
 		Image* titleBackground;
 		Logo* logo;
-		int font;
+
+		Vector2 mPos;
+		Vector2 sPos;
+		Vector2 ePos;
+
+		Text* start;
+		Text* end;
 	};
 }
 

@@ -19,7 +19,6 @@ namespace b
 		: mAnimator(nullptr)
 		, mRigidbody(nullptr)
 		, mCollider(nullptr)
-		, mForce(Vector2(Vector2::One))
 		, mPower(DEFAULT_POWER)
 		, hitCnt(0)
 		, damage(2)
@@ -75,11 +74,9 @@ namespace b
 			Vector2 dir = Input::GetMousePos();
 			dir -= pos;
 			dir.Normalize();
-			//mForce = dir;
 			mRigidbody->SetPower(mPower);
 			dir *= mRigidbody->GetPower();
 			mRigidbody->SetVelocity(dir);
-			//mRigidbody->SetForce(mForce);
 			mRigidbody->SetGravity(Vector2(0.0f, 400.0f));
 
 		}
@@ -107,9 +104,9 @@ namespace b
 		(HPEN)SelectObject(hdc, oldPen);
 		DeleteObject(pen);
 
-		wchar_t tDamage[50] = {};
+		/*wchar_t tDamage[50] = {};
 		swprintf_s(tDamage, 50, L"damage : %d", totalDamage);
-		TextOut(hdc, 800, 40, tDamage, wcsnlen_s(tDamage, 50));
+		TextOut(hdc, 800, 40, tDamage, wcsnlen_s(tDamage, 50));*/
 
 		GameObject::Render(hdc);
 	}
@@ -123,14 +120,14 @@ namespace b
 	{
 		if (bShoot)
 		{
-			Collider::eColliderType type = other->GetColliderType();
+			eColliderType type = other->GetColliderType();
 
-			if (type != Collider::eColliderType::null)
+			if (type != eColliderType::null)
 			{
 				float power = mRigidbody->GetPower() * 0.9f;
 				mRigidbody->SetPower(power);
 
-				if (type == Collider::eColliderType::peg)
+				if (type == eColliderType::peg)
 					hitCnt++;
 			}
 

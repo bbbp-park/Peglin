@@ -26,6 +26,8 @@ namespace b
 
 		// false = monster turn, true = player turn
 		static bool GetPlayerTurn() { return mTurn; }
+		bool IsClear() { return isClear; }
+		static std::vector<class Monster*>& GetMonsters() { return mMonsters; }
 
 	private:
 		Peglin* mPeglin;
@@ -44,10 +46,12 @@ namespace b
 		std::vector<class BouncerTile*> mBouncerTiles;
 
 		std::vector<class Peg*> mPegs;
-		std::vector<class Monster*> mMonsters;
+		static std::vector<class Monster*> mMonsters;
 
 		static bool mTurn;
 		static int cnt;
+		bool isClear;
+		float mTime;
 	};
 }
 

@@ -1,7 +1,7 @@
 #include "bExplosion.h"
 #include "bAnimator.h"
 #include "bObject.h"
-
+#include "bFightScene.h"
 
 namespace b
 {

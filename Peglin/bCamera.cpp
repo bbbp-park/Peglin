@@ -67,7 +67,7 @@ namespace b
 			{
 				mCuttonAlpha = 1.0f - ratio;
 			}
-			else if (mType == eCameraEffectType::FadeOut)
+			if (mType == eCameraEffectType::FadeOut)
 			{
 				mCuttonAlpha = ratio;
 			}
