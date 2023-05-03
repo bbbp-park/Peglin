@@ -30,6 +30,8 @@ namespace b
 		bool bActive;
 		float mTime;
 
+		bool once;
+
 		class Rigidbody* mRigidbody;
 	};
 }

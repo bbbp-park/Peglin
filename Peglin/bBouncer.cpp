@@ -28,7 +28,7 @@ namespace b
 		bouncerCol->SetShape(eColliderShape::Ellipse);
 		bouncerCol->SetCenter(Vector2(-2.0f, 0.0f));
 		bouncerCol->SetSize(Vector2(bouncerImage->GetWidth() * 3, bouncerImage->GetHeight() * 3));
-		bouncerCol->SetColliderType(eColliderType::bouncer);
+		bouncerCol->SetColliderType(eColliderType::wall);
 		
 		GameObject::Initialize();
 	}

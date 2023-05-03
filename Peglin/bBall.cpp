@@ -8,6 +8,7 @@
 #include "bRigidbody.h"
 #include "bFightScene.h"
 #include "bMonster.h"
+#include "bSound.h"
 
 namespace b
 {
@@ -75,6 +76,8 @@ namespace b
 
 	void Ball::OnCollisionEnter(Collider* other)
 	{
+		Sound* ExplodeyHitSound = Resources::Load<Sound>(L"ExplodeyHitSound", L"..\\Resources\\audio\\ExplodeyHitSound.wav");
+		ExplodeyHitSound->Play(false);
 		object::Destory(this);
 		FightScene::SetPlayerTurn(false);
 	}

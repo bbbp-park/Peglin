@@ -11,6 +11,8 @@
 #include "bOrb.h"
 #include "bPeglin.h"
 #include "bText.h"
+#include "bSound.h"
+#include "bResources.h"
 
 namespace b
 {
@@ -245,7 +247,8 @@ namespace b
 						mAnimator->Play(L"StumpAttack", false);
 						mState = eMonsterState::Attack;
 						attack();
-
+						Sound* swish_melee = Resources::Load<Sound>(L"swish_melee", L"..\\Resources\\audio\\swish_melee.wav");
+						swish_melee->Play(false);
 					}
 					else
 					{

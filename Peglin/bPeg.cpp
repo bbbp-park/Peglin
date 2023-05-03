@@ -8,6 +8,8 @@
 #include "bAnimator.h"
 #include "bObject.h"
 #include "bExplosion.h"
+#include "bSound.h"
+#include "bResources.h"
 
 namespace b
 {
@@ -127,6 +129,9 @@ namespace b
 				{
 					deleteBomb();
 					rb->SetPower(DEFAULT_POWER);
+
+					Sound* PowerHit = Resources::Load<Sound>(L"PowerHit", L"..\\Resources\\audio\\Power Hit.wav");
+					PowerHit->Play(false);
 				}
 			}
 			else if (this->GetType() != ePegType::SmallRect)

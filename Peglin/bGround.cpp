@@ -21,7 +21,7 @@ namespace b
 	{
 		mCollider = AddComponent<Collider>();
 		mCollider->SetSize(Vector2(1600.0f, 45.0f));
-
+		mCollider->SetColliderType(eColliderType::wall);
 		GameObject::Initialize();
 	}
 

@@ -12,6 +12,8 @@
 #include "bText.h"
 #include "bSceneManager.h"
 #include "bFightScene.h"
+#include "bResources.h"
+#include "bSound.h"
 
 
 namespace b
@@ -88,6 +90,8 @@ namespace b
 			mRigidbody->SetVelocity(dir);
 			mRigidbody->SetGravity(Vector2(0.0f, 400.0f));
 
+			Sound* UI_Tock_02 = Resources::Load<Sound>(L"UI_Tock_02", L"..\\Resources\\audio\\UI_Tock_02.wav");
+			UI_Tock_02->Play(false);
 		}
 
 		/*totalDamage = damage * hitCnt;*/
@@ -141,6 +145,9 @@ namespace b
 					{
 						mInfo.hitCnt++;
 						//mInfo.totalDamage = mInfo.damage * mInfo.hitCnt;
+
+						Sound* LowThud = Resources::Load<Sound>(L"LowThud", L"..\\Resources\\audio\\Low Thud.wav");
+						LowThud->Play(false);
 					}
 					else if (peg->GetType() == ePegType::Crit)
 					{
@@ -148,6 +155,9 @@ namespace b
 						mInfo.isCrit = true;
 
 						Scene* activeScene = SceneManager::GetActiveScene();
+
+						Sound* Crit = Resources::Load<Sound>(L"Crit", L"..\\Resources\\audio\\Crit.wav");
+						Crit->Play(false);
 						if (activeScene->GetName() == L"FightScene")
 						{
 							FightScene::SetRedPegs();
@@ -158,6 +168,10 @@ namespace b
 					{
 						// 새로고침
 						Scene* activeScene = SceneManager::GetActiveScene();
+
+						Sound* Refresh = Resources::Load<Sound>(L"Refresh", L"..\\Resources\\audio\\Refresh.wav");
+						Refresh->Play(false);
+
 						if (activeScene->GetName() == L"FightScene")
 						{
 							FightScene::Refresh();
@@ -184,6 +198,12 @@ namespace b
 					pos.y -= 10;
 					textTr->SetPos(pos);
 				}
+			}
+
+			if (type == eColliderType::wall)
+			{
+				Sound* NFF = Resources::Load<Sound>(L"NFF", L"..\\Resources\\audio\\NFF-bump.wav");
+				NFF->Play(false);
 			}
 		}
 	}

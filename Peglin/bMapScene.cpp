@@ -11,6 +11,7 @@
 #include "bObject.h"
 #include "bTrees.h"
 #include "mMapIcon.h"
+#include "bSound.h"
 
 namespace b
 {
@@ -60,11 +61,16 @@ namespace b
 	{
 		Camera::StartFadeIn();
 		Camera::SetTarget(mMapPeglin);
+
+		Sound* forestmap = Resources::Load<Sound>(L"forestmap", L"..\\Resources\\audio\\forestmap.wav");
+		forestmap->Play(true);
 	}
 
 	void MapScene::OnExit()
 	{
 		Camera::Clear();
 		Camera::SetTarget(nullptr);
+		Sound* forestmap = Resources::Load<Sound>(L"forestmap", L"..\\Resources\\audio\\forestmap.wav");
+		forestmap->Stop(true);
 	}
 }

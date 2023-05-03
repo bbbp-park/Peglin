@@ -29,7 +29,7 @@ namespace b
 
 		static void SetState(ePeglinState state) { mState = state; }
 
-		static void CalHp(int damage) { hp -= damage; }
+		static void CalHp(int damage);
 
 	private:
 		void shoot_ball();

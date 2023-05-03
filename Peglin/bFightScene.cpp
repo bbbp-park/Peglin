@@ -18,12 +18,7 @@
 #include "bPeg.h"
 #include "bGameObject.h"
 #include "bTime.h"
-
-
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-#include <iostream>
+#include "bSound.h"
 
 namespace b
 {
@@ -70,6 +65,8 @@ namespace b
 		mMonsters[0]->SetMonsterType(eMonsterType::Stump);
 		mMonsters.push_back(object::Instantiate<Monster>(Vector2(1300.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster));
 		mMonsters[1]->SetMonsterType(eMonsterType::Stump);
+
+		
 
 		//object::Instantiate<Bag>(Vector2(140.0f, 0.0f), Vector2(2.4f, 2.4f), eLayerType::UI);
 		//object::Instantiate<SpeedUp>(eLayerType::UI);
@@ -422,6 +419,9 @@ namespace b
 		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Peg, true);
+
+		Sound* world1_fight = Resources::Load<Sound>(L"world1_fight", L"..\\Resources\\audio\\world1_fight.wav");
+		world1_fight->Play(true);
 	}
 
 	void FightScene::OnExit()
@@ -432,6 +432,9 @@ namespace b
 		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Wall, false);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Wall, false);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Peg, false);
+
+		Sound* world1_fight = Resources::Load<Sound>(L"world1_fight", L"..\\Resources\\audio\\world1_fight.wav");
+		world1_fight->Stop(true);
 	}
 
 	void FightScene::SetRedPegs()

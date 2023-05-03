@@ -4,6 +4,8 @@
 #include "bTime.h"
 #include "bObject.h"
 #include "bRigidbody.h"
+#include "bSound.h"
+#include "bResources.h"
 
 namespace b
 {
@@ -16,6 +18,7 @@ namespace b
 		, mTime(0.0f)
 		, bActive(false)
 		, mRigidbody(nullptr)
+		, once(false)
 	{
 	}
 
@@ -89,6 +92,12 @@ namespace b
 			if (mousePos.x >= mPos.x - 150.0f && mousePos.x <= mPos.x + 150.0f
 				&& mousePos.y >= mPos.y - 10.0f && mousePos.y <= mPos.y + 90.0f)
 			{
+				if (once == false)
+				{
+					Sound* cursorMove = Resources::Load<Sound>(L"cursorMove", L"..\\Resources\\audio\\UI_Cursor_Move_06.wav");
+					cursorMove->Play(false);
+					once = true;
+				}
 				// white
 				SetTextColor(hdc, RGB(219, 219, 219));
 			}
@@ -96,6 +105,7 @@ namespace b
 			{
 				// gray
 				SetTextColor(hdc, RGB(106, 107, 110));
+				once = false;
 			}
 		}
 

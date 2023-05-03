@@ -12,6 +12,7 @@
 #include "bFightScene.h"
 #include "bPeglin.h"
 #include "bText.h"
+#include "bSound.h"
 
 namespace b
 {
@@ -79,6 +80,8 @@ namespace b
 		Vector2 pos = tr->GetPos();
 		pos.x += 60.0f;
 		pos.y += 120.0f;
+		Sound* BombHitSoundDistort = Resources::Load<Sound>(L"BombHitSoundDistort", L"..\\Resources\\audio\\BombHitSoundDistort.wav");
+		BombHitSoundDistort->Play(false);
 		object::Instantiate<Explosion>(pos, Vector2(0.8f, 0.8f), eLayerType::Effect);
 
 		std::vector<Monster*> mons = FightScene::GetMonsters();

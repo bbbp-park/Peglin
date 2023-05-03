@@ -8,6 +8,7 @@
 #include "bCamera.h"
 #include "bText.h"
 #include "bApplication.h"
+#include "bSound.h"
 
 extern b::Application application;
 
@@ -31,6 +32,9 @@ namespace b
 	void TitleScene::Initialize()
 	{
 		Scene::Initialize();
+
+		Sound* peglinmenu = Resources::Load<Sound>(L"peglinmenu", L"..\\Resources\\audio\\peglinmenu.wav");
+		peglinmenu->Play(true);
 
 		logo = object::Instantiate<Logo>(Vector2(100.0f, 180.0f), Vector2(7.0f, 7.0f), eLayerType::BG);
 		
@@ -60,6 +64,8 @@ namespace b
 			if (mPos.x >= sPos.x - 150.0f && mPos.x <= sPos.x + 150.0f
 				&& mPos.y >= sPos.y - 10.0f && mPos.y <= sPos.y + 90.0f)
 			{
+				Sound* title_to_map = Resources::Load<Sound>(L"title_to_map", L"..\\Resources\\audio\\title_to_map.wav");
+				title_to_map->Play(false);
 				SceneManager::LoadScene(eSceneType::Map);
 			}
 
@@ -93,6 +99,7 @@ namespace b
 
 	void TitleScene::OnExit()
 	{
-
+		Sound* peglinmenu = Resources::Load<Sound>(L"peglinmenu", L"..\\Resources\\audio\\peglinmenu.wav");
+		peglinmenu->Stop(true);
 	}
 }

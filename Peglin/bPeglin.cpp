@@ -16,6 +16,7 @@
 #include "bFightScene.h"
 #include "bHPbar.h"
 #include "bText.h"
+#include "bSound.h"
 
 namespace b
 {
@@ -136,6 +137,13 @@ namespace b
 
 	void Peglin::OnCollisionExit(Collider* other)
 	{
+	}
+
+	void Peglin::CalHp(int damage)
+	{
+		hp -= damage;
+		Sound* player_hit = Resources::Load<Sound>(L"player_hit", L"..\\Resources\\audio\\player_hit.wav");
+		player_hit->Play(false);
 	}
 
 	void Peglin::shoot_ball()

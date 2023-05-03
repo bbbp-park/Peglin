@@ -2,6 +2,7 @@
 #include "bAnimator.h"
 #include "bObject.h"
 #include "bFightScene.h"
+#include "bResources.h"
 
 namespace b
 {
@@ -48,6 +49,7 @@ namespace b
 
 	void Explosion::explosionCompleteEvent()
 	{
+		
 		object::Destory(this);
 		mEnd = true;
 	}

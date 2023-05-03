@@ -48,7 +48,6 @@ enum class eColliderType
 {
 	ball,
 	peg,
-	bouncer,
 	wall,
 	bomb,
 	null,

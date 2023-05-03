@@ -72,9 +72,6 @@
     <Filter Include="Engine\Component\RigidBody">
       <UniqueIdentifier>{f80d881c-3e03-4665-8a5d-201597095a77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main\Sound">
-      <UniqueIdentifier>{a5292d40-26e8-41ad-84e9-75daaed2e44f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Tile">
       <UniqueIdentifier>{8b146db8-9cb5-45ef-847f-aaaed51d7f23}</UniqueIdentifier>
     </Filter>
@@ -92,6 +89,9 @@
     </Filter>
     <Filter Include="Contents\Orb">
       <UniqueIdentifier>{fd6851ff-6508-4131-9e03-8ab8190f626c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource\Sound">
+      <UniqueIdentifier>{a5292d40-26e8-41ad-84e9-75daaed2e44f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -213,10 +213,10 @@
       <Filter>Engine\Component\RigidBody</Filter>
     </ClInclude>
     <ClInclude Include="bSound.h">
-      <Filter>main\Sound</Filter>
+      <Filter>Engine\Resource\Sound</Filter>
     </ClInclude>
     <ClInclude Include="bSoundManager.h">
-      <Filter>main\Sound</Filter>
+      <Filter>Engine\Resource\Sound</Filter>
     </ClInclude>
     <ClInclude Include="bToolScene.h">
       <Filter>Contents\Scene</Filter>
@@ -362,10 +362,10 @@
       <Filter>Engine\Component\RigidBody</Filter>
     </ClCompile>
     <ClCompile Include="bSound.cpp">
-      <Filter>main\Sound</Filter>
+      <Filter>Engine\Resource\Sound</Filter>
     </ClCompile>
     <ClCompile Include="bSoundManager.cpp">
-      <Filter>main\Sound</Filter>
+      <Filter>Engine\Resource\Sound</Filter>
     </ClCompile>
     <ClCompile Include="bToolScene.cpp">
       <Filter>Contents\Scene</Filter>

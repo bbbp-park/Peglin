@@ -23,6 +23,7 @@ namespace b
 		tileImage = Resources::Load<Image>(L"BouncerTile", L"..\\Resources\\sprite\\Background\\tileset_33.bmp");
 
 		tileCol = AddComponent<Collider>();
+		tileCol->SetColliderType(eColliderType::wall);
 		tileCol->SetSize(Vector2(tileImage->GetWidth() * 3, tileImage->GetHeight() * 3));
 
 		GameObject::Initialize();
