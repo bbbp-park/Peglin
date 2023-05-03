@@ -7,6 +7,15 @@
 #include "bSceneManager.h"
 #include "bResources.h"
 
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+
+#ifdef _DEBUG
+#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+#else
+#define DBG_NEW new
+#endif
+
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
@@ -33,7 +42,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
      UNREFERENCED_PARAMETER(hPrevInstance);
      UNREFERENCED_PARAMETER(lpCmdLine);
      _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-     //_CrtSetBreakAlloc(217); // 추가
+     _CrtSetBreakAlloc(205); // 추가
      // 1. 윈도우의 정보를 담고있는 클래스를 정의(메모리에 등록)해주어야한다.
      // 2. CreateWindow함수를 통해서 메모리상에 윈도우를 할당해준다.
      // 3. ShowWindow함수를 통해서 화면에 보여준다.

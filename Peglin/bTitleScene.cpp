@@ -83,6 +83,7 @@ namespace b
 
 	void TitleScene::Release()
 	{
+
 		Scene::Release();
 	}
 
@@ -92,6 +93,6 @@ namespace b
 
 	void TitleScene::OnExit()
 	{
-		
+
 	}
 }

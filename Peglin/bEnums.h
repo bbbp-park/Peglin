@@ -14,10 +14,10 @@ enum class eSceneType
 enum class eLayerType
 {
 	BG,
-	Tile,
+	//Tile,
 	Monster,
 	Player,
-	Ball,
+	//Ball,
 	Bomb,
 	Wall,
 	Orb,

@@ -7,7 +7,6 @@
 #include "bRigidbody.h"
 #include "bTime.h"
 #include "bHPbar.h"
-//#include "bMonsterHpbar.h"
 #include "bObject.h"
 #include "bOrb.h"
 #include "bPeglin.h"
@@ -56,11 +55,8 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		/*hpBar = object::Instantiate<HpBar>(pos, Vector2(3.7f, 3.7f), eLayerType::UI);
-		hpBar->SetHpType(eHpType::Monster);*/
-
-		/*hpBar = object::Instantiate<MonsterHpbar>(pos, Vector2(3.7f, 3.7f), eLayerType::UI);*/
-		//hpText = object::Instantiate<Text>(eLayerType::UI);
+		hpBar = object::Instantiate<HpBar>(pos, Vector2(3.7f, 3.7f), eLayerType::UI);
+		hpBar->SetHpType(eHpType::Monster);
 
 		Collider* collider = AddComponent<Collider>();
 		collider->SetCenter(Vector2(5.0f, -20.0f));
@@ -77,12 +73,8 @@ namespace b
 	{
 		GameObject::Update();
 
-		/*hpBar->SetHp(mInfo.hp);
-		hpBar->SetMaxHp(mInfo.maxHp);*/
-		/*wchar_t str[50] = L"";
-		int num = swprintf_s(str, 50, L"%d / ", mInfo.hp);
-		num += swprintf_s(str + num, 50 - num, L"%d", mInfo.maxHp);
-		hpText->SetText(*str);*/
+		hpBar->SetHp(mInfo.hp);
+		hpBar->SetMaxHp(mInfo.maxHp);
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
@@ -125,9 +117,9 @@ namespace b
 
 		}
 
-		/*Transform* hpTr = hpBar->GetComponent<Transform>();
+		Transform* hpTr = hpBar->GetComponent<Transform>();
 		Vector2 hpPos = pos;
-		hpTr->SetPos(hpPos);*/
+		hpTr->SetPos(hpPos);
 	}
 
 	void Monster::Render(HDC hdc)

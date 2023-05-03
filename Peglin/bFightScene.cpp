@@ -19,12 +19,18 @@
 #include "bGameObject.h"
 #include "bTime.h"
 
+
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+#include <iostream>
+
 namespace b
 {
 	bool FightScene::mTurn = true;
-	int FightScene::cnt = 0;
+	int FightScene::cnt = 1;
 	std::vector<Monster*> FightScene::mMonsters = {};
-
+	std::vector<Peg*> FightScene::mPegs = {};
 	int i = 0;
 
 	FightScene::FightScene()
@@ -39,9 +45,12 @@ namespace b
 		, backScreen(nullptr)
 		, mBouncers({})
 		, mBouncerTiles({})
-		, mPegs({})
+		//, mPegs({})
 		, isClear(false)
 		, mTime(0.0f)
+		, CritIdx({})
+		, mOrb(nullptr)
+		, RefreshIdx({})
 	{
 	}
 
@@ -55,7 +64,7 @@ namespace b
 
 		mPeglin = object::Instantiate<Peglin>(Vector2(410.0f, 170.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
 
-		object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+		//object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
 
 		mMonsters.push_back(object::Instantiate<Monster>(Vector2(890.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster));
 		mMonsters[0]->SetMonsterType(eMonsterType::Stump);
@@ -248,6 +257,26 @@ namespace b
 		{
 			CreateOrb();
 			cnt--;
+
+			SetNormalPegs();
+
+			for (int idx : CritIdx)
+			{
+				if (mPegs[idx]->GetType() != ePegType::SmallRect)
+					mPegs[idx]->SetType(ePegType::Normal);
+			}
+			for (int idx : RefreshIdx)
+			{
+				if (mPegs[idx]->GetType() != ePegType::SmallRect)
+					mPegs[idx]->SetType(ePegType::Normal);
+			}
+
+			SetCritPegs();
+			SetRefreshPegs();
+			if (mOrb != nullptr && mOrb->GetIsCrit())
+			{
+				SetRedPegs();
+			}
 		}
 		
 		if (!mTurn && cnt == 0)
@@ -375,9 +404,9 @@ namespace b
 			, plunger->GetHdc(), 0, 0
 			, plunger->GetWidth(), plunger->GetHeight(), SRCCOPY);
 
-		Scene::Render(hdc);
-
 		DeleteObject(oldBrush);
+
+		Scene::Render(hdc);
 	}
 
 	void FightScene::Release()
@@ -389,7 +418,7 @@ namespace b
 	{
 		Camera::StartFadeIn();
 		
-		CollisionManager::SetLayer(eLayerType::Ball, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Peg, true);
@@ -399,14 +428,69 @@ namespace b
 	{
 		Camera::StartFadeOut();
 
-		CollisionManager::SetLayer(eLayerType::Ball, eLayerType::Monster, false);
+		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Monster, false);
 		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Wall, false);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Wall, false);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Peg, false);
 	}
 
+	void FightScene::SetRedPegs()
+	{
+		for (auto peg : mPegs)
+		{
+			if (peg->GetType() == ePegType::Normal)
+			{
+				peg->SetType(ePegType::Red);
+			}
+		}
+	}
+
+	void FightScene::SetNormalPegs()
+	{
+		for (auto peg : mPegs)
+		{
+			if (peg->GetType() == ePegType::Red)
+			{
+				peg->SetType(ePegType::Normal);
+			}
+		}
+	}
+
+	void FightScene::Refresh()
+	{
+		for (auto peg : mPegs)
+		{
+			if (peg->GetType() == ePegType::SmallRect)
+			{
+				peg->SetType(ePegType::Normal);
+			}
+		}
+	}
+
 	void FightScene::CreateOrb()
 	{
-		Orb* orb = object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+	}
+
+	void FightScene::SetCritPegs()
+	{
+		CritIdx = {};
+		CritIdx = math::Random(3, 83);
+
+		for (int idx : CritIdx)
+		{
+			mPegs[idx]->SetType(ePegType::Crit);
+		}
+	}
+
+	void FightScene::SetRefreshPegs()
+	{
+		RefreshIdx = {};
+		RefreshIdx = math::Random(3, 83);
+
+		for (int idx : RefreshIdx)
+		{
+			mPegs[idx]->SetType(ePegType::Refresh);
+		}
 	}
 }

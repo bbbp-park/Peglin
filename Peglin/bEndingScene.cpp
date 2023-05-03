@@ -28,12 +28,12 @@ namespace b
 		mText->SetText(*str);
 		mText->SetIsChange(false);
 		mText->SetTextHeight(80);
-
 	}
 
 	void EndingScene::Update()
 	{
 		Scene::Update();
+		mText->SetTextHeight(80);
 	}
 
 	void EndingScene::Render(HDC hdc)

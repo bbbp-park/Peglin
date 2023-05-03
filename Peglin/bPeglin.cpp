@@ -80,6 +80,7 @@ namespace b
 
 		if (hp <= 0 && mState == ePeglinState::Idle)
 		{
+			hp = 0;
 			mAnimator->Play(L"PeglinDeath", true);
 			mState = ePeglinState::Death;
 		}
@@ -190,7 +191,7 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		object::Instantiate<Ball>(pos, Vector2(3.0f, 3.0f), eLayerType::Ball);
+		object::Instantiate<Ball>(pos, Vector2(3.0f, 3.0f), eLayerType::Orb);
 
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;

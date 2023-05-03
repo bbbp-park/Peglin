@@ -43,7 +43,10 @@ namespace b
 			mTime += Time::DeltaTime();
 
 			if (mTime >= 1.2f)
+			{
 				object::Destory(this);
+				return;
+			}
 		}
 
 		if (bActive)

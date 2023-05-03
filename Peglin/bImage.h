@@ -6,7 +6,7 @@ namespace b
 	class Image : public Resource
 	{
 	public:
-		static Image* Create(const std::wstring& name, UINT widht, UINT height, COLORREF rgb = RGB(255, 255, 255));
+		static Image* Create(const std::wstring& name, int widht, int height, COLORREF rgb = RGB(255, 255, 255));
 
 		Image();
 		~Image();
@@ -18,14 +18,14 @@ namespace b
 
 		HDC GetHdc() { return mHdc; }
 		HBITMAP GetBitmap() { return mBitmap; }
-		UINT GetWidth() { return mWidth; }
-		UINT GetHeight() { return mHeight; }
+		int GetWidth() { return mWidth; }
+		int GetHeight() { return mHeight; }
 
 	private:
 		HDC mHdc;
 		HBITMAP mBitmap;
-		UINT mWidth;
-		UINT mHeight;
+		int mWidth;
+		int mHeight;
 	};
 }
 

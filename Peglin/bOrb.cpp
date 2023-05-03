@@ -10,6 +10,9 @@
 #include "bBall.h"
 #include "bPeglin.h"
 #include "bText.h"
+#include "bSceneManager.h"
+#include "bFightScene.h"
+
 
 namespace b
 {
@@ -21,13 +24,17 @@ namespace b
 		, mRigidbody(nullptr)
 		, mCollider(nullptr)
 		, mPower(DEFAULT_POWER)
-		, hitCnt(0)
-		, damage(2)
-		, critDamage(4)
-		, totalDamage(0)
+		, mInfo()
 		, mText(nullptr)
 	{
 		bombCnt = 0;
+
+		mInfo.damage = 2;
+		mInfo.critDamage = 4;
+		mInfo.hitCnt = 0;
+		mInfo.totalDamage = 0;
+		mInfo.isCrit = false;
+		mInfo.isRefresh = false;
 	}
 
 	Orb::~Orb()
@@ -65,7 +72,7 @@ namespace b
 		{
 			object::Destory(this);
 			bShoot = false;
-			Ball::SetPower(totalDamage);
+			Ball::SetPower(mInfo.totalDamage);
 			Peglin::SetState(Peglin::ePeglinState::ShootBomb);
 		}
 
@@ -127,14 +134,46 @@ namespace b
 
 				if (type == eColliderType::peg)
 				{
-					hitCnt++;
-					totalDamage = damage * hitCnt;
+					Peg* peg = dynamic_cast<Peg*>(other->GetOwner());
+
+					if (peg->GetType() == ePegType::Normal
+						|| peg->GetType() == ePegType::Red)
+					{
+						mInfo.hitCnt++;
+						//mInfo.totalDamage = mInfo.damage * mInfo.hitCnt;
+					}
+					else if (peg->GetType() == ePegType::Crit)
+					{
+						// 치명타 페그 터질 때
+						mInfo.isCrit = true;
+
+						Scene* activeScene = SceneManager::GetActiveScene();
+						if (activeScene->GetName() == L"FightScene")
+						{
+							FightScene::SetRedPegs();
+						}
+						
+					}
+					else if (peg->GetType() == ePegType::Refresh)
+					{
+						// 새로고침
+						Scene* activeScene = SceneManager::GetActiveScene();
+						if (activeScene->GetName() == L"FightScene")
+						{
+							FightScene::Refresh();
+						}
+					}
+
+					if (mInfo.isCrit)
+						mInfo.totalDamage = mInfo.critDamage * mInfo.hitCnt;
+					else
+						mInfo.totalDamage = mInfo.damage * mInfo.hitCnt;
 
 					Transform* tr = GetComponent<Transform>();
 					Vector2 pos = tr->GetPos();
 					mText = object::Instantiate<Text>(eLayerType::UI);
 					wchar_t str[10] = L"";
-					int num = swprintf_s(str, 10, L"%d", totalDamage);
+					int num = swprintf_s(str, 10, L"%d", mInfo.totalDamage);
 					mText->SetText(*str);
 					mText->SetIsChange(false);
 					mText->SetTextHeight(30);

@@ -103,7 +103,7 @@ namespace b
 			hpText->SetTextHeight(32);
 
 		} 
-		/*else if (this->GetHpType() == eHpType::Monster)
+		else if (this->GetHpType() == eHpType::Monster)
 		{
 			pos.x -= 30.0f;
 			pos.y -= 80.0f;
@@ -139,7 +139,7 @@ namespace b
 			textPos.y -= 3.0f;
 			textTr->SetPos(textPos);
 			hpText->SetTextHeight(28);
-		}*/
+		}
 		GameObject::Render(hdc);
 
 	}

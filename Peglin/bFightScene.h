@@ -1,11 +1,11 @@
 #pragma once
 #include "bScene.h"
-#include "bImage.h"
 
 namespace b
 {
 	class HpBar;
 	class Peglin;
+	class Image;
 	class FightScene : public Scene
 	{
 	public:
@@ -20,7 +20,6 @@ namespace b
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
 
-		static void CreateOrb();
 		static void SetPlayerTurn(bool turn) { mTurn = turn; }
 		static void SetCnt(int n) { cnt = n; }
 
@@ -28,6 +27,15 @@ namespace b
 		static bool GetPlayerTurn() { return mTurn; }
 		bool IsClear() { return isClear; }
 		static std::vector<class Monster*>& GetMonsters() { return mMonsters; }
+
+		static void SetRedPegs();
+		void SetNormalPegs();
+		static void Refresh();
+
+	private:
+		void CreateOrb();
+		void SetCritPegs();
+		void SetRefreshPegs();
 
 	private:
 		Peglin* mPeglin;
@@ -45,7 +53,10 @@ namespace b
 		std::vector<class Bouncer*> mBouncers;
 		std::vector<class BouncerTile*> mBouncerTiles;
 
-		std::vector<class Peg*> mPegs;
+		class Orb* mOrb;
+		static std::vector<class Peg*> mPegs;
+		std::vector<int> CritIdx;
+		std::vector<int> RefreshIdx;
 		static std::vector<class Monster*> mMonsters;
 
 		static bool mTurn;

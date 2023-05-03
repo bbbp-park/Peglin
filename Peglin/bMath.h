@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include <random>
 
 #define PI 3.141592
 
@@ -35,12 +36,12 @@ struct Vector2
 
 	}
 
-	Vector2(UINT32 x, UINT32 y)
+	/*Vector2(UINT32 x, UINT32 y)
 		: x(x)
 		, y(y)
 	{
 
-	}
+	}*/
 
 	Vector2(const Vector2&) = default;
 	Vector2& operator=(const Vector2&) = default;
@@ -194,11 +195,39 @@ namespace b::math
 		return reflect;
 	}
 
-	/*inline static int Random(int max)
+	inline static std::vector<int> Random(int n, int max)
 	{
-		srand((unsigned int)time(NULL));
-		int num = rand();
+		// random_devie : 시드값 생성
+		std::random_device rd;
+		// random_device를 통해 난수 생성 엔진 초기화
+		std::mt19937 gen(rd());
+		// 0 ~ max까지 균등하게 나타나는 난수열을 생성하기 위해 귱등 분포 정의
+		std::uniform_int_distribution<int> dis(0, max);
+		bool flag = true;
+		std::vector<int> result = {};
 
-		return (int)num % max;
-	}*/
+		for (int i = 0; i < n; )
+		{
+			int num = dis(gen);
+			for (int r : result)
+			{
+				if (num == r)
+				{
+					flag = false;
+				}
+				else
+				{
+					flag = true;
+				}
+			}
+
+			if (flag)
+			{
+				result.push_back(num);
+				i++;
+			}
+		}
+
+		return result;
+	}
 }

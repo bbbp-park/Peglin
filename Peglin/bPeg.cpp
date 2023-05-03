@@ -17,6 +17,7 @@ namespace b
 		, collider(nullptr)
 		, mAnimator(nullptr)
 		, durability(0)
+		, mOrb(nullptr)
 	{
 	}
 
@@ -65,7 +66,7 @@ namespace b
 		}
 
 	}
-
+	
 	void Peg::Render(HDC hdc)
 	{
 		Transform* tr = GetComponent<Transform>();
@@ -90,14 +91,14 @@ namespace b
 
 	void Peg::OnCollisionEnter(Collider* other)
 	{
-		Orb* orb = dynamic_cast<Orb*>(other->GetOwner());
+		mOrb = dynamic_cast<Orb*>(other->GetOwner());
 
-		if (orb == nullptr)
+		if (mOrb == nullptr)
 			return;
 
-		Rigidbody* rb = orb->GetComponent<Rigidbody>();
+		Rigidbody* rb = mOrb->GetComponent<Rigidbody>();
 
-		Collider* orbCol = orb->GetComponent<Collider>();
+		Collider* orbCol = mOrb->GetComponent<Collider>();
 		Vector2 orbPos = orbCol->GetCenterPos();
 
 		Collider* bCol = this->GetComponent<Collider>();
@@ -107,7 +108,7 @@ namespace b
 			|| this->GetType() == ePegType::Null)
 			return;
 
-		if (orb->GetIsShoot())
+		if (mOrb->GetIsShoot())
 		{
 
 			Vector2 dir = orbPos;

@@ -8,6 +8,17 @@ namespace b
 	class Orb : public GameObject
 	{
 	public:
+		struct orbInfo
+		{
+			int hitCnt;
+			int damage;
+			int critDamage;
+			int totalDamage;
+
+			bool isCrit;
+			bool isRefresh;
+		};
+
 		Orb();
 		~Orb();
 
@@ -24,6 +35,11 @@ namespace b
 		static void AddBombCnt() { bombCnt++; }
 		static int GetBombCnt() { return bombCnt; }
 
+		void SetIsCrit(bool b) { mInfo.isCrit = b; }
+		bool GetIsCrit() { return mInfo.isCrit; }
+		void SetIsRefresh(bool b) { mInfo.isRefresh = b; }
+		bool GetIsRefresh() { return mInfo.isRefresh; }
+
 	private:
 		Animator* mAnimator;
 		Rigidbody* mRigidbody;
@@ -31,10 +47,8 @@ namespace b
 
 		static bool bShoot;
 		static int bombCnt;
-		int hitCnt;
-		int damage;
-		int critDamage;
-		int totalDamage;
+		
+		orbInfo mInfo;
 		
 		float mPower;
 		class Text* mText;

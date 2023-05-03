@@ -33,6 +33,7 @@ namespace b
 		ePegType mType;
 
 		int durability;
+		class Orb* mOrb;
 	};
 
 }
