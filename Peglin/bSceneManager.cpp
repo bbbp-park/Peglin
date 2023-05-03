@@ -3,7 +3,6 @@
 #include "bTitleScene.h"
 #include "bFightScene.h"
 #include "bEndingScene.h"
-#include "bToolScene.h"
 #include "bCollisionManager.h"
 #include "bCamera.h"
 
@@ -42,10 +41,10 @@ namespace b
 	{
 		HBRUSH brush = CreateSolidBrush(RGB(48, 130, 48));
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
+		DeleteObject(oldBrush);
 
 		mActiveScene->Render(hdc);
 
-		DeleteObject(oldBrush);
 	}
 
 	void SceneManager::Destroy()

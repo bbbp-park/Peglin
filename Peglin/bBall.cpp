@@ -26,7 +26,7 @@ namespace b
 
 	void Ball::Initialize()
 	{
-		//mImage = Resources::Load<Image>(L"Rock", L"..\\Resources\\sprite\\Ball\\rock.bmp");
+		mImage = Resources::Load<Image>(L"Rock", L"..\\\Resources\\sprite\\Ball\\Rock\\rock.bmp");
 
 		Transform* tr = GetComponent<Transform>();
 		tr->SetScale(Vector2(2.0f, 2.0f));
@@ -57,7 +57,8 @@ namespace b
 
 	void Ball::Render(HDC hdc)
 	{
-		mImage = Resources::Load<Image>(L"Rock", L"..\\Resources\\sprite\\Ball\\Rock\\rock.bmp");
+		//mImage = Resources::Load<Image>(L"Rock", L"..\\Resources\\sprite\\Ball\\Rock\\rock.bmp");
+		GameObject::Render(hdc);
 
 		Transform* tr = GetComponent<Transform>();
 		
@@ -66,7 +67,6 @@ namespace b
 
 		TransparentBlt(hdc, pos.x, pos.y, mImage->GetWidth() * scale.x, mImage->GetHeight() * scale.y, mImage->GetHdc(), 0, 0, mImage->GetWidth(), mImage->GetHeight(), RGB(255, 0, 255));
 
-		GameObject::Render(hdc);
 	}
 
 	void Ball::Release()
@@ -78,8 +78,9 @@ namespace b
 	{
 		Sound* ExplodeyHitSound = Resources::Load<Sound>(L"ExplodeyHitSound", L"..\\Resources\\audio\\ExplodeyHitSound.wav");
 		ExplodeyHitSound->Play(false);
-		object::Destory(this);
 		FightScene::SetPlayerTurn(false);
+		object::Destory(this);
+		return;
 	}
 
 	void Ball::OnCollisionStay(Collider* other)

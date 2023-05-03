@@ -49,7 +49,6 @@ namespace b
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Monster\\Stump\\Dead", Vector2::Zero, 0.1f);
 
 		mAnimator->Play(L"StumpIdle", true);
-
 		mAnimator->GetCompleteEvent(L"StumpDie") = std::bind(&Monster::StumpDeathCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"StumpMove") = std::bind(&Monster::StumpMoveCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"StumpAttack") = std::bind(&Monster::StumpAttackCompleteEvent, this);
@@ -96,13 +95,15 @@ namespace b
 				if (mState != eMonsterState::Dead)
 				{
 					mState = eMonsterState::Dead;
+					mRigidbody->SetVelocity(Vector2::Zero);
 					mInfo.hp = mInfo.maxHp;
 					mAnimator->Play(L"StumpDie", false);
 				}
 				else
 				{
 					//object::Destory(hpBar);
-					this->SetState(eState::Death);
+					//this->SetState(eState::Death);
+					object::Destory(this);
 					return;
 				}
 			}
@@ -189,8 +190,8 @@ namespace b
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
-		pos.x += 15;
-		pos.y += 8;
+		pos.x += 30.0f;
+		pos.y += 10.0f;
 		tr->SetPos(pos);
 	}
 

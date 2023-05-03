@@ -4,6 +4,7 @@
 #include "bSceneManager.h"
 #include "bObject.h"
 #include "bText.h"
+#include "bCamera.h"
 
 namespace b
 {
@@ -32,8 +33,9 @@ namespace b
 
 	void EndingScene::Update()
 	{
-		Scene::Update();
 		mText->SetTextHeight(80);
+		Scene::Update();
+
 	}
 
 	void EndingScene::Render(HDC hdc)
@@ -54,6 +56,7 @@ namespace b
 
 	void EndingScene::OnEnter()
 	{
+		Camera::StartFadeIn();
 	}
 
 	void EndingScene::OnExit()

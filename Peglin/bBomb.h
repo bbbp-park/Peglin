@@ -21,9 +21,6 @@ namespace b
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
 
-	public:
-		void explosionCompleteEvent();
-
 	private:
 		Image* mImage;
 		Animator* mAnimator;

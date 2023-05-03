@@ -3,7 +3,6 @@
 
 namespace b
 {
-	class Image;
 	class Ball : public GameObject
 	{
 	public:
@@ -23,7 +22,7 @@ namespace b
 		static int GetPower() { return power; }
 
 	private:
-		Image* mImage;
+		class Image* mImage;
 		class Rigidbody* mRigidbody;
 
 		static int power;

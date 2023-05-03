@@ -50,8 +50,6 @@ namespace b
 		num += swprintf_s(str + num, 50 - num, L"%d", maxHp);
 		hpText->SetText(*str);
 
-		
-
 		if (this->GetHpType() == eHpType::Player)
 		{
 			
@@ -64,6 +62,7 @@ namespace b
 
 	void HpBar::Render(HDC hdc)
 	{
+		GameObject::Render(hdc);
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 scale = tr->GetScale();
@@ -75,15 +74,15 @@ namespace b
 			Vector2 textPos = pos;
 
 			TransparentBlt(hdc, pos.x, pos.y
-				, hpUIs[0]->GetWidth() * scale.x
-				, hpUIs[0]->GetHeight() * scale.y
-				, hpUIs[0]->GetHdc(), 0, 0
-				, hpUIs[0]->GetWidth()
-				, hpUIs[0]->GetHeight()
+				, hpUIs[(UINT)eHpType::Player]->GetWidth() * scale.x
+				, hpUIs[(UINT)eHpType::Player]->GetHeight() * scale.y
+				, hpUIs[(UINT)eHpType::Player]->GetHdc(), 0, 0
+				, hpUIs[(UINT)eHpType::Player]->GetWidth()
+				, hpUIs[(UINT)eHpType::Player]->GetHeight()
 				, RGB(255, 0, 255));
 
-			float width = bars[0]->GetWidth() * scale.x;
-			float height = bars[0]->GetHeight() * scale.y;
+			float width = bars[(UINT)eHpType::Player]->GetWidth() * scale.x;
+			float height = bars[(UINT)eHpType::Player]->GetHeight() * scale.y;
 			float mod = (float)hp / maxHp;
 
 			if (mod < 1)
@@ -92,9 +91,9 @@ namespace b
 			TransparentBlt(hdc, pos.x + 61, pos.y + 22
 				, width
 				, height
-				, bars[0]->GetHdc(), 0, 0
-				, bars[0]->GetWidth()
-				, bars[0]->GetHeight()
+				, bars[(UINT)eHpType::Player]->GetHdc(), 0, 0
+				, bars[(UINT)eHpType::Player]->GetWidth()
+				, bars[(UINT)eHpType::Player]->GetHeight()
 				, RGB(255, 0, 255));
 
 			textPos.x += 140.0f;
@@ -112,11 +111,11 @@ namespace b
 			Vector2 textPos = pos;
 
 			TransparentBlt(hdc, pos.x, pos.y
-				, hpUIs[1]->GetWidth() * scale.x
-				, hpUIs[1]->GetHeight() * scale.y
-				, hpUIs[1]->GetHdc(), 0, 0
-				, hpUIs[1]->GetWidth()
-				, hpUIs[1]->GetHeight()
+				, hpUIs[(UINT)eHpType::Monster]->GetWidth() * scale.x
+				, hpUIs[(UINT)eHpType::Monster]->GetHeight() * scale.y
+				, hpUIs[(UINT)eHpType::Monster]->GetHdc(), 0, 0
+				, hpUIs[(UINT)eHpType::Monster]->GetWidth()
+				, hpUIs[(UINT)eHpType::Monster]->GetHeight()
 				, RGB(255, 0, 255));
 
 			float width = bars[1]->GetWidth() * scale.x;
@@ -129,9 +128,9 @@ namespace b
 			TransparentBlt(hdc, pos.x + 11, pos.y + 36				
 				, width
 				, height + 1
-				, bars[1]->GetHdc(), 0, 0
-				, bars[1]->GetWidth()
-				, bars[1]->GetHeight()
+				, bars[(UINT)eHpType::Monster]->GetHdc(), 0, 0
+				, bars[(UINT)eHpType::Monster]->GetWidth()
+				, bars[(UINT)eHpType::Monster]->GetHeight()
 				, RGB(255, 0, 255));
 
 
@@ -140,7 +139,6 @@ namespace b
 			textTr->SetPos(textPos);
 			hpText->SetTextHeight(28);
 		}
-		GameObject::Render(hdc);
 
 	}
 

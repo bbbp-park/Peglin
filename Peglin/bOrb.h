@@ -40,6 +40,8 @@ namespace b
 		void SetIsRefresh(bool b) { mInfo.isRefresh = b; }
 		bool GetIsRefresh() { return mInfo.isRefresh; }
 
+		void Reset();
+
 	private:
 		Animator* mAnimator;
 		Rigidbody* mRigidbody;

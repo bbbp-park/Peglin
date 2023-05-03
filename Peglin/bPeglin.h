@@ -27,7 +27,7 @@ namespace b
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
 
-		static void SetState(ePeglinState state) { mState = state; }
+		static void SetPeglinState(ePeglinState state) { mState = state; }
 
 		static void CalHp(int damage);
 

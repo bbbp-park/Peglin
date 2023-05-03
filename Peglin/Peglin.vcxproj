@@ -120,6 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -175,7 +176,6 @@
     <ClInclude Include="bTilePalatte.h" />
     <ClInclude Include="bTime.h" />
     <ClInclude Include="bTitleScene.h" />
-    <ClInclude Include="bToolScene.h" />
     <ClInclude Include="bTransform.h" />
     <ClInclude Include="bTrees.h" />
     <ClInclude Include="bWall.h" />
@@ -230,7 +230,6 @@
     <ClCompile Include="bTilePalatte.cpp" />
     <ClCompile Include="bTime.cpp" />
     <ClCompile Include="bTitleScene.cpp" />
-    <ClCompile Include="bToolScene.cpp" />
     <ClCompile Include="bTransform.cpp" />
     <ClCompile Include="bTrees.cpp" />
     <ClCompile Include="bWall.cpp" />

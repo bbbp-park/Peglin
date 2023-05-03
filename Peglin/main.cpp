@@ -10,10 +10,15 @@
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 
-#ifdef _DEBUG
-#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
-#else
-#define DBG_NEW new
+//#ifdef _DEBUG
+//#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+//#else
+//#define DBG_NEW new
+//#endif
+
+#if _DEBUG
+#define new new(_NORMAL_BLOCK , __FILE__ , __LINE__ )
+#define malloc(s) _malloc_dbg(s, _NORMAL_BLOCK, __FILE__, __LINE__)
 #endif
 
 #define MAX_LOADSTRING 100
@@ -33,7 +38,7 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 LRESULT CALLBACK    AtlasWndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-
+//int* a = new int;
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
      _In_opt_ HINSTANCE hPrevInstance,
      _In_ LPWSTR    lpCmdLine,
@@ -42,7 +47,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
      UNREFERENCED_PARAMETER(hPrevInstance);
      UNREFERENCED_PARAMETER(lpCmdLine);
      _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-     //_CrtSetBreakAlloc(16484); // 추가
+     //_CrtSetBreakAlloc(9139); // 추가
      // 1. 윈도우의 정보를 담고있는 클래스를 정의(메모리에 등록)해주어야한다.
      // 2. CreateWindow함수를 통해서 메모리상에 윈도우를 할당해준다.
      // 3. ShowWindow함수를 통해서 화면에 보여준다.
@@ -96,7 +101,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
      return (int)msg.wParam;
 }
 
-
 //
 //  함수: MyRegisterClass()
 //
@@ -140,9 +144,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       0, 0, 1600, 900, nullptr, nullptr, hInstance, nullptr);
 
-   HWND hWnd2 = CreateWindowW(L"AtlasWindow", szTitle, WS_OVERLAPPEDWINDOW,
-        1600, 0, 500, 500, nullptr, nullptr, hInstance, nullptr);
-
    if (!hWnd)
    {
       return FALSE;
@@ -151,11 +152,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
-   ShowWindow(hWnd2, nCmdShow);
-   UpdateWindow(hWnd2);
-
    application.Initialize(hWnd);
-   application.SetToolHwnd(hWnd2);
 
    return TRUE;
 }
@@ -200,6 +197,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     case WM_DESTROY:
+         //_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
         PostQuitMessage(0);
         break;
     default:

@@ -68,6 +68,11 @@ namespace b
 
 	void Scene::Release()
 	{
+		for (Layer& layer : mLayers)
+		{
+			layer.Release();
+
+		}
 	}
 
 	void Scene::OnEnter()

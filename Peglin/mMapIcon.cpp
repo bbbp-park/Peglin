@@ -25,10 +25,14 @@ namespace b
 		mImages.push_back(Resources::Load<Image>(L"moleIcon", L"..\\Resources\\sprite\\Background\\Mole_map_icon.bmp"));
 
 		mImage = mImages[0];
+
+		GameObject::Initialize();
 	}
 
 	void MapIcon::Update()
 	{
+		GameObject::Update();
+
 		if (mType == eIconType::Skull)
 			mImage = mImages[(UINT)eIconType::Skull];
 
@@ -44,6 +48,8 @@ namespace b
 
 	void MapIcon::Render(HDC hdc)
 	{
+		GameObject::Render(hdc);
+
 		TransparentBlt(hdc, mPos.x, mPos.y
 			, mImage->GetWidth() * 4.0f
 			, mImage->GetHeight() * 4.0f
@@ -55,5 +61,6 @@ namespace b
 
 	void MapIcon::Release()
 	{
+		GameObject::Release();
 	}
 }

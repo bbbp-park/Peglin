@@ -79,7 +79,7 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 		Vector2 vel = mRigidbody->GetVelocity();
-		vel -= dir * 5;
+		vel -= dir * 120.0f * Time::DeltaTime();
 
 		mRigidbody->SetVelocity(vel);
 
@@ -109,7 +109,7 @@ namespace b
 				target = Vector2(805.0f, 590.0f);
 				dir = pos - target;
 				dir.Normalize();
-				mRigidbody->SetVelocity(dir * 100);
+				mRigidbody->SetVelocity(dir * 80.0f);
 				mState = eMapPeglinState::Move;
 				mTime = 0.0f;
 			}

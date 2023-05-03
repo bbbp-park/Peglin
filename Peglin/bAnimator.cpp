@@ -18,7 +18,6 @@ namespace b
 			delete animation.second;
 			animation.second = nullptr;
 		}
-
 		for (auto events : mEvents)
 		{
 			delete events.second;
@@ -38,7 +37,8 @@ namespace b
 
 			if (mActiveAnimation->IsComplete())
 			{
-				Animator::Events* events = FindEvents(mActiveAnimation->GetAnimationName());
+				Animator::Events* events
+					= FindEvents(mActiveAnimation->GetAnimationName());
 
 				if (events != nullptr)
 					events->mCompleteEvent();
@@ -51,14 +51,19 @@ namespace b
 	void Animator::Render(HDC hdc)
 	{
 		if (mActiveAnimation)
+		{
 			mActiveAnimation->Render(hdc);
+		}
 	}
 
 	void Animator::Release()
 	{
 	}
 
-	void Animator::CreateAnimation(const std::wstring& name, Image* sheet, Vector2 leftTop, UINT coulmn, UINT row, UINT spriteLength, Vector2 offset, float duration)
+	void Animator::CreateAnimation(const std::wstring& name
+		, Image* sheet, Vector2 leftTop
+		, UINT coulmn, UINT row, UINT spriteLength
+		, Vector2 offset, float duration)
 	{
 		Animation* animation = FindAnimation(name);
 
@@ -71,7 +76,6 @@ namespace b
 		animation->SetAnimator(this);
 
 		mAnimations.insert(std::make_pair(name, animation));
-
 		Events* event = new Events();
 		mEvents.insert(std::make_pair(name, event));
 	}
@@ -84,7 +88,6 @@ namespace b
 
 		std::filesystem::path fs(path);
 		std::vector<Image*> images = {};
-
 		for (const auto& p : std::filesystem::recursive_directory_iterator(path))
 		{
 			std::wstring fileName = p.path().filename();
@@ -98,9 +101,13 @@ namespace b
 			images.push_back(image);
 
 			if (width < image->GetWidth())
+			{
 				width = image->GetWidth();
+			}
 			if (height < image->GetHeight())
+			{
 				height = image->GetHeight();
+			}
 			fileCount++;
 		}
 
@@ -108,8 +115,8 @@ namespace b
 		key += fs.filename();
 		mSpriteSheet = Image::Create(key, width * fileCount, height);
 
+		//
 		int index = 0;
-
 		for (Image* image : images)
 		{
 			int centerX = (width - image->GetWidth()) / 2;
@@ -129,7 +136,8 @@ namespace b
 
 	Animation* Animator::FindAnimation(const std::wstring& name)
 	{
-		std::map<std::wstring, Animation*>::iterator iter = mAnimations.find(name);
+		std::map<std::wstring, Animation*>::iterator iter
+			= mAnimations.find(name);
 
 		if (iter == mAnimations.end())
 			return nullptr;
@@ -141,7 +149,8 @@ namespace b
 	{
 		if (mActiveAnimation != nullptr)
 		{
-			Animator::Events* prevEvents = FindEvents(mActiveAnimation->GetAnimationName());
+			Animator::Events* prevEvents
+				= FindEvents(mActiveAnimation->GetAnimationName());
 
 			if (prevEvents != nullptr)
 				prevEvents->mEndEvent();
@@ -151,7 +160,8 @@ namespace b
 		mActiveAnimation->Reset();
 		mbLoop = loop;
 
-		Animator::Events* events = FindEvents(mActiveAnimation->GetAnimationName());
+		Animator::Events* events
+			= FindEvents(mActiveAnimation->GetAnimationName());
 
 		if (events != nullptr)
 			events->mStartEvent();
@@ -159,7 +169,8 @@ namespace b
 
 	Animator::Events* Animator::FindEvents(const std::wstring& name)
 	{
-		std::map<std::wstring, Events*>::iterator iter = mEvents.find(name);
+		std::map<std::wstring, Events*>::iterator iter
+			= mEvents.find(name);
 
 		if (iter == mEvents.end())
 			return nullptr;
@@ -171,7 +182,8 @@ namespace b
 	{
 		Animation* animation = FindAnimation(name);
 
-		Animator::Events* events = FindEvents(animation->GetAnimationName());
+		Animator::Events* events
+			= FindEvents(animation->GetAnimationName());
 
 		return events->mStartEvent.mEvent;
 	}
@@ -180,7 +192,8 @@ namespace b
 	{
 		Animation* animation = FindAnimation(name);
 
-		Animator::Events* events = FindEvents(animation->GetAnimationName());
+		Animator::Events* events
+			= FindEvents(animation->GetAnimationName());
 
 		return events->mCompleteEvent.mEvent;
 	}
@@ -189,7 +202,8 @@ namespace b
 	{
 		Animation* animation = FindAnimation(name);
 
-		Animator::Events* events = FindEvents(animation->GetAnimationName());
+		Animator::Events* events
+			= FindEvents(animation->GetAnimationName());
 
 		return events->mEndEvent.mEvent;
 	}

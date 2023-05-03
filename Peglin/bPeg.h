@@ -19,7 +19,7 @@ namespace b
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
-		void SetType(ePegType type) { mType = type; }
+		void SetPegType(ePegType type) { mType = type; }
 		ePegType GetType() { return mType; }
 
 		void deletePeg();
@@ -32,7 +32,6 @@ namespace b
 		std::vector<Image*> mImages;
 		ePegType mType;
 
-		int durability;
 		class Orb* mOrb;
 	};
 

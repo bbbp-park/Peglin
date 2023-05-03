@@ -18,7 +18,6 @@ namespace b
 		, mType(ePegType::Normal)
 		, collider(nullptr)
 		, mAnimator(nullptr)
-		, durability(0)
 		, mOrb(nullptr)
 	{
 	}
@@ -29,12 +28,12 @@ namespace b
 
 	void Peg::Initialize()
 	{
-		GameObject::Initialize();
 
 		mImages.resize((UINT)ePegType::End);
 
 		mImages[(UINT)ePegType::Normal] = Resources::Load<Image>(L"NormalPeg", L"..\\Resources\\sprite\\Peg\\Normal Peg.bmp");
 		mImages[(UINT)ePegType::Bomb] = Resources::Load<Image>(L"BombPeg1", L"..\\Resources\\sprite\\Peg\\Bomb Peg1.bmp");
+		mImages[(UINT)ePegType::ActiveBomb] = Resources::Load<Image>(L"BombPeg0", L"..\\Resources\\sprite\\Peg\\Bomb Peg0.bmp");
 		mImages[(UINT)ePegType::Crit] = Resources::Load<Image>(L"CritPeg", L"..\\Resources\\sprite\\Peg\\Crit Peg.bmp");
 		mImages[(UINT)ePegType::Red] = Resources::Load<Image>(L"RedPeg", L"..\\Resources\\sprite\\Peg\\Red Peg.bmp");
 		mImages[(UINT)ePegType::Refresh] = Resources::Load<Image>(L"RefreshPeg", L"..\\Resources\\sprite\\Peg\\Refresh Peg.bmp");
@@ -48,6 +47,9 @@ namespace b
 		collider->SetCenter(Vector2(0.0f, 0.0f));
 		collider->SetSize(Vector2(mImages[(UINT)mType]->GetWidth() * 3, mImages[(UINT)mType]->GetHeight() * 3));
 		collider->SetColliderType(eColliderType::peg);
+
+		GameObject::Initialize();
+
 	}
 
 	void Peg::Update()
@@ -57,20 +59,23 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		if (this->GetType() == ePegType::Bomb)
+		if (mType == ePegType::Bomb || mType == ePegType::ActiveBomb)
 		{
-			collider->SetCenter(Vector2(0.0f, 6.0f));
+			collider->SetCenter(Vector2(0.0f, 8.0f));
 		}
 
-		if (durability == 1)
-		{
-			mImages[(UINT)ePegType::Bomb] = Resources::Load<Image>(L"BombPeg0", L"..\\Resources\\sprite\\Peg\\Bomb Peg0.bmp");
-		}
+		//if (durability == 1)
+		//{
+		//	mType = ePegType::ActiveBomb;
+		//}
 
 	}
 	
 	void Peg::Render(HDC hdc)
 	{
+		GameObject::Render(hdc);
+
+
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
@@ -83,7 +88,6 @@ namespace b
 			, mImages[(UINT)mType]->GetHeight()
 			, RGB(255, 0, 255));
 
-		GameObject::Render(hdc);
 	}
 
 	void Peg::Release()
@@ -106,8 +110,8 @@ namespace b
 		Collider* bCol = this->GetComponent<Collider>();
 		Vector2 bPos = bCol->GetCenterPos();
 
-		if (this->GetType() == ePegType::SmallRect
-			|| this->GetType() == ePegType::Null)
+		if (mType == ePegType::SmallRect
+			|| mType == ePegType::Null)
 			return;
 
 		if (mOrb->GetIsShoot())
@@ -120,21 +124,29 @@ namespace b
 			Vector2 vel = rb->GetVelocity();
 
 			if (this->GetType() == ePegType::Bomb)
-				durability++;
-
-			if (this->GetType() == ePegType::Bomb)
 			{
-				// ÆøÅº Æä±× Æø¹ß
-				if (durability >= 2)
-				{
-					deleteBomb();
-					rb->SetPower(DEFAULT_POWER);
-
-					Sound* PowerHit = Resources::Load<Sound>(L"PowerHit", L"..\\Resources\\audio\\Power Hit.wav");
-					PowerHit->Play(false);
-				}
+				// inactive
+				//durability++;
+				mType = ePegType::ActiveBomb;
 			}
-			else if (this->GetType() != ePegType::SmallRect)
+			else if (this->GetType() == ePegType::ActiveBomb)
+			{
+				deleteBomb();
+				rb->SetPower(DEFAULT_POWER);
+
+				Sound* PowerHit = Resources::Load<Sound>(L"PowerHit", L"..\\Resources\\audio\\Power Hit.wav");
+				PowerHit->Play(false);
+				// ÆøÅº Æä±× Æø¹ß
+				//if (durability >= 2)
+				//{
+				//	deleteBomb();
+				//	rb->SetPower(DEFAULT_POWER);
+
+				//	Sound* PowerHit = Resources::Load<Sound>(L"PowerHit", L"..\\Resources\\audio\\Power Hit.wav");
+				//	PowerHit->Play(false);
+				//}
+			}
+			else if (mType != ePegType::SmallRect)
 			{
 				deletePeg();
 			}
@@ -159,16 +171,16 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		if (this->GetType() == ePegType::Red)
+		if (mType == ePegType::Red)
 		{
 			// »¡°£ »öÀ¸·Î Ç¥Çö Ä¿Á³´Ù°¡ »ç¶óÁü
-			this->SetType(ePegType::SmallRect);
+			mType = ePegType::SmallRect;
 		}
 		else
 		{
 			// ³ª¸ÓÁö
-			if (this->GetType() != ePegType::Null)
-				this->SetType(ePegType::SmallRect);
+			if (mType != ePegType::Null)
+				mType = ePegType::SmallRect;
 		}
 
 		this->GetComponent<Collider>()->SetColliderType(eColliderType::null);
@@ -183,7 +195,8 @@ namespace b
 		object::Instantiate<Explosion>(pos, Vector2(0.4f, 0.4f), eLayerType::Effect);
 
 		Orb::AddBombCnt();
-		this->SetType(ePegType::Null);
-		this->GetComponent<Collider>()->SetColliderType(eColliderType::null);
+		//mType = ePegType::Null;
+		//this->GetComponent<Collider>()->SetColliderType(eColliderType::null);
+		object::Destory(this);
 	}
 }

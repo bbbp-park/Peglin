@@ -36,9 +36,8 @@ namespace b
 
 		bool IsComplete() { return mbComplete; }
 		void SetAnimator(Animator* animator) { mAnimator = animator; }
-
 		void SetAnimationName(const std::wstring& name) { mAnimationName = name; }
-		std::wstring GetAnimationName() { return mAnimationName; }
+		std::wstring& GetAnimationName() { return mAnimationName; }
 
 	private:
 		Animator* mAnimator;

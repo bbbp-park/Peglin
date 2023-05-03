@@ -112,6 +112,7 @@ namespace b
 		HFONT hFont = CreateFont(textHeight, 0, 0, 0, FW_BOLD, 0, 0, 0, HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH || FF_ROMAN, TEXT("¸¼Àº °íµñ"));
 		SetTextAlign(hdc, TA_CENTER);
 		HFONT oldFont = (HFONT)SelectObject(hdc, hFont);
+		DeleteObject(oldFont);
 		TextOut(hdc, mPos.x, mPos.y, str, wcslen(str));
 	}
 

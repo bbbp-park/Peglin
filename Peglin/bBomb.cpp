@@ -107,7 +107,7 @@ namespace b
 			textTr->SetPos(pos);
 		}
 
-		Peglin::SetState(Peglin::ePeglinState::ShootBall);
+		Peglin::SetPeglinState(Peglin::ePeglinState::ShootBall);
 		object::Destory(this);
 	}
 

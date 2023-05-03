@@ -41,9 +41,9 @@ namespace b
 
 		// 완성된 스프라이트 시트를 지정해서 애니메이션을 제작
 		void CreateAnimation(const std::wstring& name
-			, Image* sheet, Vector2 leftTop
-			, UINT coulmn, UINT row
-			, UINT spriteLength
+			, Image* sheet
+			, Vector2 leftTop
+			, UINT coulmn, UINT row, UINT spriteLength
 			, Vector2 offset, float duration);
 
 		// 스프라이트를 이용해서 애니메이션 제작
@@ -57,6 +57,7 @@ namespace b
 		std::function<void()>& GetStartEvent(const std::wstring& name);
 		std::function<void()>& GetCompleteEvent(const std::wstring& name);
 		std::function<void()>& GetEndEvent(const std::wstring& name);
+		bool IsComplte() { return mActiveAnimation->IsComplete(); }
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;

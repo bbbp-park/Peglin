@@ -59,7 +59,7 @@ namespace b
 
 		mPeglin = object::Instantiate<Peglin>(Vector2(410.0f, 170.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
 
-		//object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
 
 		mMonsters.push_back(object::Instantiate<Monster>(Vector2(890.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster));
 		mMonsters[0]->SetMonsterType(eMonsterType::Stump);
@@ -202,13 +202,13 @@ namespace b
 		mPegs.push_back(object::Instantiate<Peg>(Vector2(1238.0f, 662.0f), eLayerType::Peg));
 
 		mPegs.push_back(object::Instantiate<Peg>(Vector2(634.0f, 634.0f), eLayerType::Peg)); // bomb 17
-		mPegs[84]->SetType(ePegType::Bomb);
+		mPegs[84]->SetPegType(ePegType::Bomb);
 		mPegs.push_back(object::Instantiate<Peg>(Vector2(719.0f, 514.0f), eLayerType::Peg)); // bomb 25
-		mPegs[85]->SetType(ePegType::Bomb);
+		mPegs[85]->SetPegType(ePegType::Bomb);
 		mPegs.push_back(object::Instantiate<Peg>(Vector2(1050.0f, 516.0f), eLayerType::Peg)); // bomb 62
-		mPegs[86]->SetType(ePegType::Bomb);
+		mPegs[86]->SetPegType(ePegType::Bomb);
 		mPegs.push_back(object::Instantiate<Peg>(Vector2(1132.0f, 632.0f), eLayerType::Peg)); // bomb 73
-		mPegs[87]->SetType(ePegType::Bomb);
+		mPegs[87]->SetPegType(ePegType::Bomb);
 
 		// bouncer setting
 		Vector2 bDiff = Vector2(15.0f, 55.0f);
@@ -238,7 +238,6 @@ namespace b
 
 	void FightScene::Update()
 	{
-		Scene::Update();
 
 		if (isClear)
 		{
@@ -260,16 +259,17 @@ namespace b
 			for (int idx : CritIdx)
 			{
 				if (mPegs[idx]->GetType() != ePegType::SmallRect)
-					mPegs[idx]->SetType(ePegType::Normal);
+					mPegs[idx]->SetPegType(ePegType::Normal);
 			}
 			for (int idx : RefreshIdx)
 			{
 				if (mPegs[idx]->GetType() != ePegType::SmallRect)
-					mPegs[idx]->SetType(ePegType::Normal);
+					mPegs[idx]->SetPegType(ePegType::Normal);
 			}
 
 			SetCritPegs();
 			SetRefreshPegs();
+
 			if (mOrb != nullptr && mOrb->GetIsCrit())
 			{
 				SetRedPegs();
@@ -310,6 +310,9 @@ namespace b
 				}
 			}
 		}
+
+		Scene::Update();
+
 	}
 
 	void FightScene::Render(HDC hdc)
@@ -426,7 +429,7 @@ namespace b
 
 	void FightScene::OnExit()
 	{
-		Camera::StartFadeOut();
+		//Camera::StartFadeOut();
 
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Monster, false);
 		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Wall, false);
@@ -443,7 +446,7 @@ namespace b
 		{
 			if (peg->GetType() == ePegType::Normal)
 			{
-				peg->SetType(ePegType::Red);
+				peg->SetPegType(ePegType::Red);
 			}
 		}
 	}
@@ -454,25 +457,32 @@ namespace b
 		{
 			if (peg->GetType() == ePegType::Red)
 			{
-				peg->SetType(ePegType::Normal);
+				peg->SetPegType(ePegType::Normal);
 			}
 		}
 	}
 
-	void FightScene::Refresh()
+	void FightScene::Refresh(bool isCrit)
 	{
 		for (auto peg : mPegs)
 		{
 			if (peg->GetType() == ePegType::SmallRect)
 			{
-				peg->SetType(ePegType::Normal);
+				if (isCrit)
+					peg->SetPegType(ePegType::Red);
+				else
+					peg->SetPegType(ePegType::Normal);
+
+				Collider* pCol = peg->GetComponent<Collider>();
+				pCol->SetColliderType(eColliderType::peg);
 			}
 		}
 	}
 
 	void FightScene::CreateOrb()
 	{
-		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+		//mOrb = object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
+		mOrb->Reset();
 	}
 
 	void FightScene::SetCritPegs()
@@ -482,7 +492,9 @@ namespace b
 
 		for (int idx : CritIdx)
 		{
-			mPegs[idx]->SetType(ePegType::Crit);
+			mPegs[idx]->SetPegType(ePegType::Crit);
+			Collider* pCol = mPegs[idx]->GetComponent<Collider>();
+			pCol->SetColliderType(eColliderType::peg);
 		}
 	}
 
@@ -493,7 +505,9 @@ namespace b
 
 		for (int idx : RefreshIdx)
 		{
-			mPegs[idx]->SetType(ePegType::Refresh);
+			mPegs[idx]->SetPegType(ePegType::Refresh);
+			Collider* pCol = mPegs[idx]->GetComponent<Collider>();
+			pCol->SetColliderType(eColliderType::peg);
 		}
 	}
 }

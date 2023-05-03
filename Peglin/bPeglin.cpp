@@ -73,8 +73,11 @@ namespace b
 	{
 		GameObject::Update();
 
-		hpBar->SetHp(hp);
-		hpBar->SetMaxHp(maxHp);
+		if (hpBar != nullptr)
+		{
+			hpBar->SetHp(hp);
+			hpBar->SetMaxHp(maxHp);
+		}
 
 		if (Input::GetKeyDown(eKeyCode::Q))
 			hp -= 10;
@@ -165,8 +168,8 @@ namespace b
 			if (bCnt > 0)
 			{
 				mAnimator->Play(L"PeglinShoot Bomb", false);
+				//delay = false;
 			}
-
 			else
 			{
 				mState = ePeglinState::ShootBall;
@@ -225,6 +228,8 @@ namespace b
 			}
 		}
 
+		//mAnimator->Play(L"PeglinIdle", false);
 		delay = false;
+		//mState = ePeglinState::ShootBall;
 	}
 }

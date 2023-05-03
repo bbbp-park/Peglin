@@ -30,7 +30,7 @@ namespace b
 
 		static void SetRedPegs();
 		void SetNormalPegs();
-		static void Refresh();
+		static void Refresh(bool isCrit);
 
 	private:
 		void CreateOrb();

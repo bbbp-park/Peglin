@@ -49,8 +49,8 @@ namespace b
 
 	void Explosion::explosionCompleteEvent()
 	{
-		
 		object::Destory(this);
 		mEnd = true;
+		return;
 	}
 }

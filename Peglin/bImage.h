@@ -6,7 +6,7 @@ namespace b
 	class Image : public Resource
 	{
 	public:
-		static Image* Create(const std::wstring& name, int widht, int height, COLORREF rgb = RGB(255, 255, 255));
+		static Image* Create(const std::wstring& name, UINT widht, UINT height, COLORREF rgb = RGB(255, 255, 255));
 
 		Image();
 		~Image();
@@ -24,8 +24,8 @@ namespace b
 	private:
 		HDC mHdc;
 		HBITMAP mBitmap;
-		int mWidth;
-		int mHeight;
+		UINT mWidth;
+		UINT mHeight;
 	};
 }
 

@@ -218,9 +218,6 @@
     <ClInclude Include="bSoundManager.h">
       <Filter>Engine\Resource\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="bToolScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="bTile.h">
       <Filter>Contents\Tile</Filter>
     </ClInclude>
@@ -366,9 +363,6 @@
     </ClCompile>
     <ClCompile Include="bSoundManager.cpp">
       <Filter>Engine\Resource\Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="bToolScene.cpp">
-      <Filter>Contents\Scene</Filter>
     </ClCompile>
     <ClCompile Include="bTile.cpp">
       <Filter>Contents\Tile</Filter>

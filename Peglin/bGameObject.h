@@ -53,7 +53,7 @@ namespace b
 		eState GetState() { return mState; }
 		void SetState(eState state) { mState = state; }
 
-		int GetSize() { return (int)mComponents.size(); }
+		//int GetSize() { return (int)mComponents.size(); }
 
 	private:
 		std::vector<Component*> mComponents;

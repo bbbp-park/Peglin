@@ -62,6 +62,12 @@ namespace b
 
 	void Layer::Release()
 	{
+		for (GameObject* gameObj : mGameObjects)
+		{
+			gameObj->Release();
+			delete gameObj;
+			gameObj = NULL;
+		}
 	}
 
 	void Layer::AddaGameObject(GameObject* gameObj)

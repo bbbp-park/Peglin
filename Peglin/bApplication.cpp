@@ -24,6 +24,7 @@ namespace b
 
 	Application::~Application()
 	{
+		//SceneManager::Release();
 	}
 
 	void Application::Initialize(HWND hWnd)

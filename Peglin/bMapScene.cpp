@@ -47,9 +47,9 @@ namespace b
 	{
 		HBRUSH brush = CreateSolidBrush(RGB(48, 130, 48));
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
-		
-		Scene::Render(hdc);
 		DeleteObject(oldBrush);
+
+		Scene::Render(hdc);
 	}
 
 	void MapScene::Release()

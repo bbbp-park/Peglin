@@ -21,10 +21,14 @@ namespace b
 	{
 		treeTop = Resources::Load<Image>(L"treeTop", L"..\\Resources\\sprite\\Background\\treetop_.bmp");
 		treeBottom = Resources::Load<Image>(L"treeBottom", L"..\\Resources\\sprite\\Background\\treebottom.bmp");
+
+		GameObject::Initialize();
 	}
 
 	void Trees::Update()
 	{
+		GameObject::Update();
+
 		Transform* tr = GetComponent<Transform>();
 
 		mPos = Vector2(-1000, -300);
@@ -34,6 +38,8 @@ namespace b
 
 	void Trees::Render(HDC hdc)
 	{
+		GameObject::Render(hdc);
+
 		TransparentBlt(hdc, mPos.x, mPos.y
 			, treeTop->GetWidth() * 2.4
 			, treeTop->GetHeight() * 2.4
@@ -53,5 +59,6 @@ namespace b
 
 	void Trees::Release()
 	{
+		GameObject::Release();
 	}
 }

@@ -6,7 +6,7 @@ extern b::Application application;
 
 namespace b
 {
-	Image* Image::Create(const std::wstring& name, int width, int height, COLORREF rgb)
+	Image* Image::Create(const std::wstring& name, UINT width, UINT height, COLORREF rgb)
 	{
 		if (width == 0 || height == 0)
 			return nullptr;

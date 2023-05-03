@@ -21,8 +21,6 @@ namespace b
 	float Camera::mAlphaTime = 0.0f;
 	float Camera::mEndTime = 3.0f;
 
-	bool Camera::mbMove = false;
-
 	void Camera::Initiailize()
 	{
 		mResolution.x = application.GetWidth();
@@ -34,20 +32,20 @@ namespace b
 
 	void Camera::Update()
 	{
-		if (mbMove)
-		{
-			if (Input::GetKey(eKeyCode::LEFT))
-				mLookPosition.x -= 100.0f * Time::DeltaTime();
+		//if (false)
+		//{
+		//	if (Input::GetKey(eKeyCode::LEFT))
+		//		mLookPosition.x -= 100.0f * Time::DeltaTime();
 
-			if (Input::GetKey(eKeyCode::RIGHT))
-				mLookPosition.x += 100.0f * Time::DeltaTime();
+		//	if (Input::GetKey(eKeyCode::RIGHT))
+		//		mLookPosition.x += 100.0f * Time::DeltaTime();
 
-			if (Input::GetKey(eKeyCode::UP))
-				mLookPosition.y -= 100.0f * Time::DeltaTime();
+		//	if (Input::GetKey(eKeyCode::UP))
+		//		mLookPosition.y -= 100.0f * Time::DeltaTime();
 
-			if (Input::GetKey(eKeyCode::DOWN))
-				mLookPosition.y += 100.0f * Time::DeltaTime();
-		}
+		//	if (Input::GetKey(eKeyCode::DOWN))
+		//		mLookPosition.y += 100.0f * Time::DeltaTime();
+		//}
 
 
 		if (mTarget != nullptr)
@@ -77,8 +75,7 @@ namespace b
 			}
 		}
 
-		mDistance.x = mLookPosition.x - (mResolution.x / 2.0f);
-		mDistance.y = mLookPosition.y - (mResolution.y / 2.0f);
+		mDistance = mLookPosition - (mResolution / 2.0f);
 	}
 
 	void Camera::Render(HDC hdc)
@@ -92,7 +89,6 @@ namespace b
 			func.AlphaFormat = 0;
 			func.SourceConstantAlpha = (BYTE)(255.0f * mCuttonAlpha);
 
-			
 			AlphaBlend(hdc, 0, 0
 				, mResolution.x, mResolution.y
 				, mCutton->GetHdc()
@@ -100,23 +96,23 @@ namespace b
 				, mCutton->GetWidth(), mCutton->GetHeight()
 				, func);
 		}
-		else if (mAlphaTime < mEndTime
-			&& mType == eCameraEffectType::FadeOut)
-		{
-			BLENDFUNCTION func = {};
-			func.BlendOp = AC_SRC_OVER;
-			func.BlendFlags = 0;
-			func.AlphaFormat = 0;
-			func.SourceConstantAlpha = (BYTE)(255.0f - (255.0f * mCuttonAlpha));
+		//else if (mAlphaTime < mEndTime
+		//	&& mType == eCameraEffectType::FadeOut)
+		//{
+		//	BLENDFUNCTION func = {};
+		//	func.BlendOp = AC_SRC_OVER;
+		//	func.BlendFlags = 0;
+		//	func.AlphaFormat = 0;
+		//	func.SourceConstantAlpha = (BYTE)(255.0f - (255.0f * mCuttonAlpha));
 
 
-			AlphaBlend(hdc, 0, 0
-				, mResolution.x, mResolution.y
-				, mCutton->GetHdc()
-				, 0, 0
-				, mCutton->GetWidth(), mCutton->GetHeight()
-				, func);
-		}
+		//	AlphaBlend(hdc, 0, 0
+		//		, mResolution.x, mResolution.y
+		//		, mCutton->GetHdc()
+		//		, 0, 0
+		//		, mCutton->GetWidth(), mCutton->GetHeight()
+		//		, func);
+		//}
 	}
 
 	void Camera::Clear()

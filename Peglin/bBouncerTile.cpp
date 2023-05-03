@@ -36,7 +36,6 @@ namespace b
 
 	void BouncerTile::Render(HDC hdc)
 	{
-		GameObject::Render(hdc);
 
 		Transform* tr = GetComponent<Transform>();
 
@@ -48,6 +47,8 @@ namespace b
 			, 0, 0
 			, tileImage->GetWidth(), tileImage->GetHeight()
 			, RGB(255, 0, 255));
+		GameObject::Render(hdc);
+
 	}
 
 	void BouncerTile::Release()

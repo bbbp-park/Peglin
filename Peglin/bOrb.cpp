@@ -45,7 +45,6 @@ namespace b
 
 	void Orb::Initialize()
 	{
-		GameObject::Initialize();
 		this->SetName(L"Orb");
 		mAnimator = AddComponent<Animator>();
 
@@ -62,20 +61,26 @@ namespace b
 		mRigidbody->SetMass(1.0f);
 		mRigidbody->SetGravity(Vector2::Zero);
 		mRigidbody->SetGround(false);
+
+		GameObject::Initialize();
 	}
 
 	void Orb::Update()
 	{
+		GameObject::Update();
+
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
 		// 오브가 떨어졌을 때
 		if (pos.y >= 910.0f)
 		{
-			object::Destory(this);
 			bShoot = false;
 			Ball::SetPower(mInfo.totalDamage);
-			Peglin::SetState(Peglin::ePeglinState::ShootBomb);
+			Peglin::SetPeglinState(Peglin::ePeglinState::ShootBomb);
+			//object::Destory(this);
+			this->SetState(eState::Pause);
+			//return;
 		}
 
 		if (!bShoot && Input::GetKeyDown(eKeyCode::LBUTTON))
@@ -96,11 +101,12 @@ namespace b
 
 		/*totalDamage = damage * hitCnt;*/
 
-		GameObject::Update();
 	}
 
 	void Orb::Render(HDC hdc)
 	{
+		GameObject::Render(hdc);
+
 		HPEN pen = CreatePen(PS_SOLID, 2, RGB(255, 255, 255));
 		HPEN oldPen = (HPEN)SelectObject(hdc, pen);
 
@@ -117,7 +123,6 @@ namespace b
 		(HPEN)SelectObject(hdc, oldPen);
 		DeleteObject(pen);
 
-		GameObject::Render(hdc);
 	}
 
 	void Orb::Release()
@@ -174,7 +179,7 @@ namespace b
 
 						if (activeScene->GetName() == L"FightScene")
 						{
-							FightScene::Refresh();
+							FightScene::Refresh(mInfo.isCrit);
 						}
 					}
 
@@ -214,5 +219,20 @@ namespace b
 
 	void Orb::OnCollisionExit(Collider* other)
 	{
+	}
+
+	void Orb::Reset()
+	{
+		mInfo.isCrit = false;
+		mInfo.isRefresh = false;
+		Transform* orbTr = GetComponent<Transform>();
+		orbTr->SetPos(Vector2(900.0f, 320.0f));
+		this->SetState(GameObject::eState::Active);
+		mInfo.hitCnt = 0;
+		mInfo.totalDamage = 0;
+		bombCnt = 0;
+		mRigidbody->SetGravity(Vector2::Zero);
+		mRigidbody->SetGround(false);
+		mRigidbody->SetVelocity(Vector2::Zero);
 	}
 }

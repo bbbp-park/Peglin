@@ -54,7 +54,14 @@ namespace b
 
 	void GameObject::Release()
 	{
+		for (Component* mcomp : mComponents)
+		{
+			if (mcomp == NULL) continue;
+
+			mcomp->Release();
+		}
 	}
+
 	void GameObject::OnCollisionEnter(Collider* other)
 	{
 	}

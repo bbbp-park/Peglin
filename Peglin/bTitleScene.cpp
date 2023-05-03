@@ -68,10 +68,10 @@ namespace b
 				title_to_map->Play(false);
 				SceneManager::LoadScene(eSceneType::Map);
 			}
-
 			if (mPos.x >= ePos.x - 150.0f && mPos.x <= ePos.x + 150.0f
 				&& mPos.y >= ePos.y - 10.0f && mPos.y <= ePos.y + 90.0f)
 			{
+				
 				HWND hWnd = application.GetHwnd();
 				SendMessage(hWnd, WM_CLOSE, 0, 0);
 			}
@@ -95,10 +95,13 @@ namespace b
 
 	void TitleScene::OnEnter()
 	{
+		//Camera::StartFadeIn();
 	}
 
 	void TitleScene::OnExit()
 	{
+		//Camera::StartFadeOut();
+
 		Sound* peglinmenu = Resources::Load<Sound>(L"peglinmenu", L"..\\Resources\\audio\\peglinmenu.wav");
 		peglinmenu->Stop(true);
 	}
