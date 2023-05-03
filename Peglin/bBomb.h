@@ -28,6 +28,8 @@ namespace b
 		Image* mImage;
 		Animator* mAnimator;
 		Rigidbody* mRigidbody;
+		
+		class Text* mText;
 	};
 }
 

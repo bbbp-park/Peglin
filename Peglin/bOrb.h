@@ -37,6 +37,7 @@ namespace b
 		int totalDamage;
 		
 		float mPower;
+		class Text* mText;
 	};
 }
 

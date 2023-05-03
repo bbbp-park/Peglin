@@ -11,6 +11,7 @@
 #include "bMonster.h"
 #include "bFightScene.h"
 #include "bPeglin.h"
+#include "bText.h"
 
 namespace b
 {
@@ -18,6 +19,7 @@ namespace b
 		: mImage(nullptr)
 		, mAnimator(nullptr)
 		, mRigidbody(nullptr)
+		, mText(nullptr)
 	{
 	}
 
@@ -86,6 +88,20 @@ namespace b
 			int hp = mon->GetHp();
 			hp -= 50;
 			mon->SetHp(hp);
+
+			Transform* tr = mon->GetComponent<Transform>();
+			Vector2 pos = tr->GetPos();
+			mText = object::Instantiate<Text>(eLayerType::UI);
+			wchar_t str[10] = L"50";
+			mText->SetText(*str);
+			mText->SetIsChange(false);
+			mText->SetTextHeight(35);
+			mText->SetDelete(true);
+			mText->SetActive(true);
+			Transform* textTr = mText->GetComponent<Transform>();
+			pos.x += 40;
+			pos.y -= 50;
+			textTr->SetPos(pos);
 		}
 
 		Peglin::SetState(Peglin::ePeglinState::ShootBall);

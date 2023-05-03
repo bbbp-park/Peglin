@@ -26,9 +26,10 @@ namespace b
 		, hpBar(nullptr)
 		, bombCnt(0)
 		, hpText(nullptr)
+		, mText(nullptr)
 	{
 		// stump
-		mInfo.maxHp = 10;
+		mInfo.maxHp = 200;
 		mInfo.hp = mInfo.maxHp;
 		mInfo.power = 2;
 	}
@@ -106,7 +107,7 @@ namespace b
 				}
 				else
 				{
-					object::Destory(hpBar);
+					//object::Destory(hpBar);
 					this->SetState(eState::Death);
 					return;
 				}
@@ -149,6 +150,21 @@ namespace b
 			Ball* ball = dynamic_cast<Ball*>(other->GetOwner());
 			int power = ball->GetPower();
 			mInfo.hp -= power;
+
+			Transform* tr = GetComponent<Transform>();
+			Vector2 pos = tr->GetPos();
+			mText = object::Instantiate<Text>(eLayerType::UI);
+			wchar_t str[10] = L"";
+			int num = swprintf_s(str, 10, L"%d", power);
+			mText->SetText(*str);
+			mText->SetIsChange(false);
+			mText->SetTextHeight(35);
+			mText->SetDelete(true);
+			mText->SetActive(true);
+			Transform* textTr = mText->GetComponent<Transform>();
+			pos.x += 40;
+			pos.y -= 50;
+			textTr->SetPos(pos);
 		}
 	}
 

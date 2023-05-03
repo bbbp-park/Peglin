@@ -1,14 +1,21 @@
 #include "bText.h"
 #include "bTransform.h"
 #include "bInput.h"
+#include "bTime.h"
+#include "bObject.h"
+#include "bRigidbody.h"
 
 namespace b
 {
 	Text::Text()
 		: str(L"")
-		, pos(Vector2::Zero)
+		, mPos(Vector2::Zero)
 		, isChange(false)
 		, textHeight(45)
+		, bDelete(false)
+		, mTime(0.0f)
+		, bActive(false)
+		, mRigidbody(nullptr)
 	{
 	}
 
@@ -19,11 +26,47 @@ namespace b
 	void Text::Initialize()
 	{
 		GameObject::Initialize();
+
+		mRigidbody = AddComponent<Rigidbody>();
+		mRigidbody->SetMass(1.0f);
+		mRigidbody->SetGravity(Vector2::Zero);
+		mRigidbody->SetGround(false);
+		mRigidbody->SetVelocity(Vector2::Zero);
 	}
 
 	void Text::Update()
 	{
 		GameObject::Update();
+
+		if (bDelete)
+		{
+			mTime += Time::DeltaTime();
+
+			if (mTime >= 1.2f)
+				object::Destory(this);
+		}
+
+		if (bActive)
+		{
+			Vector2 vel = mRigidbody->GetVelocity();
+			//float time = Time::DeltaTime();
+			//time *= 10000;
+			//int direction = (int)time % 2;
+
+			//if ((int)time % 2 == 0)
+			//{
+			//	
+			//}
+			//else
+			//{
+			//	vel.x = -15.0f;
+			//	vel.y = -10.0f;
+			//}
+			
+			vel.x = 15.0f;
+			vel.y = -10.0f;
+			mRigidbody->SetVelocity(vel);
+		}
 	}
 
 	void Text::Render(HDC hdc)
@@ -31,7 +74,7 @@ namespace b
 		GameObject::Render(hdc);
 
 		Transform* tr = GetComponent<Transform>();
-		pos = tr->GetPos();
+		mPos = tr->GetPos();
 
 		Vector2 mousePos = Input::GetMousePos();
 
@@ -40,8 +83,8 @@ namespace b
 
 		if (isChange)
 		{
-			if (mousePos.x >= pos.x - 150.0f && mousePos.x <= pos.x + 150.0f
-				&& mousePos.y >= pos.y - 10.0f && mousePos.y <= pos.y + 90.0f)
+			if (mousePos.x >= mPos.x - 150.0f && mousePos.x <= mPos.x + 150.0f
+				&& mousePos.y >= mPos.y - 10.0f && mousePos.y <= mPos.y + 90.0f)
 			{
 				// white
 				SetTextColor(hdc, RGB(219, 219, 219));
@@ -56,7 +99,7 @@ namespace b
 		HFONT hFont = CreateFont(textHeight, 0, 0, 0, FW_BOLD, 0, 0, 0, HANGUL_CHARSET, 0, 0, 0, VARIABLE_PITCH || FF_ROMAN, TEXT("¸¼Àº °íµñ"));
 		SetTextAlign(hdc, TA_CENTER);
 		HFONT oldFont = (HFONT)SelectObject(hdc, hFont);
-		TextOut(hdc, pos.x, pos.y, str, wcslen(str));
+		TextOut(hdc, mPos.x, mPos.y, str, wcslen(str));
 	}
 
 	void Text::Release()

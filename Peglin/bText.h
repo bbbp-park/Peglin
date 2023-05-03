@@ -17,12 +17,20 @@ namespace b
 		void SetText(wchar_t& t) { wcscpy_s(str, &t); }
 		void SetIsChange(bool b) { isChange = b; }
 		void SetTextHeight(int h) { textHeight = h; }
-
+		void SetDelete(bool b) { bDelete = b; }
+		void SetActive(bool b) { bActive = b; }
+		
 	private:
 		wchar_t str[50] = {};
-		Vector2 pos;
+		Vector2 mPos;
 		bool isChange;
 		int textHeight;
+
+		bool bDelete;
+		bool bActive;
+		float mTime;
+
+		Rigidbody* mRigidbody;
 	};
 }
 

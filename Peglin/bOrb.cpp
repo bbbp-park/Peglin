@@ -9,6 +9,7 @@
 #include "bPeg.h"
 #include "bBall.h"
 #include "bPeglin.h"
+#include "bText.h"
 
 namespace b
 {
@@ -24,6 +25,7 @@ namespace b
 		, damage(2)
 		, critDamage(4)
 		, totalDamage(0)
+		, mText(nullptr)
 	{
 		bombCnt = 0;
 	}
@@ -81,7 +83,7 @@ namespace b
 
 		}
 
-		totalDamage = damage * hitCnt;
+		/*totalDamage = damage * hitCnt;*/
 
 		GameObject::Update();
 	}
@@ -124,7 +126,25 @@ namespace b
 				mRigidbody->SetPower(power);
 
 				if (type == eColliderType::peg)
+				{
 					hitCnt++;
+					totalDamage = damage * hitCnt;
+
+					Transform* tr = GetComponent<Transform>();
+					Vector2 pos = tr->GetPos();
+					mText = object::Instantiate<Text>(eLayerType::UI);
+					wchar_t str[10] = L"";
+					int num = swprintf_s(str, 10, L"%d", totalDamage);
+					mText->SetText(*str);
+					mText->SetIsChange(false);
+					mText->SetTextHeight(30);
+					mText->SetDelete(true);
+					mText->SetActive(true);
+					Transform* textTr = mText->GetComponent<Transform>();
+					pos.x += 10;
+					pos.y -= 10;
+					textTr->SetPos(pos);
+				}
 			}
 		}
 	}

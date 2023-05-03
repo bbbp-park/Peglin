@@ -65,7 +65,7 @@ namespace b
 		int bombCnt;
 
 		eMonsterState mState;
-		//int idx;
+		class Text* mText;
 	};
 }
 
