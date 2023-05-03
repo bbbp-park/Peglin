@@ -23,7 +23,7 @@ namespace b
 	private:
 		class Orb* mOrb;
 
-		Image* bouncerImage;
+		class Image* bouncerImage;
 		Collider* bouncerCol;
 	};
 }

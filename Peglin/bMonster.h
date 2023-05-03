@@ -51,7 +51,9 @@ namespace b
 
 
 	private:
-		class HPbar* hpBar;
+		class HpBar* hpBar;
+		class Text* hpText;
+
 		Animator* mAnimator;
 		Info mInfo;
 		eMonsterType mType;

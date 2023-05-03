@@ -4,7 +4,7 @@
 
 namespace b
 {
-	class HPbar;
+	class HpBar;
 	class Peglin;
 	class FightScene : public Scene
 	{
@@ -31,7 +31,7 @@ namespace b
 
 	private:
 		Peglin* mPeglin;
-		HPbar* mHPbar;
+		HpBar* mHPbar;
 
 		Image* forest1_bg;
 		Image* forest1_tile;

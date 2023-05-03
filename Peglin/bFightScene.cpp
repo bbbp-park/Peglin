@@ -290,7 +290,6 @@ namespace b
 	{
 		HBRUSH brush = CreateSolidBrush(RGB(35, 31, 20));
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
-
 		StretchBlt(hdc, -178, -90
 			, forest1_bg->GetWidth() * 3
 			, forest1_bg->GetHeight() * 3

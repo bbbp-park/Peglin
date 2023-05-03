@@ -7,9 +7,11 @@
 #include "bRigidbody.h"
 #include "bTime.h"
 #include "bHPbar.h"
+//#include "bMonsterHpbar.h"
 #include "bObject.h"
 #include "bOrb.h"
 #include "bPeglin.h"
+#include "bText.h"
 
 namespace b
 {
@@ -23,9 +25,10 @@ namespace b
 		, mState(eMonsterState::Idle)
 		, hpBar(nullptr)
 		, bombCnt(0)
+		, hpText(nullptr)
 	{
 		// stump
-		mInfo.maxHp = 200;
+		mInfo.maxHp = 10;
 		mInfo.hp = mInfo.maxHp;
 		mInfo.power = 2;
 	}
@@ -52,9 +55,11 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		hpBar = object::Instantiate<HPbar>(pos, Vector2(3.7f, 3.7f), eLayerType::UI);
-		hpBar->SetHpType(eHpType::Monster);
+		/*hpBar = object::Instantiate<HpBar>(pos, Vector2(3.7f, 3.7f), eLayerType::UI);
+		hpBar->SetHpType(eHpType::Monster);*/
 
+		/*hpBar = object::Instantiate<MonsterHpbar>(pos, Vector2(3.7f, 3.7f), eLayerType::UI);*/
+		//hpText = object::Instantiate<Text>(eLayerType::UI);
 
 		Collider* collider = AddComponent<Collider>();
 		collider->SetCenter(Vector2(5.0f, -20.0f));
@@ -71,12 +76,21 @@ namespace b
 	{
 		GameObject::Update();
 
-		hpBar->SetHp(mInfo.hp);
-		hpBar->SetMaxHp(mInfo.maxHp);
-		Vector2 velocity = mRigidbody->GetVelocity();
+		/*hpBar->SetHp(mInfo.hp);
+		hpBar->SetMaxHp(mInfo.maxHp);*/
+		/*wchar_t str[50] = L"";
+		int num = swprintf_s(str, 50, L"%d / ", mInfo.hp);
+		num += swprintf_s(str + num, 50 - num, L"%d", mInfo.maxHp);
+		hpText->SetText(*str);*/
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
+
+		/*Transform* hpTr = hpText->GetComponent<Transform>();
+		hpTr->SetPos(pos);*/
+
+		Vector2 velocity = mRigidbody->GetVelocity();
+
 		Vector2 peglinPos = Vector2(450.0f, 200.0f);
 		distance = pos - peglinPos;
 		this;
@@ -109,9 +123,10 @@ namespace b
 
 
 		}
-		Transform* hpTr = hpBar->GetComponent<Transform>();
+
+		/*Transform* hpTr = hpBar->GetComponent<Transform>();
 		Vector2 hpPos = pos;
-		hpTr->SetPos(hpPos);
+		hpTr->SetPos(hpPos);*/
 	}
 
 	void Monster::Render(HDC hdc)
@@ -161,6 +176,12 @@ namespace b
 		mInfo.hp = mInfo.maxHp;
 
 		eventComplete = true;
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		pos.x += 15;
+		pos.y += 8;
+		tr->SetPos(pos);
 	}
 
 	void Monster::StumpMoveCompleteEvent()
@@ -190,7 +211,10 @@ namespace b
 	void Monster::StartEvent()
 	{
 		if (this->GetState() != eState::Active || mState == eMonsterState::Dead)
+		{
+			eventComplete = true;
 			return;
+		}
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();

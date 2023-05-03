@@ -134,7 +134,7 @@ namespace b
 			if (fread(&id.id, sizeof(TileID), 1, file) == NULL)
 				break;
 
-			CreateTile(index, Vector2(id.x, id.y));
+			//CreateTile(index, Vector2(id.x, id.y));
 		}
 
 		fclose(file);

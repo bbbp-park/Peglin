@@ -45,9 +45,10 @@ namespace b
 		class Animator* mAnimator;
 		static ePeglinState mState;
 
-		class HPbar* hpBar;
+		class HpBar* hpBar;
 		static int hp;
 		int maxHp;
+		class Text* hpText;
 
 		class Ground* mGround;
 

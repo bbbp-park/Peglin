@@ -263,6 +263,9 @@
     <ClInclude Include="mMapIcon.h">
       <Filter>Contents\Object</Filter>
     </ClInclude>
+    <ClInclude Include="bMonsterHpbar.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -411,6 +414,9 @@
     </ClCompile>
     <ClCompile Include="mMapIcon.cpp">
       <Filter>Contents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="bMonsterHpbar.cpp">
+      <Filter>Contents\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

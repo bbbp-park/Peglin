@@ -19,7 +19,7 @@ namespace b
 		virtual void OnCollisionExit(class Collider* other);
 
 	private:
-		Image* tileImage;
+		class Image* tileImage;
 		Collider* tileCol;
 	};
 }

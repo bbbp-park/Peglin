@@ -15,6 +15,7 @@
 #include "bOrb.h"
 #include "bFightScene.h"
 #include "bHPbar.h"
+#include "bText.h"
 
 namespace b
 {
@@ -29,6 +30,7 @@ namespace b
 		, hpBar(nullptr)
 		, maxHp(100)
 		, delay(false)
+		, hpText(nullptr)
 	{
 	}
 
@@ -42,9 +44,8 @@ namespace b
 		mGround->SetName(L"Ground");
 
 		hp = maxHp;
-		hpBar = object::Instantiate<HPbar>(Vector2(126.0f, 290.0f), Vector2(3.7f, 3.7f), eLayerType::UI);
+		hpBar = object::Instantiate<HpBar>(Vector2(126.0f, 290.0f), Vector2(3.7f, 3.7f), eLayerType::UI);
 		hpBar->SetHpType(eHpType::Player);
-		hpBar->SetMaxHp(maxHp);
 
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Idle", Vector2::Zero, 0.15f);
@@ -72,6 +73,10 @@ namespace b
 		GameObject::Update();
 
 		hpBar->SetHp(hp);
+		hpBar->SetMaxHp(maxHp);
+
+		if (Input::GetKeyDown(eKeyCode::Q))
+			hp -= 10;
 
 		if (hp <= 0 && mState == ePeglinState::Idle)
 		{
@@ -104,6 +109,14 @@ namespace b
 	void Peglin::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
+
+		Vector2 pos = Input::GetMousePos();
+		wchar_t x[50] = {};
+		swprintf_s(x, 50, L"%f", pos.x);
+		TextOut(hdc, 800, 0, x, wcsnlen_s(x, 50));
+		wchar_t y[50] = {};
+		swprintf_s(y, 50, L"%f", pos.y);
+		TextOut(hdc, 800, 40, y, wcsnlen_s(y, 50));
 	}
 
 	void Peglin::Release()

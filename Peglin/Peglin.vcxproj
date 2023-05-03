@@ -157,6 +157,7 @@
     <ClInclude Include="bMapPeglin.h" />
     <ClInclude Include="bMath.h" />
     <ClInclude Include="bMonster.h" />
+    <ClInclude Include="bMonsterHpbar.h" />
     <ClInclude Include="bObject.h" />
     <ClInclude Include="bOrb.h" />
     <ClInclude Include="bPeg.h" />
@@ -213,6 +214,7 @@
     <ClCompile Include="bMapPeglin.cpp" />
     <ClCompile Include="bMath.cpp" />
     <ClCompile Include="bMonster.cpp" />
+    <ClCompile Include="bMonsterHpbar.cpp" />
     <ClCompile Include="bOrb.cpp" />
     <ClCompile Include="bPeg.cpp" />
     <ClCompile Include="bPeglin.cpp" />

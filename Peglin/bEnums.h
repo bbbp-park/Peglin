@@ -14,6 +14,7 @@ enum class eSceneType
 enum class eLayerType
 {
 	BG,
+	UI,
 	Tile,
 	Monster,
 	Player,
@@ -23,7 +24,6 @@ enum class eLayerType
 	Orb,
 	Peg,
 	Effect,
-	UI,
 	End
 };
 

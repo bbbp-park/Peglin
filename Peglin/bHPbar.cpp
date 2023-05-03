@@ -3,23 +3,26 @@
 #include "bPeglin.h"
 #include "bTransform.h"
 #include "bMonster.h"
+#include "bText.h"
+#include "bObject.h"
 
 namespace b
 {
-	HPbar::HPbar()
+	HpBar::HpBar()
 		: hpUIs({})
 		, bars({})
 		, mType(eHpType::Player)
 		, hp(0)
 		, maxHp(0)
+		, hpText(nullptr)
 	{
 	}
 
-	HPbar::~HPbar()
+	HpBar::~HpBar()
 	{
 	}
 
-	void HPbar::Initialize()
+	void HpBar::Initialize()
 	{
 		hpUIs.push_back(Resources::Load<Image>(L"HpUI", L"..\\Resources\\sprite\\UI\\HealthUI\\health_ui_v3.bmp"));
 		hpUIs.push_back(Resources::Load<Image>(L"MonsterHpUI", L"..\\Resources\\sprite\\UI\\HealthUI\\enemy_health_ui_extended.bmp"));
@@ -27,24 +30,50 @@ namespace b
 		bars.push_back(Resources::Load<Image>(L"bar", L"..\\Resources\\sprite\\UI\\HealthUI\\hpBar1.bmp"));
 		bars.push_back(Resources::Load<Image>(L"MonsterBar", L"..\\Resources\\sprite\\UI\\HealthUI\\enemy_health_ui_bar.bmp"));
 
-		Transform* tr = GetComponent<Transform>();
+		hpText = object::Instantiate<Text>(eLayerType::Effect);
+		wchar_t str[50] = L"";
+		int num = swprintf_s(str, 50, L"%d / ", hp);
+		num += swprintf_s(str + num, 50 - num, L"%d", maxHp);
+		hpText->SetText(*str);
+		hpText->SetIsChange(false);
+		hpText->SetTextHeight(32);
 
 		GameObject::Initialize();
 	}
 
-	void HPbar::Update()
+	void HpBar::Update()
 	{
 		GameObject::Update();
+
+		wchar_t str[50] = L"";
+		int num = swprintf_s(str, 50, L"%d / ", hp);
+		num += swprintf_s(str + num, 50 - num, L"%d", maxHp);
+		hpText->SetText(*str);
+
+		
+
+		if (this->GetHpType() == eHpType::Player)
+		{
+			
+		}
+		else if (this->GetHpType() == eHpType::Monster)
+		{
+			
+		}
 	}
 
-	void HPbar::Render(HDC hdc)
+	void HpBar::Render(HDC hdc)
 	{
+
 		Transform* tr = GetComponent<Transform>();
 		Vector2 scale = tr->GetScale();
 		Vector2 pos = tr->GetPos();
 
 		if (this->GetHpType() == eHpType::Player)
 		{
+			Transform* textTr = hpText->GetComponent<Transform>();
+			Vector2 textPos = pos;
+
 			TransparentBlt(hdc, pos.x, pos.y
 				, hpUIs[0]->GetWidth() * scale.x
 				, hpUIs[0]->GetHeight() * scale.y
@@ -67,12 +96,20 @@ namespace b
 				, bars[0]->GetWidth()
 				, bars[0]->GetHeight()
 				, RGB(255, 0, 255));
-		}
-		
-		if (this->GetHpType() == eHpType::Monster)
+
+			textPos.x += 140.0f;
+			textPos.y -= 20.0f;
+			textTr->SetPos(textPos);
+			hpText->SetTextHeight(32);
+
+		} 
+		/*else if (this->GetHpType() == eHpType::Monster)
 		{
 			pos.x -= 30.0f;
 			pos.y -= 80.0f;
+
+			Transform* textTr = hpText->GetComponent<Transform>();
+			Vector2 textPos = pos;
 
 			TransparentBlt(hdc, pos.x, pos.y
 				, hpUIs[1]->GetWidth() * scale.x
@@ -96,12 +133,18 @@ namespace b
 				, bars[1]->GetWidth()
 				, bars[1]->GetHeight()
 				, RGB(255, 0, 255));
-		}
-		
+
+
+			textPos.x += 60.0f;
+			textPos.y -= 3.0f;
+			textTr->SetPos(textPos);
+			hpText->SetTextHeight(28);
+		}*/
 		GameObject::Render(hdc);
+
 	}
 
-	void HPbar::Release()
+	void HpBar::Release()
 	{
 		GameObject::Release();
 	}

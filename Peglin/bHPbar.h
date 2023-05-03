@@ -1,14 +1,14 @@
 #pragma once
 #include "bGameObject.h"
-#include "bImage.h"
 
 namespace b
 {
-	class HPbar : public GameObject
+	class Image;
+	class HpBar : public GameObject
 	{
 	public:
-		HPbar();
-		~HPbar();
+		HpBar();
+		~HpBar();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -29,6 +29,7 @@ namespace b
 
 		int hp;
 		int maxHp;
+		class Text* hpText;
 	};
 }
 
