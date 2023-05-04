@@ -260,6 +260,9 @@
     <ClInclude Include="mMapIcon.h">
       <Filter>Contents\Object</Filter>
     </ClInclude>
+    <ClInclude Include="bBossScene.h">
+      <Filter>Contents\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -405,6 +408,9 @@
     </ClCompile>
     <ClCompile Include="mMapIcon.cpp">
       <Filter>Contents\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="bBossScene.cpp">
+      <Filter>Contents\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

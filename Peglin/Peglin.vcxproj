@@ -136,6 +136,7 @@
     <ClInclude Include="bApplication.h" />
     <ClInclude Include="bBall.h" />
     <ClInclude Include="bBomb.h" />
+    <ClInclude Include="bBossScene.h" />
     <ClInclude Include="bBouncer.h" />
     <ClInclude Include="bBouncerTile.h" />
     <ClInclude Include="bCamera.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="bApplication.cpp" />
     <ClCompile Include="bBall.cpp" />
     <ClCompile Include="bBomb.cpp" />
+    <ClCompile Include="bBossScene.cpp" />
     <ClCompile Include="bBouncer.cpp" />
     <ClCompile Include="bBouncerTile.cpp" />
     <ClCompile Include="bCamera.cpp" />

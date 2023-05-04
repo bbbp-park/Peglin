@@ -24,7 +24,7 @@ namespace b
 	private:
 		std::vector<Image*> hpUIs;
 		std::vector<Image*> bars;
-
+		Image* mIcon;
 		eHpType mType;
 
 		int hp;

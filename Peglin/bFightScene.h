@@ -21,12 +21,11 @@ namespace b
 		virtual void OnExit() override;
 
 		static void SetPlayerTurn(bool turn) { mTurn = turn; }
-		static void SetCnt(int n) { cnt = n; }
 
 		// false = monster turn, true = player turn
 		static bool GetPlayerTurn() { return mTurn; }
-		bool IsClear() { return isClear; }
 		static std::vector<class Monster*>& GetMonsters() { return mMonsters; }
+		static bool GetIsClear() { return isClear; }
 
 		static void SetRedPegs();
 		void SetNormalPegs();
@@ -39,7 +38,6 @@ namespace b
 
 	private:
 		Peglin* mPeglin;
-		HpBar* mHPbar;
 
 		Image* forest1_bg;
 		Image* forest1_tile;
@@ -60,9 +58,10 @@ namespace b
 		static std::vector<class Monster*> mMonsters;
 
 		static bool mTurn;
-		static int cnt;
-		bool isClear;
+		int cnt;
+		static bool isClear;
 		float mTime;
+		int i;
 	};
 }
 

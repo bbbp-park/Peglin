@@ -23,14 +23,13 @@
 namespace b
 {
 	bool FightScene::mTurn = true;
-	int FightScene::cnt = 1;
+	//int FightScene::cnt = 1;
 	std::vector<Monster*> FightScene::mMonsters = {};
 	std::vector<Peg*> FightScene::mPegs = {};
-	int i = 0;
+	bool FightScene::isClear = false;
 
 	FightScene::FightScene()
 		: mPeglin(nullptr)
-		, mHPbar(nullptr)
 		, forest1_bg(nullptr)
 		, forest1_tile(nullptr)
 		, tileSet0(nullptr)
@@ -40,12 +39,12 @@ namespace b
 		, backScreen(nullptr)
 		, mBouncers({})
 		, mBouncerTiles({})
-		//, mPegs({})
-		, isClear(false)
+		, cnt(1)
 		, mTime(0.0f)
 		, CritIdx({})
 		, mOrb(nullptr)
 		, RefreshIdx({})
+		, i(0)
 	{
 	}
 
@@ -61,6 +60,7 @@ namespace b
 
 		mOrb = object::Instantiate<Orb>(Vector2(900.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
 
+		// monster setting
 		mMonsters.push_back(object::Instantiate<Monster>(Vector2(890.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster));
 		mMonsters[0]->SetMonsterType(eMonsterType::Stump);
 		mMonsters.push_back(object::Instantiate<Monster>(Vector2(1300.0f, 180.0f), Vector2(3.0f, 3.0f), eLayerType::Monster));
@@ -244,7 +244,7 @@ namespace b
 			mTime += Time::DeltaTime();
 			if (mTime >= 2.0f)
 			{
-				SceneManager::LoadScene(eSceneType::Ending);
+				SceneManager::LoadScene(eSceneType::Map);
 				//return;
 			}
 		}

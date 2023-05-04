@@ -5,7 +5,7 @@ enum class eSceneType
 	Title,
 	Map,
 	Fight,
-	//MiniMap,
+	Boss,
 	Ending,
 	Tool,
 	End,
@@ -69,11 +69,15 @@ enum class eHpType
 {
 	Player,
 	Monster,
+	Mole,
 };
 
 enum class eMonsterType
 {
-	Stump
+	Stump,
+	Tree,
+	Mole,
+	SmallPlant,
 };
 
 enum class eMonsterState

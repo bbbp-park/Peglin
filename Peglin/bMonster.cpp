@@ -28,11 +28,9 @@ namespace b
 		, bombCnt(0)
 		, hpText(nullptr)
 		, mText(nullptr)
+		, mInfo()
 	{
-		// stump
-		mInfo.maxHp = 200;
-		mInfo.hp = mInfo.maxHp;
-		mInfo.power = 2;
+		
 	}
 
 	Monster::~Monster()
@@ -42,16 +40,28 @@ namespace b
 	void Monster::Initialize()
 	{
 		mAnimator = AddComponent<Animator>();
+		// stump
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Monster\\Stump\\Idle", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Monster\\Stump\\Attack", Vector2::Zero, 0.15f);
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Monster\\Stump\\Move", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Monster\\Stump\\Die", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Monster\\Stump\\Dead", Vector2::Zero, 0.1f);
 
-		mAnimator->Play(L"StumpIdle", true);
 		mAnimator->GetCompleteEvent(L"StumpDie") = std::bind(&Monster::StumpDeathCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"StumpMove") = std::bind(&Monster::StumpMoveCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"StumpAttack") = std::bind(&Monster::StumpAttackCompleteEvent, this);
+
+		// Tree
+		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Monster\\Tree", Vector2::Zero, 0.1f);
+
+		// Mole
+		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Boss\\Mole\\Attack", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Boss\\Mole\\Dive", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Boss\\Mole\\Emerge", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Boss\\Mole\\Idle", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Boss\\Mole\\Hit", Vector2::Zero, 0.1f);
+
+		mAnimator->Play(L"StumpIdle", true);
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
@@ -121,7 +131,18 @@ namespace b
 		}
 
 		Transform* hpTr = hpBar->GetComponent<Transform>();
-		Vector2 hpPos = pos;
+		Vector2 hpPos = Vector2::Zero;
+		if (mType == eMonsterType::Stump)
+			hpPos = pos;
+		else if (mType == eMonsterType::Tree)
+		{
+			hpPos.x = pos.x + 60.0f;
+			hpPos.y = 160.0f;
+		}
+		else if (mType == eMonsterType::Mole)
+		{
+			hpPos = Vector2(1330.0f, 290.0f);
+		}
 		hpTr->SetPos(hpPos);
 	}
 
@@ -178,6 +199,33 @@ namespace b
 		if (mType == eMonsterType::Stump)
 		{
 			mAnimator->Play(L"StumpIdle", true);
+			// stump
+			mInfo.maxHp = 200;
+			mInfo.hp = mInfo.maxHp;
+			mInfo.power = 2;
+		}
+		else if (mType == eMonsterType::Tree)
+		{
+			mAnimator->Play(L"MonsterTree", true);
+			mInfo.maxHp = 999;
+			mInfo.hp = mInfo.maxHp;
+			mInfo.power = 0;
+		}
+		else if (mType == eMonsterType::Mole)
+		{
+			mAnimator->Play(L"MoleIdle", true);
+			mInfo.maxHp = 602;
+			mInfo.hp = mInfo.maxHp;
+			mInfo.power = 10;
+			hpBar->SetHpType(eHpType::Mole);
+		}
+		else if (mType == eMonsterType::SmallPlant)
+		{
+			//mAnimator->Play(L"MoleHit", true);
+			//mInfo.maxHp = 60;
+			//mInfo.hp = mInfo.maxHp;
+			//mInfo.power = 3;
+			
 		}
 	}
 

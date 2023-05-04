@@ -1,4 +1,4 @@
-﻿  unity_20K1EZKAOOHY88TF.cpp
+﻿  unity_FCIO7GOXYCHJI5H6.cpp
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.22000.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bMath.h(33,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bMath.h(34,6): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -25,6 +25,10 @@ C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bBall.cpp(68,87): warnin
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bBall.cpp(68,56): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bBall.cpp(68,33): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bBall.cpp(68,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bBossScene.cpp(249,28): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bBossScene.cpp(348,44): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bBossScene.cpp(360,35): warning C4267: '+=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bBossScene.cpp(380,35): warning C4267: '+=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bBouncer.cpp(49,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bBouncer.cpp(49,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bBouncerTile.cpp(44,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -50,22 +54,34 @@ C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bFightScene.cpp(244,28):
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bFightScene.cpp(342,44): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bFightScene.cpp(354,35): warning C4267: '+=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bFightScene.cpp(374,35): warning C4267: '+=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(78,49): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(77,48): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(76,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(76,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(93,7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(92,7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(91,42): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(91,30): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(115,50): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(114,49): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(113,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(113,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(130,14): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(129,7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(128,42): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(128,30): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(82,49): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(81,48): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(80,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(80,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(97,7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(96,7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(95,42): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(95,30): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(119,50): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(118,49): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(117,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(117,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(134,14): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(133,7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(132,42): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(132,30): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(153,47): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(152,46): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(151,34): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(151,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(161,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(160,25): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(159,42): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(159,30): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(176,7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(175,7): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(174,42): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bHPbar.cpp(174,30): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bInput.cpp(66,26): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bInput.cpp(67,26): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\user\Desktop\Dev\Unity Workspace\Peglin\Peglin\bMapPeglin.cpp(82,40): warning C4244: '인수': 'double'에서 'const float'(으)로 변환하면서 데이터가 손실될 수 있습니다.

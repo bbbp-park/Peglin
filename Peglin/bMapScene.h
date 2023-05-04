@@ -24,6 +24,8 @@ namespace b
 		MapPeglin* mMapPeglin;
 		Image* treeTop;
 		SpeedUp* mSpeedUp;
+
+		bool enterBoss;
 	};
 }
 

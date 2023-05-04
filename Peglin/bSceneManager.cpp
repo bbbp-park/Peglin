@@ -3,6 +3,7 @@
 #include "bTitleScene.h"
 #include "bFightScene.h"
 #include "bEndingScene.h"
+#include "bBossScene.h"
 #include "bCollisionManager.h"
 #include "bCamera.h"
 
@@ -19,6 +20,8 @@ namespace b
 		mScenes[(UINT)eSceneType::Map] = new MapScene();
 		mScenes[(UINT)eSceneType::Fight] = new FightScene();
 		mScenes[(UINT)eSceneType::Fight]->SetName(L"FightScene");
+		mScenes[(UINT)eSceneType::Boss] = new BossScene();
+		mScenes[(UINT)eSceneType::Boss]->SetName(L"BossScene");
 		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
 
 		for (Scene* scene : mScenes)
@@ -29,7 +32,7 @@ namespace b
 			scene->Initialize();
 		}
 
-		mActiveScene = mScenes[(UINT)eSceneType::Title];
+		mActiveScene = mScenes[(UINT)eSceneType::Boss];
 	}
 
 	void SceneManager::Update()
