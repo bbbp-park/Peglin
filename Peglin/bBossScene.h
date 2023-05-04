@@ -19,7 +19,8 @@ namespace b
 		virtual void OnExit() override;
 
 		static void SetPlayerTurn(bool turn) { mTurn = turn; }
-		static void AddMonster(Monster* mon) { mMonsters.push_back(mon); }
+		static std::vector<class Monster*>& GetMonsters() { return mMonsters; }
+		static void AddMonster(Vector2 pos, eMonsterType type);
 
 		static void SetRedPegs();
 		void SetNormalPegs();

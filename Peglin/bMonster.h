@@ -7,12 +7,12 @@ namespace b
 	class Monster : public GameObject
 	{
 	public:
-		
 		struct Info
 		{
 			int hp;
 			int maxHp;
 			int power;
+			int turn;
 		};
 
 		Monster();
@@ -34,10 +34,24 @@ namespace b
 		void SetEventComplete(bool b) { eventComplete = b; }
 		bool GetEventComplete() { return eventComplete; }
 		eMonsterState GetMonsterState() { return mState; }
+		eMonsterType GetMonsterType() { return mType; }
 
+		// stump fsm
 		void StumpDeathCompleteEvent();
 		void StumpMoveCompleteEvent();
 		void StumpAttackCompleteEvent();
+
+		// mole fsm
+		void MoleDiveCompleteEvent();
+		void MoleEmergeCompleteEvent();
+		void MoleAttackCompleteEvent();
+		void MoleHitCompleteEvent();
+
+		// smallPlant fsm
+		void SmallPlantAttackCompleteEvent();
+		void SmallPlantDieCompleteEvent();
+		void SmallPlantIdleCompleteEvent();
+		void SmallPlantSummonCompleteEvent();
 
 		int GetHp() { return mInfo.hp; }
 
@@ -55,6 +69,7 @@ namespace b
 		class Text* hpText;
 
 		Animator* mAnimator;
+		Collider* mCollider;
 		Info mInfo;
 		eMonsterType mType;
 
@@ -66,6 +81,9 @@ namespace b
 
 		eMonsterState mState;
 		class Text* mText;
+
+		int pattern;
+		class PlantBlob* blob;
 	};
 }
 

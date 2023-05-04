@@ -3,6 +3,7 @@
 #include "bTransform.h"
 #include "bImage.h"
 #include "bCamera.h"
+#include "bCollider.h"
 
 namespace b
 {
@@ -24,7 +25,10 @@ namespace b
 		mImages.push_back(Resources::Load<Image>(L"skull", L"..\\Resources\\sprite\\Background\\skull.bmp"));
 		mImages.push_back(Resources::Load<Image>(L"moleIcon", L"..\\Resources\\sprite\\Background\\Mole_map_icon.bmp"));
 
-		mImage = mImages[0];
+		mImage = mImages[(UINT)mType];
+
+		Transform* tr = GetComponent<Transform>();
+		tr->SetScale(Vector2(4.0f, 4.0f));
 
 		GameObject::Initialize();
 	}
@@ -33,26 +37,23 @@ namespace b
 	{
 		GameObject::Update();
 
-		if (mType == eIconType::Skull)
-			mImage = mImages[(UINT)eIconType::Skull];
-
-		if (mType == eIconType::Mole)
-			mImage = mImages[(UINT)eIconType::Mole];
 		Transform* tr = GetComponent<Transform>();
-		
+
 		mPos = lockPos;
 		mPos = Camera::CalculatePos(mPos);
 		tr->SetPos(mPos);
-
 	}
 
 	void MapIcon::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
 
+		Transform* tr = GetComponent<Transform>();
+		Vector2 scale = tr->GetScale();
+
 		TransparentBlt(hdc, mPos.x, mPos.y
-			, mImage->GetWidth() * 4.0f
-			, mImage->GetHeight() * 4.0f
+			, mImage->GetWidth() * scale.x
+			, mImage->GetHeight() * scale.y
 			, mImage->GetHdc(), 0, 0
 			, mImage->GetWidth()
 			, mImage->GetHeight()
@@ -62,5 +63,12 @@ namespace b
 	void MapIcon::Release()
 	{
 		GameObject::Release();
+	}
+
+	void MapIcon::SetIconType(eIconType type)
+	{
+		mType = type;
+
+		mImage = mImages[(UINT)mType];
 	}
 }

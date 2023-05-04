@@ -32,7 +32,7 @@ namespace b
 			scene->Initialize();
 		}
 
-		mActiveScene = mScenes[(UINT)eSceneType::Boss];
+		mActiveScene = mScenes[(UINT)eSceneType::Title];
 	}
 
 	void SceneManager::Update()

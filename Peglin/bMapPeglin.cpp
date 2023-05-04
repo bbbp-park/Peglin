@@ -6,6 +6,7 @@
 #include "bTime.h"
 #include "bRigidbody.h"
 #include "bSceneManager.h"
+#include "bFightScene.h"
 
 namespace b
 {
@@ -16,6 +17,7 @@ namespace b
 		, target(Vector2::Zero)
 		, dir(Vector2::Zero)
 		, mTime(0.0f)
+		, stageCnt(0)
 	{
 	}
 
@@ -65,8 +67,7 @@ namespace b
 	void MapPeglin::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
-
-		// 820 625
+		
 	}
 
 	void MapPeglin::Release()
@@ -83,15 +84,33 @@ namespace b
 
 		mRigidbody->SetVelocity(vel);
 
-		if (pos.x >= 795 && pos.x <= 815
-			&& pos.y >= 580 && pos.y <= 595)
+		if (stageCnt == 1)
 		{
-			mAnimator->Play(L"PeglinIdle", true);
-			mState = eMapPeglinState::Idle;
-			vel = Vector2::Zero;
-			mRigidbody->SetVelocity(Vector2::Zero);
-			mState = eMapPeglinState::Pass;
+			if (pos.x >= 785 && pos.x <= 850
+				&& pos.y >= 815 && pos.y <= 840)
+			{
+				mAnimator->Play(L"PeglinIdle", true);
+				//mState = eMapPeglinState::Idle;
+				vel = Vector2::Zero;
+				mRigidbody->SetVelocity(Vector2::Zero);
+				mState = eMapPeglinState::Pass;
+			}
 		}
+
+		if (stageCnt == 0)
+		{
+			if (pos.x >= 795 && pos.x <= 815
+				&& pos.y >= 580 && pos.y <= 595)
+			{
+				mAnimator->Play(L"PeglinIdle", true);
+				//mState = eMapPeglinState::Idle;
+				vel = Vector2::Zero;
+				mRigidbody->SetVelocity(Vector2::Zero);
+				mState = eMapPeglinState::Pass;
+			}
+		}
+
+		
 	}
 
 	void MapPeglin::idle()
@@ -113,6 +132,23 @@ namespace b
 				mState = eMapPeglinState::Move;
 				mTime = 0.0f;
 			}
+
+			if (stageCnt == 1)
+			{
+				if (mousePos.x >= 780 && mousePos.x <= 880
+					&& mousePos.y >= 700 && mousePos.y <= 750)
+				{
+					mAnimator->Play(L"PeglinMove", true);
+					Transform* tr = GetComponent<Transform>();
+					Vector2 pos = tr->GetPos();
+					target = Vector2(805.0f, 845.0f);
+					dir = pos - target;
+					dir.Normalize();
+					mRigidbody->SetVelocity(dir * 80.0f);
+					mState = eMapPeglinState::Move;
+					mTime = 0.0f;
+				}
+			}
 		}
 	}
 
@@ -122,7 +158,20 @@ namespace b
 
 		if (mTime >= 1.5f)
 		{
-			SceneManager::LoadScene(eSceneType::Fight);
+			if (stageCnt == 1)
+			{
+				SceneManager::LoadScene(eSceneType::Boss);
+				stageCnt++;
+			}
+
+			if (stageCnt == 0)
+			{
+				SceneManager::LoadScene(eSceneType::Fight);
+				stageCnt++;
+			}
+			
+
+			mState = eMapPeglinState::Idle;
 		}
 	}
 }

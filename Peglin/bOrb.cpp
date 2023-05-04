@@ -14,7 +14,7 @@
 #include "bFightScene.h"
 #include "bResources.h"
 #include "bSound.h"
-
+#include "bBossScene.h"
 
 namespace b
 {
@@ -99,6 +99,12 @@ namespace b
 			UI_Tock_02->Play(false);
 		}
 
+		if (Input::GetKeyDown(eKeyCode::P))
+		{
+			mInfo.damage += 5;
+			mInfo.critDamage += 5;
+		}
+
 		/*totalDamage = damage * hitCnt;*/
 
 	}
@@ -167,7 +173,10 @@ namespace b
 						{
 							FightScene::SetRedPegs();
 						}
-						
+						else if (activeScene->GetName() == L"BossScene")
+						{
+							BossScene::SetRedPegs();
+						}
 					}
 					else if (peg->GetType() == ePegType::Refresh)
 					{
@@ -180,6 +189,10 @@ namespace b
 						if (activeScene->GetName() == L"FightScene")
 						{
 							FightScene::Refresh(mInfo.isCrit);
+						}
+						else if (activeScene->GetName() == L"BossScene")
+						{
+							BossScene::Refresh(mInfo.isCrit);
 						}
 					}
 

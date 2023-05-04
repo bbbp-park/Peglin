@@ -9,6 +9,9 @@
 #include "bFightScene.h"
 #include "bMonster.h"
 #include "bSound.h"
+#include "bBossScene.h"
+#include "bScene.h"
+#include "bSceneManager.h"
 
 namespace b
 {
@@ -17,6 +20,7 @@ namespace b
 	Ball::Ball()
 		: mImage(nullptr)
 		, mRigidbody(nullptr)
+		, shoot(false)
 	{
 	}
 
@@ -26,10 +30,10 @@ namespace b
 
 	void Ball::Initialize()
 	{
-		mImage = Resources::Load<Image>(L"Rock", L"..\\\Resources\\sprite\\Ball\\Rock\\rock.bmp");
+		mImage = Resources::Load<Image>(L"Rock", L"..\\Resources\\sprite\\Ball\\Rock\\rock.bmp");
 
 		Transform* tr = GetComponent<Transform>();
-		tr->SetScale(Vector2(2.0f, 2.0f));
+		tr->SetScale(Vector2(4.0f, 4.0f));
 
 		Collider* collider = AddComponent<Collider>();
 		collider->SetCenter(Vector2(5.0f, 5.0f));
@@ -47,12 +51,14 @@ namespace b
 	{
 		GameObject::Update();
 
+		if (shoot)
+		{
+			Vector2 velocity = mRigidbody->GetVelocity();
+			velocity.x += 100.0f;
 
-		Vector2 velocity = mRigidbody->GetVelocity();
-		velocity.x += 100.0f;
+			mRigidbody->SetVelocity(velocity);
+		}
 
-		mRigidbody->SetVelocity(velocity);
-		
 	}
 
 	void Ball::Render(HDC hdc)
@@ -61,7 +67,7 @@ namespace b
 		GameObject::Render(hdc);
 
 		Transform* tr = GetComponent<Transform>();
-		
+
 		Vector2 scale = tr->GetScale();
 		Vector2 pos = tr->GetPos();
 
@@ -76,11 +82,29 @@ namespace b
 
 	void Ball::OnCollisionEnter(Collider* other)
 	{
+		//GameObject* obj = other->GetOwner();
+		//if (obj->GetState() == eState::Active)
+
 		Sound* ExplodeyHitSound = Resources::Load<Sound>(L"ExplodeyHitSound", L"..\\Resources\\audio\\ExplodeyHitSound.wav");
 		ExplodeyHitSound->Play(false);
-		FightScene::SetPlayerTurn(false);
-		object::Destory(this);
+
+		Scene* scene = SceneManager::GetActiveScene();
+		if (scene->GetName() == L"FightScene")
+		{
+			FightScene::SetPlayerTurn(false);
+
+		}
+		else if (scene->GetName() == L"BossScene")
+		{
+			BossScene::SetPlayerTurn(false);
+
+		}
+		//object::Destory(this);
+		mRigidbody->SetVelocity(Vector2::Zero);
+
+		this->SetState(eState::Pause);
 		return;
+
 	}
 
 	void Ball::OnCollisionStay(Collider* other)
@@ -89,5 +113,13 @@ namespace b
 
 	void Ball::OnCollisionExit(Collider* other)
 	{
+	}
+
+	void Ball::Reset(Vector2 pos)
+	{
+		Transform* tr = GetComponent<Transform>();
+		tr->SetPos(pos);
+		this->SetState(eState::Active);
+		shoot = true;
 	}
 }

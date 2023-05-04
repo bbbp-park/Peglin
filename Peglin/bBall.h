@@ -21,11 +21,14 @@ namespace b
 		static void SetPower(int p) { power = p; }
 		static int GetPower() { return power; }
 
+		void Reset(Vector2 pos);
+
 	private:
 		class Image* mImage;
 		class Rigidbody* mRigidbody;
 
 		static int power;
+		bool shoot;
 	};
 
 }

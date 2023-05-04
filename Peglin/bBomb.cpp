@@ -13,6 +13,9 @@
 #include "bPeglin.h"
 #include "bText.h"
 #include "bSound.h"
+#include "bSceneManager.h"
+#include "bScene.h"
+#include "bBossScene.h"
 
 namespace b
 {
@@ -84,13 +87,24 @@ namespace b
 		BombHitSoundDistort->Play(false);
 		object::Instantiate<Explosion>(pos, Vector2(0.8f, 0.8f), eLayerType::Effect);
 
-		std::vector<Monster*> mons = FightScene::GetMonsters();
+		std::vector<Monster*> mons = {};
+		Scene* activeScene = SceneManager::GetActiveScene();
+		if (activeScene->GetName() == L"FightScene")
+			mons = FightScene::GetMonsters();
+		else if (activeScene->GetName() == L"BossScene")
+			mons = BossScene::GetMonsters();
 
 		for (auto mon : mons)
 		{
 			int hp = mon->GetHp();
 			hp -= 50;
 			mon->SetHp(hp);
+
+			if (mon->GetMonsterType() == eMonsterType::Mole)
+			{
+				Animator* anim = mon->GetComponent<Animator>();
+				anim->Play(L"MoleHit", false);
+			}
 
 			Transform* tr = mon->GetComponent<Transform>();
 			Vector2 pos = tr->GetPos();

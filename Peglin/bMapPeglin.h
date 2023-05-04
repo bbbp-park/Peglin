@@ -35,6 +35,8 @@ namespace b
 		Vector2 target;
 		Vector2 dir;
 		float mTime;
+
+		int stageCnt;
 	};
 
 }

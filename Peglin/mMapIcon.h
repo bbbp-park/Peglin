@@ -15,7 +15,7 @@ namespace b
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
-		void SetIconType(eIconType type) { mType = type; }
+		void SetIconType(eIconType type);
 		void SetLockPos(Vector2 pos) { lockPos = pos; }
 
 	private:
@@ -25,6 +25,7 @@ namespace b
 		eIconType mType;
 		Vector2 mPos;
 		Vector2 lockPos;
+
 	};
 }
 

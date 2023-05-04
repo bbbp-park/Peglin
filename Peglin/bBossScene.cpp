@@ -44,7 +44,7 @@ namespace b
 	void BossScene::Initialize()
 	{
 		Scene::Initialize();
-
+		
 		mPeglin = object::Instantiate<Peglin>(Vector2(410.0f, 170.0f), Vector2(3.0f, 3.0f), eLayerType::Player);
 
 		mOrb = object::Instantiate<Orb>(Vector2(888.0f, 320.0f), Vector2(2.0f, 2.0f), eLayerType::Orb);
@@ -53,10 +53,11 @@ namespace b
 		object::Instantiate<Wall>(Vector2(1273.0f, 250.0f), eLayerType::Wall);
 
 		// monster setting
-		mMonsters.push_back(object::Instantiate<Monster>(Vector2(1275.0f, 150.0f), Vector2(3.0f, 3.0f), eLayerType::Monster));
-		mMonsters[0]->SetMonsterType(eMonsterType::Mole);
+		
 		mMonsters.push_back(object::Instantiate<Monster>(Vector2(775.0f, 7.0f), Vector2(3.0f, 3.0f), eLayerType::Monster));
-		mMonsters[1]->SetMonsterType(eMonsterType::Tree);
+		mMonsters[0]->SetMonsterType(eMonsterType::Tree);
+		mMonsters.push_back(object::Instantiate<Monster>(Vector2(1275.0f, 150.0f), Vector2(3.0f, 3.0f), eLayerType::Monster));
+		mMonsters[1]->SetMonsterType(eMonsterType::Mole);
 
 		// peg setting
 		mPegs.push_back(object::Instantiate<Peg>(Vector2(836.0f, 276.0f), eLayerType::Peg));
@@ -283,6 +284,13 @@ namespace b
 
 		if (!mTurn && cnt == 0)
 		{
+			for (int i = 0; i < mMonsters.size(); i++)
+			{
+				if (mMonsters[i]->GetState() != GameObject::eState::Active)
+				{
+					mMonsters[i] = nullptr;
+				}
+			}
 			if (mMonsters[i]->GetEventComplete())
 				i++;
 
@@ -295,28 +303,21 @@ namespace b
 				mTurn = true;
 				i = 0;
 
-				for (auto mon : mMonsters)
+				for (Monster* mon : mMonsters)
 				{
 					mon->SetEventComplete(false);
 				}
 			}
-		}
-
-		if (isClear == false)
-		{
-			for (auto mon : mMonsters)
+			/*if (mMonsters[mMonsters.size() - 1] != nullptr)
 			{
-				if (mon->GetState() != GameObject::eState::Active || mon->GetMonsterState() == eMonsterState::Dead)
-					isClear = true;
-				else
-				{
-					isClear = false;
-					break;
-				}
-			}
+				
+			}*/
 		}
 
-
+		if (mMonsters[1]->GetHp() <= 0)
+		{
+			SceneManager::LoadScene(eSceneType::Ending);
+		}
 
 		Scene::Update();
 	}
@@ -423,24 +424,40 @@ namespace b
 	{
 		Camera::StartFadeIn();
 
+		CollisionManager::SetLayer(eLayerType::Blob, eLayerType::Player, true);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Peg, true);
 
-		Sound* world1_fight = Resources::Load<Sound>(L"world1_fight", L"..\\Resources\\audio\\world1_fight.wav");
-		world1_fight->Play(true);
+		Sound* ForestBossMusic = Resources::Load<Sound>(L"world1_fight", L"..\\Resources\\audio\\ForestBossMusic.wav");
+		ForestBossMusic->Play(true);
 	}
 
 	void BossScene::OnExit()
 	{
+		CollisionManager::SetLayer(eLayerType::Blob, eLayerType::Player, false);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Monster, false);
 		CollisionManager::SetLayer(eLayerType::Bomb, eLayerType::Wall, false);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Wall, false);
 		CollisionManager::SetLayer(eLayerType::Orb, eLayerType::Peg, false);
 
-		Sound* world1_fight = Resources::Load<Sound>(L"world1_fight", L"..\\Resources\\audio\\world1_fight.wav");
-		world1_fight->Stop(true);
+		Sound* ForestBossMusic = Resources::Load<Sound>(L"ForestBossMusic", L"..\\Resources\\audio\\ForestBossMusic.wav");
+		ForestBossMusic->Stop(true);
+	}
+
+	/*void BossScene::AddMonster(eMonsterType type, Vector2 pos)
+	{
+		Monster* mon = object::Instantiate<Monster>(pos, eLayerType::Monster)
+	}*/
+
+	void BossScene::AddMonster(Vector2 pos, eMonsterType type)
+	{
+		Monster* mon = object::Instantiate<Monster>(pos, eLayerType::Monster);
+		mon->SetMonsterType(eMonsterType::SmallPlant);
+		Transform* monTr = mon->GetComponent<Transform>();
+		monTr->SetScale(Vector2(3.0f, 3.0f));
+		mMonsters.push_back(mon);
 	}
 
 	void BossScene::SetRedPegs()

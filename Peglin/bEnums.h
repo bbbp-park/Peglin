@@ -16,6 +16,7 @@ enum class eLayerType
 	BG,
 	//Tile,
 	Monster,
+	Blob,
 	Player,
 	Bomb,
 	Wall,

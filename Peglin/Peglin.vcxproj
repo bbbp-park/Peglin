@@ -164,6 +164,7 @@
     <ClInclude Include="bPeg.h" />
     <ClInclude Include="bPeglin.h" />
     <ClInclude Include="bMapScene.h" />
+    <ClInclude Include="bPlantBlob.h" />
     <ClInclude Include="bResource.h" />
     <ClInclude Include="bResources.h" />
     <ClInclude Include="bRigidbody.h" />
@@ -219,6 +220,7 @@
     <ClCompile Include="bPeg.cpp" />
     <ClCompile Include="bPeglin.cpp" />
     <ClCompile Include="bMapScene.cpp" />
+    <ClCompile Include="bPlantBlob.cpp" />
     <ClCompile Include="bResource.cpp" />
     <ClCompile Include="bResources.cpp" />
     <ClCompile Include="bRigidbody.cpp" />

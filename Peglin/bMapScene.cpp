@@ -12,7 +12,6 @@
 #include "bTrees.h"
 #include "mMapIcon.h"
 #include "bSound.h"
-#include "bFightScene.h"
 
 namespace b
 {
@@ -20,7 +19,7 @@ namespace b
 		: mMapPeglin(nullptr)
 		, treeTop(nullptr)
 		, mSpeedUp(nullptr)
-		, enterBoss(true)
+		
 	{
 	}
 
@@ -38,6 +37,7 @@ namespace b
 
 		MapIcon* stage1 = object::Instantiate<MapIcon>(eLayerType::BG);
 		stage1->SetLockPos(Vector2(800, 600));
+		stage1->SetIconType(eIconType::Skull);
 		MapIcon* bossStage = object::Instantiate<MapIcon>(eLayerType::BG);
 		bossStage->SetLockPos(Vector2(750, 800));
 		bossStage->SetIconType(eIconType::Mole);
@@ -45,11 +45,6 @@ namespace b
 
 	void MapScene::Update()
 	{
-		if (enterBoss == false)
-		{
-			FightScene::GetIsClear();
-		}
-
 		Scene::Update();
 	}
 

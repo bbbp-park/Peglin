@@ -48,6 +48,12 @@ namespace b
 		hpBar = object::Instantiate<HpBar>(Vector2(126.0f, 290.0f), Vector2(3.7f, 3.7f), eLayerType::UI);
 		hpBar->SetHpType(eHpType::Player);
 
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		mBall = object::Instantiate<Ball>(pos, Vector2(3.0f, 3.0f), eLayerType::Orb);
+		mBall->SetState(eState::Pause);
+
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Idle", Vector2::Zero, 0.15f);
 		mAnimator->CreateAnimations(L"..\\Resources\\sprite\\Peglin\\Angel", Vector2::Zero, 0.15f);
@@ -115,13 +121,6 @@ namespace b
 	{
 		GameObject::Render(hdc);
 
-		Vector2 pos = Input::GetMousePos();
-		wchar_t x[50] = {};
-		swprintf_s(x, 50, L"%f", pos.x);
-		TextOut(hdc, 800, 0, x, wcsnlen_s(x, 50));
-		wchar_t y[50] = {};
-		swprintf_s(y, 50, L"%f", pos.y);
-		TextOut(hdc, 800, 40, y, wcsnlen_s(y, 50));
 	}
 
 	void Peglin::Release()
@@ -202,7 +201,7 @@ namespace b
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		object::Instantiate<Ball>(pos, Vector2(3.0f, 3.0f), eLayerType::Orb);
+		mBall->Reset(pos);
 
 		mAnimator->Play(L"PeglinIdle", true);
 		mState = ePeglinState::Idle;

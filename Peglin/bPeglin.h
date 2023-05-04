@@ -53,6 +53,7 @@ namespace b
 		class Ground* mGround;
 
 		class Orb* mOrb;
+		class Ball* mBall;
 		std::vector<class Bomb*> mBombs;
 
 		bool delay;

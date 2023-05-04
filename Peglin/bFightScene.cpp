@@ -301,6 +301,9 @@ namespace b
 		{
 			for (auto mon : mMonsters)
 			{
+				if (mon == nullptr)
+					break;
+
 				if (mon->GetState() != GameObject::eState::Active || mon->GetMonsterState() == eMonsterState::Dead)
 					isClear = true;
 				else

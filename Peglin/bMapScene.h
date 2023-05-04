@@ -25,7 +25,7 @@ namespace b
 		Image* treeTop;
 		SpeedUp* mSpeedUp;
 
-		bool enterBoss;
+		
 	};
 }
 
